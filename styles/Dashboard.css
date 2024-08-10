@@ -1,3 +1,41 @@
+#agency {
+    height: 60px;
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+#employee {
+    padding-left: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+#filterID {
+    padding-left: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+}
+.separator {
+    height: 20px;
+    width: 100%;
+    background-color: aquamarine;
+}
+.emplAction button {
+    height: 60px;
+    background: lightgray;
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.emplAction button:hover {
+    background: green;
+}
 .tab {
     width: 100%;
     overflow: hidden;
@@ -20,7 +58,7 @@
 }
 .tabcontent {
     background: white;
-    width: 100%;
+    width: 98%;
     padding: 12px;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 21px;
@@ -31,6 +69,7 @@
     color: white;
     padding: 16px;
     font-size: 16px;
+    font-weight: bold;
     border: none;
     cursor: pointer;
 }
