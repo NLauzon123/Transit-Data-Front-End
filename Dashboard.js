@@ -63,6 +63,7 @@ const filter3 = document.getElementById("filterRow3");
 const filter4 = document.getElementById("filterRow4");
 const filter5 = document.getElementById("filterRow5");
 const filterButton = document.getElementById("filterButton");
+var filter1Data, filter2Data, filter3Data, filter4Data, filter5Data;
 function cleanAllFilters() {
     while(filter1.firstChild) filter1.removeChild(filter1.firstChild); filter1.style.display = "none";
     while(filter2.firstChild) filter2.removeChild(filter2.firstChild); filter2.style.display = "none";
@@ -86,7 +87,7 @@ function populateFilter1() {
     filter1.appendChild(select);
 }
 filter1.addEventListener("change", e => {
-    for (i = 0; i < years.length; i++) if (e.target.value == years[i]) console.log("Got year: " + years[i]);
+    for (i = 0; i < years.length; i++) if (e.target.value == years[i]) filter1Data = years[i];
 });
 function populateFilter2() {
     var input = document.createElement("input");
@@ -94,7 +95,17 @@ function populateFilter2() {
     filter2.innerHTML = "Select a period (in years): ";
     filter2.appendChild(input);
 }
-function populateFilter3() {}
+filter2.addEventListener("change", e => {filter2Data = e.target.value;});
+function populateFilter3() {
+    var input = document.createElement("input");
+    input.id = "datePicker";
+    input.class = "form-control";
+    input.type = "date";
+    filter3.style.display = "block";
+    filter3.innerHTML = "Select a date: ";
+    filter3.appendChild(input);
+}
+filter3.addEventListener("change", e => {filter3Data = e.target.value;});
 function populateFilter4() {
     var select = document.createElement("select");
     for (var key in services) {
@@ -108,7 +119,7 @@ function populateFilter4() {
     filter4.innerHTML = "Select a service: ";
     filter4.appendChild(select);
 }
-filter4.addEventListener("change", e => {console.log("Got service: " + e.target.value);});
+filter4.addEventListener("change", e => {filter4Data = e.target.value;});
 function populateFilter5() {
     var select = document.createElement("select");
     for (var key in directions) {
@@ -122,7 +133,7 @@ function populateFilter5() {
     filter5.innerHTML = "Select a service: ";
     filter5.appendChild(select);
 }
-filter5.addEventListener("change", e => {console.log("Got direction: " + e.target.value);});
+filter5.addEventListener("change", e => {filter5Data = e.target.value;});
 function applyDashBFilter0() {
     cleanAllFilters();
     populateFilter1();
@@ -150,7 +161,19 @@ function applyDashBFilter5(selected) {
 }
 function applyDashBFilter6(selected) {
     cleanAllFilters();
+    populateFilter3();
     populateFilter4();
     filterButton.style.display = "block";
+}
+function filterDataCompilation() {
+    switch (dashBSelect) {
+        case 0: console.log(dashBSelect + " " + filter1Data + " " + filter2Data); break;
+        case 1: console.log(dashBSelect + " " + filter1Data); break;
+        case 2: console.log(dashBSelect + " " + filter1Data); break;
+        case 3: console.log(dashBSelect + " " + filter1Data); break;
+        case 4: console.log(dashBSelect + " " + filter1Data + " " + filter2Data + " " + filter4Data + " " + filter5Data); break;
+        case 5: console.log(dashBSelect + " " + filter1Data + " " + filter4Data); break;
+        case 6: console.log(dashBSelect + " " + filter3Data + " " + filter4Data); break;
+    }
 }
 
