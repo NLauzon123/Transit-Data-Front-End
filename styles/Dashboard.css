@@ -17,10 +17,29 @@
     font-weight: bold;
     font-size: 18px;
 }
+#filterRow1, #filterRow2, #filterRow3, #filterRow4, #filterRow5, #filterButton {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    display: none;
+}
 .separator {
     height: 20px;
     width: 100%;
     background-color: aquamarine;
+}
+.filterButton {
+    height: 60px;
+    background: lightgray;
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.filterButton:hover {
+    background: green;
 }
 .emplAction button {
     height: 60px;
