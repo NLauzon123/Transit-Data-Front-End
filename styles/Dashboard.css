@@ -1,0 +1,96 @@
+#agency {
+    height: 60px;
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+#employee {
+    padding-left: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+#filterID {
+    padding-left: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+}
+.separator {
+    height: 20px;
+    width: 100%;
+    background-color: aquamarine;
+}
+.emplAction button {
+    height: 60px;
+    background: lightgray;
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.emplAction button:hover {
+    background: green;
+}
+.tab {
+    width: 100%;
+    overflow: hidden;
+}
+.tab button {
+    background: lightgray;
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.tab button:hover {
+    background: green;
+}
+.tab button.active {
+    background: darkgray;
+}
+.tabcontent {
+    background: white;
+    width: 98%;
+    padding: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 21px;
+    display: none;
+}
+.dropbtn {
+    background-color: darkgray;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+.dashboards {
+    position: relative;
+    display: inline-block;
+}
+.dashboards-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dashboards-content div {
+    color: black;
+    padding: 12px 16px;
+    /*text-decoration: none;*/
+    display: block;
+}
+.dashboards-content div:hover {background-color: #f1f1f1}  
+.dashboards:hover .dashboards-content {display: block;}
+.dashboards:hover .dropbtn {background-color: green;}        
