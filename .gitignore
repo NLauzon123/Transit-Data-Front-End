@@ -71,3 +71,9 @@ jspm_packages/
 # Misc
 .DS_Store
 *.pem
+
+# Local Netlify folder
+.netlify
+
+#Local testing page
+test.html
