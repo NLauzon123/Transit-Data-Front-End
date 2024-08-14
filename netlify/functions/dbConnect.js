@@ -24,6 +24,7 @@ const queries = {
 exports.handler = async function (event, context) {
   const queryName = event.queryStringParameters.queryName;
   const query = queries[queryName];
+  console.log(config);
   console.log(query);
   if (!query) {
     // If queryName is not found in the queries object, throw an error
