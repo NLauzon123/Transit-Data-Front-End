@@ -13,7 +13,7 @@
       // Function to call the Netlify serverless function
       async function callNetlifyFunction() {
         try {
-          const queryName = "top1fare";
+          const queryName = "top10fare";
           // Make the request to the Netlify function
           const response = await fetch(
             `/.netlify/functions/dbConnect?queryName=${queryName}`
