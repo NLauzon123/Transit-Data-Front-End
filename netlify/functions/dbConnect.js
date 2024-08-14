@@ -6,10 +6,12 @@ const config = {
   server: process.env.DB_SERVER,
   database: process.env.DB_DATABASE,
   options: {
-    encrypt: process.env.DB_TRUST_CERTIFICATE === true,
-    trustServerCertificate: process.env.DB_ENCRYPT === true,
+    encrypt: process.env.DB_TRUST_CERTIFICATE === "true", // Logically check for string 'true'
+    trustServerCertificate: process.env.DB_ENCRYPT === "true", // Logically check for string 'true'
   },
 };
+
+console.log("DB Config:", config); // Log the DB configuration
 
 const queries = {
   top10fare: `SELECT TOP (10) [fareID]
@@ -24,31 +26,36 @@ const queries = {
 exports.handler = async function (event, context) {
   const queryName = event.queryStringParameters.queryName;
   const query = queries[queryName];
-  console.log(config);
-  console.log(query);
+
+  console.log("Received query:", queryName);
+  console.log("SQL Query:", query);
+
   if (!query) {
-    // If queryName is not found in the queries object, throw an error
     return {
-      statusCode: 400, // Bad Request
+      statusCode: 400,
       body: JSON.stringify({ error: `Query "${queryName}" not found.` }),
     };
   }
-  try {
-    let pool = await sql.connect(config);
+  return {
+    statusCode: 500,
+  };
+  // try {
+  //   console.log("Attempting to connect to the database...");
+  //   let pool = await sql.connect(config);
+  //   console.log("Connected to the database successfully.");
 
-    // Execute the SQL query
-    let result = await pool.request().query(query);
-    // .input("year", sql.Int, 2024)
-    // .input("service", sql.Int, 35)
-    // .execute("MidTermTraffic");
+  //   let result = await pool.request().query(query);
 
-    // Return the result to the client
-    return {
-      statusCode: 200,
-      body: JSON.stringify(result.recordsets), // Include the query result in the response body
-    };
-  } catch (err) {
-    console.error("SQL error", err);
-    return { statusCode: 500, body: "Server Error" };
-  }
+  //   console.log("Query executed successfully:", result);
+  //   return {
+  //     statusCode: 200,
+  //     body: JSON.stringify(result.recordsets),
+  //   };
+  // } catch (err) {
+  //   console.error("SQL error", err);
+  //   return {
+  //     statusCode: 500,
+  //     body: JSON.stringify({ error: "Server Error", details: err.message }),
+  //   };
+  // }
 };
