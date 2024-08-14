@@ -36,26 +36,23 @@ exports.handler = async function (event, context) {
       body: JSON.stringify({ error: `Query "${queryName}" not found.` }),
     };
   }
-  return {
-    statusCode: 500,
-  };
-  // try {
-  //   console.log("Attempting to connect to the database...");
-  //   let pool = await sql.connect(config);
-  //   console.log("Connected to the database successfully.");
+  try {
+    console.log("Attempting to connect to the database...");
+    let pool = await sql.connect(config);
+    console.log("Connected to the database successfully.");
 
-  //   let result = await pool.request().query(query);
+    //   let result = await pool.request().query(query);
 
-  //   console.log("Query executed successfully:", result);
-  //   return {
-  //     statusCode: 200,
-  //     body: JSON.stringify(result.recordsets),
-  //   };
-  // } catch (err) {
-  //   console.error("SQL error", err);
-  //   return {
-  //     statusCode: 500,
-  //     body: JSON.stringify({ error: "Server Error", details: err.message }),
-  //   };
-  // }
+    //   console.log("Query executed successfully:", result);
+    //   return {
+    //     statusCode: 200,
+    //     body: JSON.stringify(result.recordsets),
+    //   };
+  } catch (err) {
+    console.error("SQL error", err);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Server Error", details: err.message }),
+    };
+  }
 };
