@@ -14,26 +14,30 @@ const config = {
 const queries = {};
 
 exports.handler = async function (event, context) {
-  const queryName = event.queryStringParameters.queryName;
-  const query = queries[queryName];
+  // const queryName = event.queryStringParameters.queryName;
+  // const query = queries[queryName];
 
-  if (!query) {
-    // If queryName is not found in the queries object, throw an error
-    return {
-      statusCode: 400, // Bad Request
-      body: JSON.stringify({ error: `Query "${queryName}" not found.` }),
-    };
-  }
+  // if (!query) {
+  //   // If queryName is not found in the queries object, throw an error
+  //   return {
+  //     statusCode: 400, // Bad Request
+  //     body: JSON.stringify({ error: `Query "${queryName}" not found.` }),
+  //   };
+  // }
   try {
     let pool = await sql.connect(config);
 
     // Execute the SQL query
-    let result = await pool.request().query(query);
+    let result = await pool
+      .request()
+      .input("year", sql.Int, 2024)
+      .input("service", sql.Int, 35)
+      .execute("MidTermTraffic");
 
     // Return the result to the client
     return {
       statusCode: 200,
-      body: JSON.stringify(result.recordset), // Include the query result in the response body
+      body: JSON.stringify(result.recordsets), // Include the query result in the response body
     };
   } catch (err) {
     console.error("SQL error", err);
