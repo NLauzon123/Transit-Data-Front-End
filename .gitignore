@@ -76,4 +76,4 @@ jspm_packages/
 .netlify
 
 #Local testing page
-test.html
+#test.html

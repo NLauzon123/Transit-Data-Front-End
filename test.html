@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Call Netlify Function</title>
+  </head>
+  <body>
+    <h1>Netlify Function Example</h1>
+    <div id="result"></div>
+
+    <script>
+      // Function to call the Netlify serverless function
+      async function callNetlifyFunction() {
+        try {
+          const queryName = "top1fare";
+          // Make the request to the Netlify function
+          const response = await fetch(
+            `/.netlify/functions/dbConnect?queryName=${queryName}`
+          );
+
+          // Check if the response is OK (status code 200)
+          if (response.ok) {
+            // Parse the JSON data from the response
+            const data = await response.json();
+
+            // Display the data in the #result div
+            document.getElementById("result").innerText = JSON.stringify(
+              data,
+              null,
+              2
+            );
+          } else {
+            // Handle errors (e.g., non-200 status codes)
+            document.getElementById(
+              "result"
+            ).innerText = `Error: ${response.statusText}`;
+          }
+        } catch (error) {
+          // Handle network errors or other issues
+          document.getElementById(
+            "result"
+          ).innerText = `Error: ${error.message}`;
+        }
+      }
+
+      // Call the function when the page loads
+      callNetlifyFunction();
+    </script>
+  </body>
+</html>
