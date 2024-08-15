@@ -5,24 +5,6 @@ const validateForm = (formSelector, callback) => {
 
   const validationOptions = [
     {
-      attribute: "match",
-      isValid: (input) => {
-        const matchSelector = input.getAttribute("match");
-        const matchedElement = formElement.querySelector(`#${matchSelector}`);
-        return (
-          matchedElement && matchedElement.value.trim() === input.value.trim()
-        );
-      },
-      errorMessage: (input, label) => {
-        const matchSelector = input.getAttribute("match");
-        const matchedElement = formElement.querySelector(`#${matchSelector}`);
-        const matchedLabel =
-          matchedElement.parentElement.parentElement.querySelector("label");
-
-        return `${label.textContent} should match ${matchedLabel.textContent}`;
-      },
-    },
-    {
       attribute: 'pattern',
       isValid: (input) => {
         const patternRegex = new RegExp(input.pattern);
@@ -48,7 +30,7 @@ const validateForm = (formSelector, callback) => {
   const validateSingleFormGroup = (formGroup) => {
     const label = formGroup.querySelector('label');
     const input = formGroup.querySelector('input, textarea');
-    const errorContainer = formGroup.querySelector('.error__signup');
+    const errorContainer = formGroup.querySelector('.error__settings');
     const errorIcon = formGroup.querySelector('.error-icon');
     const successIcon = formGroup.querySelector('.success-icon');
 
@@ -122,4 +104,4 @@ const sendToAPI = (formElement) => {
   //submitting to an API via AJAX or smtg.
 };
 
-validateForm('#signUpForm', sendToAPI);
+validateForm('#settingsForm', sendToAPI);
