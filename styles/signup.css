@@ -54,8 +54,8 @@ a:focus {
 }
 a:hover {
   color: black;
-  border-bottom: 5px solid blue;
-} 
+  border-bottom: 2px solid blue;
+}
 img {
   max-width: 100% !important;
   height: auto;
@@ -65,13 +65,40 @@ img {
   left: -10000px;
 }
 
+.form-container {
+  background-color: white;
+}
 /* main {
   padding: 1rem;
 } */
 
-
 /* Error div */
-.error__signup{
+/* .error-icon {
+  padding-right: calc(1.5em + .75rem);
+  background-image: url('https://use.fontawesome.com/releases/v5.8.2/svgs/regular/calendar-alt.svg');
+  background-repeat: no-repeat;
+  background-position: center right calc(.375em + .1875rem);
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+} */
+
+.errspan-error {
+  float: right;
+  margin-right: 10px;
+  margin-top: -30px;
+  position: relative;
+  z-index: 2;
+  color: red;
+}
+.errspan-success {
+  float: right;
+  margin-right: 10px;
+  margin-top: -30px;
+  position: relative;
+  z-index: 2;
+  color: green;
+}
+
+.error__signup {
   padding-top: 0.5rem;
   color: red;
 }

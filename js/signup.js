@@ -1,122 +1,125 @@
 'use strict';
 
-//On change to detect changes on inputs
-function validateAgencyID() {
-  var agencyIDInput = document.getElementById('inputAgencyID').value;
-  var message = document.getElementById('error__agencyID');
+const validateForm = (formSelector, callback) => {
+  const formElement = document.querySelector(formSelector);
 
-  if (agencyIDInput !== ' ' && agencyIDInput.length > 0) {
-    message.textContent = 'Checked';
-    message.style.color = 'green';
-  } else {
-    agencyIDInput.clear();
-    message.textContent = 'Please enter your angency ID 22';
-    message.style.color = 'red';
-  }
-}
+  const validationOptions = [
+    {
+      attribute: "match",
+      isValid: (input) => {
+        const matchSelector = input.getAttribute("match");
+        const matchedElement = formElement.querySelector(`#${matchSelector}`);
+        return (
+          matchedElement && matchedElement.value.trim() === input.value.trim()
+        );
+      },
+      errorMessage: (input, label) => {
+        const matchSelector = input.getAttribute("match");
+        const matchedElement = formElement.querySelector(`#${matchSelector}`);
+        const matchedLabel =
+          matchedElement.parentElement.parentElement.querySelector("label");
 
-function validateFName() {
-  var fNameInput = document.getElementById('inputFName').value;
-  var message = document.getElementById('error__fname');
+        return `${label.textContent} should match ${matchedLabel.textContent}`;
+      },
+    },
+    {
+      attribute: 'pattern',
+      isValid: (input) => {
+        const patternRegex = new RegExp(input.pattern);
+        return patternRegex.test(input.value);
+      },
+      errorMessage: (input, label) =>
+        `Your password should have minimum length of 8,  with at least a symbol, upper and lower case letters and a number`,
+    },
+    {
+      attribute: 'minlength',
+      isValid: (input) =>
+        input.value && input.value.length >= parseInt(input.minLength, 10),
+      errorMessage: (input, label) =>
+        `${label.textContent} needs to be at least ${input.minLength} characters`,
+    },
+    {
+      attribute: 'required',
+      isValid: (input) => input.value.trim() !== '',
+      errorMessage: (input, label) => `${label.textContent} is required`,
+    },
+  ];
 
-  if (fNameInput !== ' ' && fNameInput.length > 0) {
-    message.textContent = 'Checked';
-    message.style.color = 'green';
-  } else {
-    fNameInput = "";
-    message.textContent = 'Please key in your first name 22';
-    message.style.color = 'red';
-  }
-}
+  const validateSingleFormGroup = (formGroup) => {
+    const label = formGroup.querySelector('label');
+    const input = formGroup.querySelector('input, textarea');
+    const errorContainer = formGroup.querySelector('.error__signup');
+    const errorIcon = formGroup.querySelector('.error-icon');
+    const successIcon = formGroup.querySelector('.success-icon');
 
-function validateLName() {
-  var lNameInput = document.getElementById('inputLName').value;
-  var message = document.getElementById('error__lname');
+    let formGroupError = false;
 
-  if (lNameInput !== ' ' && lNameInput.length > 0) {
-    message.textContent = 'checked';
-    message.style.color = 'green';
-  } else {
-    lNameInput = "";
-    message.textContent = 'Please key in your last name 22';
-    message.style.color = 'red';
-  }
-}
+    for (const option of validationOptions) {
+      if (input.hasAttribute(option.attribute) && !option.isValid(input)) {
+        errorContainer.textContent = option.errorMessage(input, label);
+        input.classList.add('border-red-700');
+        input.classList.remove('border-green-700');
+        successIcon.classList.add('hidden');
+        errorIcon.classList.remove('hidden');
+        formGroupError = true;
+      }
+    }
 
-function validateUsername() {
-  var usernameInput = document.getElementById('inputUsername').value;
-  var message = document.getElementById('error__username');
+    if (!formGroupError) {
+      errorContainer.textContent = '';
+      input.classList.add('border-green-700');
+      input.classList.remove('border-red-700');
+      successIcon.classList.remove('hidden');
+      errorIcon.classList.add('hidden');
+    }
 
-  if (usernameInput !== ' ' && usernameInput.length > 0) {
-    message.textContent = 'checked';
-    message.style.color = 'green';
-  } else {
-    usernameInput = "";
-    message.textContent = 'Please key in your username 22';
-    message.style.color = 'red';
-  }
-}
+    return !formGroupError;
+  };
+  //disable browser html validation
+  formElement.setAttribute('novalidate', '');
 
-function validatePassword() {
-  var passwordInput = document.getElementById('inputPassword').value;
-  var message = document.getElementById('error__password');
+  Array.from(formElement.elements).forEach((element) => {
+    element.addEventListener('blur', (event) => {
+      validateSingleFormGroup(event.srcElement.parentElement.parentElement);
+    });
+  });
 
-  // Simple password validation pattern
-  var regexPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&^])[A-Za-z\d@.#$!%*?&]{8,15}$/;
-  if (passwordInput.match(regexPattern)) {
-    message.textContent = 'checked';
-    message.style.color = 'green';
-  } else {
-    passwordInput = "";
-    message.textContent = 'Your password should have minimum length of 8,  with at least a symbol, upper and lower case letters and a number';
-    message.style.color = 'red';
-  }
-}
+  const validateAllFormGroups = (formToValidate) => {
+    const formValidationGroups = Array.from(
+      formToValidate.querySelectorAll('.formValidationGroup')
+    );
 
-let formAjaxValidate = document.getElementById('form_ajax_validate');
-let checkForm = function (e) {
-  let form = e.target;
+    return formValidationGroups.every((formValidationGroup) =>
+      validateSingleFormGroup(formValidationGroup)
+    );
+  };
 
-  if (this.inputAgencyID.value == '') {
-    document.getElementById('error__agencyID').innerHTML =
-      'Please key in your agency ID';
-    this.inputAgencyID.focus();
-    e.preventDefault();
-    return;
-  }
-  if (this.inputFName.value == '') {
-    document.getElementById('error__fname').innerHTML =
-      'Please key in your first name';
-    this.inputFName.focus();
-    e.preventDefault();
-    return;
-  }
-  if (this.inputLName.value == '') {
-    document.getElementById('error__lname').innerHTML =
-      'Please key in your last name';
-    this.inputLName.focus();
-    e.preventDefault();
-    return;
-  }
-  if (this.inputUsername.value == '') {
-    document.getElementById('error__username').innerHTML =
-      'Please key in your username';
-    this.inputUsername.focus();
-    e.preventDefault();
-    return;
-  }
-  if (this.inputPassword.value == '') {
-    document.getElementById('error__password').innerHTML =
-      'Please key in your password';
-    this.inputPassword.focus();
-    e.preventDefault();
-    return;
-  }
+  formElement.addEventListener('submit', (event) => {
+    event.preventDefault(); //Stop form completely submitting the form
 
-  alert(
-    'Success!  The form has been completed, validated and is ready to be submitted...'
-  );
-  e.preventDefault();
+    const formValid = validateAllFormGroups(formElement);
+
+    if (formValid) {
+      console.log('Form is valid');
+      callback(formElement);
+    }
+  });
 };
 
-formAjaxValidate.addEventListener('submit', checkForm, false);
+const sendToAPI = (formElement) => {
+  const formObject = Array.from(formElement.elements)
+    .filter((element) => element.type !== 'submit')
+    .reduce(
+      (accumulator, element) => ({
+        ...accumulator,
+        [element.id]: element.value,
+      }),
+      {}
+    );
+
+  console.log(formObject);
+
+  //submitting to an API via AJAX or smtg.
+};
+
+validateForm('#signUpForm', sendToAPI);

@@ -10,6 +10,10 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles/global.css" type="text/css" />
     <link rel="stylesheet" href="styles/signup.css" type="text/css" />
   </head>
@@ -54,69 +58,104 @@
     </div>
     </header>
     <main>
-        <div class="container container-fluid ">
-            <div class="row text-center">
-                <div class="col p-3">
-                    <h1>Sign Up</h1>
+        <div class="  container container-fluid ">
+            <div class="row  text-center">
+                <div class="col">
+                    <h1 class="pb-3">Sign Up</h1>
+                    <p class="pt-2">Already have an account?
+                        <a href="#">Login here</a> instead.</p>
                 </div>
             </div>
-            <form class="row needs-validation" id="form_ajax_validate" method="Post" action="form handler" >
-                <div class="row g-2 justify-content-md-center align-items-center">
+            <form class="row " id="signUpForm" >
+                <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
                     <div class=" col col-md-5 ">
                         <div class="col-auto">
-                            <label for="inputAgencyID" class="col-form-label">Agency ID :</label>
+                            <label for="agencyID" class="col-form-label">Agency ID</label>
                         </div>
-                        <div class="col-auto">
-                            <input type="text" id="inputAgencyID" class="form-control" onchange="validateAgencyID()" >
+                        <div class="col-auto ">
+                            <input required type="text" id="agencyID" class="form-control" >
+                            <span class="error-icon hidden errspan-error">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                            </span>
+                            <span class="success-icon hidden errspan-success">
+                            <i class="fa-solid fa-circle-check "></i>
+                            </span>
                         </div>
                         <div class="error__signup " id="error__agencyID"></div>
                     </div>
                 </div>
-                <div class="row g-2 justify-content-md-center align-items-center">
+                <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
                     <div class=" col col-md-5 ">
                         <div class="col-auto">
-                            <label for="inputFName" class="col-form-label">First Name :</label>
+                            <label for="firstName" class="col-form-label">First Name</label>
                         </div>
                         <div class="col-auto">
-                            <input type="text" id="inputFName" class="form-control" onchange="validateFName()" aria-describedby="firstNameHelpInline">
+                            <input required type="text" id="firstName" class="form-control">
+                            <span class="error-icon hidden errspan-error">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                            </span>
+                            <span class="success-icon hidden errspan-success">
+                                <i class="fa-solid fa-circle-check "></i>
+                            </span>
                         </div>
                         <div class="error__signup" id="error__fname"></div>
                     </div>
                 </div>
-                <div class="row g-2 justify-content-md-center align-items-center">
+                <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
                     <div class=" col col-md-5  ">
                         <div class="col-auto">
-                            <label for="inputLName" class="col-form-label">Last Name :</label>
+                            <label for="lastName" class="col-form-label">Last Name</label>
                         </div>
                         <div class="col-auto">
-                            <input type="text" id="inputLName" class="form-control" onchange="validateLName()"  aria-describedby="lastNameHelpInline" >
+                            <input required type="text" id="lastName" class="form-control" >
+                            <span class="error-icon hidden errspan-error">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                            </span>
+                            <span class="success-icon hidden errspan-success">
+                                <i class="fa-solid fa-circle-check "></i>
+                            </span>
                         </div>
                         <div class="error__signup" id="error__lname"></div>
                     </div>
                 </div>
-                <div class="row g-2 justify-content-md-center align-items-center">
+                <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
                     <div class=" col col-md-5 ">
                         <div class="col-auto">
-                            <label for="inputUsername" class="col-form-label">Username :</label>
+                            <label for="username" class="col-form-label">Username</label>
                         </div>
                         <div class="col-auto">
-                            <input type="text" id="inputUsername" class="form-control" onchange="validateUsername()" aria-describedby="usernameHelpInline">
+                            <input required type="text" id="username" class="form-control">
+                            <span class="error-icon hidden errspan-error">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                            </span>
+                            <span class="success-icon hidden errspan-success">
+                                <i class="fa-solid fa-circle-check "></i>
+                            </span>
                         </div>
                         <div class="error__signup" id="error__username"></div>
                     </div>
                 </div>
-                <div class="row g-2 justify-content-md-center align-items-center">
+                <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
                     <div class=" col col-md-5  ">
                         <div class="col-auto">
-                            <label for="inputPassword" class="col-form-label">Password :</label>
+                            <label for="password" class="col-form-label">Password</label>
                         </div>
                         <div class="col-auto">
-                            <input type="password" id="inputPassword" class="form-control" onchange="validatePassword()" aria-describedby="passwordHelpInline" >
+                            <input required 
+                            minlength="8"
+                            pattern="/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/" 
+                            type="password" id="password" class="form-control" >
+                            <span class="error-icon hidden errspan-error">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                            </span>
+                            <span class="success-icon hidden errspan-success">
+                                <i class="fa-solid fa-circle-check "></i>
+                            </span>
                         </div>
                         <div class="error__signup " id="error__password"></div>
                     </div>
                 </div>
-                <div class="row g-3 justify-content-md-center align-items-center">
+                <div class="row g-3 justify-content-md-center align-items-center ">
                     <div class=" col col-md-5">
                         <div class="col-12 text-center">
                             <button class="btn btn-primary" type="submit">Submit</button>
@@ -124,11 +163,10 @@
                     </div>
                 </div>
               </form>
-
         </div>
     </main>
     <!-- Test the footer-->
-    <footer id="footer" class="row text-center  ">
+    <footer id="footer" class="row text-center fixed-bottom ">
         <div class="text-center ">&#169 Copyright <script>document.write(new Date().getFullYear())</script>, Transit Inc. </div>
     </footer>
     <script
