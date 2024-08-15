@@ -14,9 +14,44 @@
     <link rel="stylesheet" href="styles/signup.css" type="text/css" />
   </head>
   <body>
-    <header>
-        
+    <div class="hamburger-container">
+        <div class="hamburger-button" id="hamburger"></div>
+      </div>
+      <div class="container site-container">
+    <header
+    class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
+    >
+    <div class="col-md-3 mb-2 mb-md-0">
+        <a
+        href="/"
+        class="d-inline-flex link-body-emphasis text-decoration-none"
+        >
+        <svg
+            class="bi"
+            width="40"
+            height="32"
+            role="img"
+            aria-label="Bootstrap"
+        >
+            <use xlink:href="#bootstrap"></use>
+        </svg>
+        </a>
+    </div>
 
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="#" class="nav-link px-2">Features</a></li>
+        <li><a href="#" class="nav-link px-2">Pricing</a></li>
+        <li><a href="#" class="nav-link px-2">FAQs</a></li>
+        <li><a href="#" class="nav-link px-2">About</a></li>
+    </ul>
+
+    <div class="col-md-3 text-end">
+        <button type="button" class="btn btn-outline-primary me-2">
+        Login
+        </button>
+        <button type="button" class="btn btn-primary">Sign-up</button>
+    </div>
     </header>
     <main>
         <div class="container container-fluid ">
@@ -25,65 +60,64 @@
                     <h1>Sign Up</h1>
                 </div>
             </div>
-            <form class="row" id="form_ajax_validate" method="POST" action="form handler">
+            <form class="row needs-validation" id="form_ajax_validate" method="Post" action="form handler" >
                 <div class="row g-2 justify-content-md-center align-items-center">
-                    <div class=" col col-md-4 p-1">
+                    <div class=" col col-md-5 ">
                         <div class="col-auto">
                             <label for="inputAgencyID" class="col-form-label">Agency ID :</label>
                         </div>
                         <div class="col-auto">
-                            <input type="text" id="inputAgencyID" class="form-control" aria-describedby="agencyIDHelpInline">
+                            <input type="text" id="inputAgencyID" class="form-control" onchange="validateAgencyID()" >
                         </div>
-                        <div class="error__signup" id="error__agencyID"></div>
-
+                        <div class="error__signup " id="error__agencyID"></div>
                     </div>
                 </div>
                 <div class="row g-2 justify-content-md-center align-items-center">
-                    <div class=" col col-md-4 p-1">
+                    <div class=" col col-md-5 ">
                         <div class="col-auto">
                             <label for="inputFName" class="col-form-label">First Name :</label>
                         </div>
                         <div class="col-auto">
-                            <input type="text" id="inputFName" class="form-control" aria-describedby="firstNameHelpInline">
+                            <input type="text" id="inputFName" class="form-control" onchange="validateFName()" aria-describedby="firstNameHelpInline">
                         </div>
                         <div class="error__signup" id="error__fname"></div>
                     </div>
                 </div>
                 <div class="row g-2 justify-content-md-center align-items-center">
-                    <div class=" col col-md-4 p-1">
+                    <div class=" col col-md-5  ">
                         <div class="col-auto">
                             <label for="inputLName" class="col-form-label">Last Name :</label>
                         </div>
                         <div class="col-auto">
-                            <input type="text" id="inputLName" class="form-control" aria-describedby="lastNameHelpInline">
+                            <input type="text" id="inputLName" class="form-control" onchange="validateLName()"  aria-describedby="lastNameHelpInline" >
                         </div>
                         <div class="error__signup" id="error__lname"></div>
                     </div>
                 </div>
                 <div class="row g-2 justify-content-md-center align-items-center">
-                    <div class=" col col-md-4 p-1">
+                    <div class=" col col-md-5 ">
                         <div class="col-auto">
                             <label for="inputUsername" class="col-form-label">Username :</label>
                         </div>
                         <div class="col-auto">
-                            <input type="text" id="inputUsername" class="form-control" aria-describedby="usernameHelpInline">
+                            <input type="text" id="inputUsername" class="form-control" onchange="validateUsername()" aria-describedby="usernameHelpInline">
                         </div>
                         <div class="error__signup" id="error__username"></div>
                     </div>
                 </div>
                 <div class="row g-2 justify-content-md-center align-items-center">
-                    <div class=" col col-md-4 p-1">
+                    <div class=" col col-md-5  ">
                         <div class="col-auto">
                             <label for="inputPassword" class="col-form-label">Password :</label>
                         </div>
                         <div class="col-auto">
-                            <input type="password" id="inputPassword" class="form-control" aria-describedby="passwordHelpInline">
+                            <input type="password" id="inputPassword" class="form-control" onchange="validatePassword()" aria-describedby="passwordHelpInline" >
                         </div>
-                        <div class="error__signup" id="error__password"></div>
+                        <div class="error__signup " id="error__password"></div>
                     </div>
                 </div>
                 <div class="row g-3 justify-content-md-center align-items-center">
-                    <div class=" col col-md-4 p-1">
+                    <div class=" col col-md-5">
                         <div class="col-12 text-center">
                             <button class="btn btn-primary" type="submit">Submit</button>
                         </div>
@@ -92,7 +126,6 @@
               </form>
 
         </div>
-
     </main>
     <!-- Test the footer-->
     <footer id="footer" class="row text-center  ">
