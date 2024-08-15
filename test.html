@@ -10,14 +10,25 @@
     <div id="result"></div>
 
     <script>
+      const requestData = {
+        procedure: "MidTermTraffic",
+        params: [
+          { key: "year", type: "Int", value: 2025 },
+          { key: "service", type: "Int", value: 13 },
+        ],
+      };
       // Function to call the Netlify serverless function
       async function callNetlifyFunction() {
         try {
           const queryName = "top10fare";
           // Make the request to the Netlify function
-          const response = await fetch(
-            `/.netlify/functions/dbConnect?queryName=${queryName}`
-          );
+          const response = await fetch(`/.netlify/functions/dbConnect`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestData),
+          });
 
           // Check if the response is OK (status code 200)
           if (response.ok) {
