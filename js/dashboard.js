@@ -12,7 +12,8 @@ var services = {"Select a service" : "0", "Ligne 1 - Verte',1" : "1", "Ligne 2 -
 var directions = {"Select a direction" : "-1", "Direction 0" : "0", "Direction 1" : "1", "Both directions" : null};
 const agency = document.getElementById("agency");
 const employee = document.getElementById("employee");
-switch (agencyNum) {
+switch (agencyNum) { 
+    
     case 1: agency.style.backgroundImage = "url('resources/artm-logo.png')"; break;
     case 2: agency.style.backgroundImage = "url('resources/stm-logo.png')"; break;
     case 3: agency.style.backgroundImage = "url('resources/exo-logo.png')"; break;
