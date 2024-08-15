@@ -3,8 +3,7 @@ var dashBSelect;
 var agencyNum = 1;
 var firstName = "Emma";
 var lastName = "Tremblay";
-var years = []; 
-years[0]= "Select a year"; years[1] = "2023"; years[2] = "2024"; years[3] = "2025"; years[4] = "2026"; years[5] = "2027";
+var years = ["Select a year", "2023", "2024", "2025", "2026", "2027"]; 
 var services = {"Select a service" : "0", "Ligne 1 - Verte',1" : "1", "Ligne 2 - Orange" : "2", "Ligne 4 - Jaune" : "3",
     "Ligne 5 - Bleue" : "4", "Bus 18 - Beaubien" : "13", "Bus 24 - Sherbrooke" : "16", "Bus 51 - Édouard-Montpetit" : "40",
     "Bus 67 - Saint-Michel" : "51", "Bus 105 - Sherbrooke" : "77", "Bus 121 - Sauvé / Côte-Vertu" : "89",
@@ -63,6 +62,8 @@ const filter3 = document.getElementById("filterRow3");
 const filter4 = document.getElementById("filterRow4");
 const filter5 = document.getElementById("filterRow5");
 const filterButton = document.getElementById("filterButton");
+const graph = document.getElementById("tab1");
+const table = document.getElementById("tab2");
 var filter1Data, filter2Data, filter3Data, filter4Data, filter5Data;
 function cleanAllFilters() {
     while(filter1.firstChild) filter1.removeChild(filter1.firstChild); filter1.style.display = "none";
@@ -71,6 +72,12 @@ function cleanAllFilters() {
     while(filter4.firstChild) filter4.removeChild(filter4.firstChild); filter4.style.display = "none";
     while(filter5.firstChild) filter5.removeChild(filter5.firstChild); filter5.style.display = "none";
     filterButton.style.display = "none";
+    cleanGraph(); cleanTable();
+    var headerG = document.createElement("h2");
+    var headerT = document.createElement("h2");
+    headerG.innerHTML="Graph zone";
+    headerT.innerHTML="Table zone";
+    graph.append(headerG); table.append(headerT);
 }
 function populateFilter1() {
     var select = document.createElement("select");
@@ -176,8 +183,6 @@ function filterDataCompilation() {
         case 6: console.log(dashBSelect + " " + filter3Data + " " + filter4Data); applyDashBGraph6(); applyDashBTable6(); break;
     }
 }
-const graph = document.getElementById("tab1");
-const table = document.getElementById("tab2");
 function cleanGraph() {while(graph.firstChild) graph.removeChild(graph.firstChild);}
 function cleanTable() {while(table.firstChild) table.removeChild(table.firstChild);}
 function applyDashBGraph0() {
@@ -185,6 +190,18 @@ function applyDashBGraph0() {
     var header = document.createElement("h2");
     header.innerHTML = "Tab for the graph for dashboard 0";
     graph.append(header);
+    var graph0 = document.createElement("canvas");
+    graph0.id = "graph0";
+    graph0.style.width="100%"
+    var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+    var yValues = [55, 49, 44, 24, 15];
+    var barColors = ["red", "green","blue","orange","brown"];
+    new Chart(graph0, {
+        type: "bar",
+        data: {labels: xValues, datasets: [{backgroundColor: barColors, data: yValues}]},
+        options: {legend: {display: false}, title: {display: true, text: "World Wine Production 2018"}}
+    });
+    graph.append(graph0);
 }
 function applyDashBGraph1() {
     cleanGraph();
@@ -215,6 +232,31 @@ function applyDashBGraph5() {
     var header = document.createElement("h2");
     header.innerHTML = "Tab for the graph for dashboard 5";
     graph.append(header);
+    var graph5 = document.createElement("canvas");
+    graph5.id = "graph0";
+    graph5.style.width="100%";
+    var xLabel = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "Novmeber", "December"];
+    var yLabel = ["Total", "Direction 0", "Direction 1"];
+    var yAnnual = ["26932", "13466", "13466"];
+    var dataSet = [["2838", "2332", "2330", "2258", "2270", "2128", "2346", "2178", "2108", "2146", "1934", "2064"],
+        ["1419", "1166", "1165", "1129", "1135", "1064", "1173", "1089", "1054", "1073", "967", "1032"],
+        ["1419", "1166", "1165", "1129", "1135", "1064", "1173", "1089", "1054", "1073", "967", "1032"]];
+    var barColor = ["blue", "green", "orange"];
+    var data = {
+        labels: xLabel,
+        datasets: [{label: yLabel[0], data: dataSet[0],  backgroundColor: barColor[0]}, 
+            {label: yLabel[1], data: dataSet[1],  backgroundColor: barColor[1]}, 
+            {label: yLabel[2], data: dataSet[2],  backgroundColor: barColor[2]}]
+    };
+    var config = {
+        type: "bar", data: data,
+        options: {
+            responsive: true,
+            plugins: {legend: {position: 'top',}, title: {display: false, text: ""}}
+        },
+    };
+    new Chart(graph5, config);
+    graph.append(graph5);
 }
 function applyDashBGraph6() {
     cleanGraph();
