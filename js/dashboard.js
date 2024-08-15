@@ -13,7 +13,6 @@ var directions = {"Select a direction" : "-1", "Direction 0" : "0", "Direction 1
 const agency = document.getElementById("agency");
 const employee = document.getElementById("employee");
 switch (agencyNum) { 
-    
     case 1: agency.style.backgroundImage = "url('resources/artm-logo.png')"; break;
     case 2: agency.style.backgroundImage = "url('resources/stm-logo.png')"; break;
     case 3: agency.style.backgroundImage = "url('resources/exo-logo.png')"; break;
@@ -168,13 +167,100 @@ function applyDashBFilter6(selected) {
 }
 function filterDataCompilation() {
     switch (dashBSelect) {
-        case 0: console.log(dashBSelect + " " + filter1Data + " " + filter2Data); break;
-        case 1: console.log(dashBSelect + " " + filter1Data); break;
-        case 2: console.log(dashBSelect + " " + filter1Data); break;
-        case 3: console.log(dashBSelect + " " + filter1Data); break;
-        case 4: console.log(dashBSelect + " " + filter1Data + " " + filter2Data + " " + filter4Data + " " + filter5Data); break;
-        case 5: console.log(dashBSelect + " " + filter1Data + " " + filter4Data); break;
-        case 6: console.log(dashBSelect + " " + filter3Data + " " + filter4Data); break;
+        case 0: console.log(dashBSelect + " " + filter1Data + " " + filter2Data); applyDashBGraph0(); applyDashBTable0(); break;
+        case 1: console.log(dashBSelect + " " + filter1Data); applyDashBGraph1(); applyDashBTable1(); break;
+        case 2: console.log(dashBSelect + " " + filter1Data); applyDashBGraph2(); applyDashBTable2(); break;
+        case 3: console.log(dashBSelect + " " + filter1Data); applyDashBGraph3(); applyDashBTable3(); break;
+        case 4: console.log(dashBSelect + " " + filter1Data + " " + filter2Data + " " + filter4Data + " " + filter5Data); applyDashBGraph4(); applyDashBTable4(); break;
+        case 5: console.log(dashBSelect + " " + filter1Data + " " + filter4Data); applyDashBGraph5(); applyDashBTable5(); break;
+        case 6: console.log(dashBSelect + " " + filter3Data + " " + filter4Data); applyDashBGraph6(); applyDashBTable6(); break;
     }
 }
-
+const graph = document.getElementById("tab1");
+const table = document.getElementById("tab2");
+function cleanGraph() {while(graph.firstChild) graph.removeChild(graph.firstChild);}
+function cleanTable() {while(table.firstChild) table.removeChild(table.firstChild);}
+function applyDashBGraph0() {
+    cleanGraph();
+    var header = document.createElement("h2");
+    header.innerHTML = "Tab for the graph for dashboard 0";
+    graph.append(header);
+}
+function applyDashBGraph1() {
+    cleanGraph();
+    var header = document.createElement("h2");
+    header.innerHTML = "Tab for the graph for dashboard 1";
+    graph.append(header);
+}
+function applyDashBGraph2() {
+    cleanGraph();
+    var header = document.createElement("h2");
+    header.innerHTML = "Tab for the graph for dashboard 2";
+    graph.append(header);
+}
+function applyDashBGraph3() {
+    cleanGraph();
+    var header = document.createElement("h2");
+    header.innerHTML = "Tab for the graph for dashboard 3";
+    graph.append(header);
+}
+function applyDashBGraph4() {
+    cleanGraph();
+    var header = document.createElement("h2");
+    header.innerHTML = "Tab for the graph for dashboard 4";
+    graph.append(header);
+}
+function applyDashBGraph5() {
+    cleanGraph();
+    var header = document.createElement("h2");
+    header.innerHTML = "Tab for the graph for dashboard 5";
+    graph.append(header);
+}
+function applyDashBGraph6() {
+    cleanGraph();
+    var header = document.createElement("h2");
+    header.innerHTML = "Tab for the graph for dashboard 6";
+    graph.append(header);
+}
+function applyDashBTable0() {
+    cleanTable();
+    var header = document.createElement("h2");
+    header.innerHTML = "Tab for the table for dashboard 0";
+    table.append(header);
+}
+function applyDashBTable1() {
+    cleanTable();
+    var header = document.createElement("h2");
+    header.innerHTML = "Tab for the table for dashboard 1";
+    table.append(header);
+}
+function applyDashBTable2() {
+    cleanTable();
+    var header = document.createElement("h2");
+    header.innerHTML = "Tab for the table for dashboard 2";
+    table.append(header);
+}
+function applyDashBTable3() {
+    cleanTable();
+    var header = document.createElement("h2");
+    header.innerHTML = "Tab for the table for dashboard 3";
+    table.append(header);
+}
+function applyDashBTable4() {
+    cleanTable();
+    var header = document.createElement("h2");
+    header.innerHTML = "Tab for the table for dashboard 4";
+    table.append(header);
+}
+function applyDashBTable5() {
+    cleanTable();
+    var header = document.createElement("h2");
+    header.innerHTML = "Tab for the table for dashboard 5";
+    table.append(header);
+}
+function applyDashBTable6() {
+    cleanTable();
+    var header = document.createElement("h2");
+    header.innerHTML = "Tab for the table for dashboard 6";
+    table.append(header);
+}
