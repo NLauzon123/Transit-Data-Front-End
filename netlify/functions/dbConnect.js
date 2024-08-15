@@ -5,6 +5,7 @@ const config = {
   password: process.env.DB_PASSWORD,
   server: process.env.DB_SERVER,
   database: process.env.DB_DATABASE,
+  port: parseInt(process.env.DB_PORT),
   options: {
     encrypt: process.env.DB_TRUST_CERTIFICATE === "true", // Logically check for string 'true'
     trustServerCertificate: process.env.DB_ENCRYPT === "true", // Logically check for string 'true'
@@ -13,41 +14,45 @@ const config = {
 
 console.log("DB Config:", config); // Log the DB configuration
 
-const queries = {
-  top10fare: `SELECT TOP (10) [fareID]
-      ,[fareUserID]
-      ,[fareType]
-      ,[startDate]
-      ,[endDate]
-      ,[quantityRemaining]
-  FROM [Transit].[dbo].[Fare]`,
-};
+// const queries = {
+//   top10fare: `SELECT TOP (10) [fareID]
+//       ,[fareUserID]
+//       ,[fareType]
+//       ,[startDate]
+//       ,[endDate]
+//       ,[quantityRemaining]
+//   FROM [Transit].[dbo].[Fare]`,
+// };
 
 exports.handler = async function (event, context) {
-  const queryName = event.queryStringParameters.queryName;
-  const query = queries[queryName];
+  // const queryName = event.queryStringParameters.queryName;
+  // const query = queries[queryName];
 
-  console.log("Received query:", queryName);
-  console.log("SQL Query:", query);
+  // console.log("Received query:", queryName);
+  // console.log("SQL Query:", query);
 
-  if (!query) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ error: `Query "${queryName}" not found.` }),
-    };
-  }
+  // if (!query) {
+  //   return {
+  //     statusCode: 400,
+  //     body: JSON.stringify({ error: `Query "${queryName}" not found.` }),
+  //   };
+  // }
   try {
     console.log("Attempting to connect to the database...");
     let pool = await sql.connect(config);
     console.log("Connected to the database successfully.");
 
-    //   let result = await pool.request().query(query);
+    let result = await pool
+      .request()
+      .input("year", sql.Int, 2025)
+      .input("service", sql.Int, 13)
+      .execute("MidTermTraffic");
 
-    //   console.log("Query executed successfully:", result);
-    //   return {
-    //     statusCode: 200,
-    //     body: JSON.stringify(result.recordsets),
-    //   };
+    console.log("Query executed successfully:", result);
+    return {
+      statusCode: 200,
+      body: JSON.stringify(result.recordsets),
+    };
   } catch (err) {
     console.error("SQL error", err);
     return {
