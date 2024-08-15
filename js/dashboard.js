@@ -9,6 +9,7 @@ var services = {"Select a service" : "0", "Ligne 1 - Verte',1" : "1", "Ligne 2 -
     "Bus 67 - Saint-Michel" : "51", "Bus 105 - Sherbrooke" : "77", "Bus 121 - Sauvé / Côte-Vertu" : "89",
     "Bus 141 - Jean-Talon Est" : "102", "Bus 165 - Côte-des-Neiges" : "110", "Bus 439 - Express Pie-IX" : "191"};
 var directions = {"Select a direction" : "-1", "Direction 0" : "0", "Direction 1" : "1", "Both directions" : null};
+var getKeyByValue = (object, value) => {return Object.keys(object).find(key => object[key] === value);};
 const agency = document.getElementById("agency");
 const employee = document.getElementById("employee");
 switch (agencyNum) { 
@@ -230,7 +231,7 @@ function applyDashBGraph4() {
 function applyDashBGraph5() {
     cleanGraph();
     var header = document.createElement("h2");
-    header.innerHTML = "Tab for the graph for dashboard 5";
+    header.innerHTML = "Mid-term user traffic in " + filter1Data + " for service " +  getKeyByValue(services, filter4Data);
     graph.append(header);
     var graph5 = document.createElement("canvas");
     graph5.id = "graph0";
@@ -257,6 +258,31 @@ function applyDashBGraph5() {
     };
     new Chart(graph5, config);
     graph.append(graph5);
+    var annualTable = document.createElement("div");
+    annualTable.id = "graph5Table";
+    var table = document.createElement('table');
+    var thead = document.createElement('thead');
+    var tbody = document.createElement('tbody');
+    var headerRow = document.createElement('tr');
+    for (var i = -1; i < yLabel.length; i++) {
+        const th = document.createElement('th');
+        if (i == -1) th.textContent  = "Direction: ";
+        else th.textContent = yLabel[i];
+        headerRow.appendChild(th);
+    };
+    thead.appendChild(headerRow);
+    var dataRow = document.createElement('tr');
+    for (var i = -1; i < yAnnual.length; i++) {
+        const td = document.createElement('td');
+        if (i == -1) td.textContent  = "Total annual users: ";
+        else td.textContent = yAnnual[i];
+        dataRow.appendChild(td);
+    };
+    tbody.appendChild(dataRow);
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    annualTable.appendChild(table);
+    graph.append(annualTable);
 }
 function applyDashBGraph6() {
     cleanGraph();
