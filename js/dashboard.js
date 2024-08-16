@@ -8,7 +8,7 @@ var services = {"Select a service" : "0", "Ligne 1 - Verte',1" : "1", "Ligne 2 -
     "Ligne 5 - Bleue" : "4", "Bus 18 - Beaubien" : "13", "Bus 24 - Sherbrooke" : "16", "Bus 51 - Édouard-Montpetit" : "40",
     "Bus 67 - Saint-Michel" : "51", "Bus 105 - Sherbrooke" : "77", "Bus 121 - Sauvé / Côte-Vertu" : "89",
     "Bus 141 - Jean-Talon Est" : "102", "Bus 165 - Côte-des-Neiges" : "110", "Bus 439 - Express Pie-IX" : "191"};
-var directions = {"Select a direction" : "-1", "Direction 0" : "0", "Direction 1" : "1", "Both directions" : null};
+var directions = {"Select a direction" : "-1", "Direction 0" : "0", "Direction 1" : "1", "Both directions" : "null"};
 var getKeyByValue = (object, value) => {return Object.keys(object).find(key => object[key] === value);};
 const agency = document.getElementById("agency");
 const employee = document.getElementById("employee");
@@ -184,57 +184,151 @@ function filterDataCompilation() {
         case 6: console.log(dashBSelect + " " + filter3Data + " " + filter4Data); applyDashBGraph6(); applyDashBTable6(); break;
     }
 }
+
 function cleanGraph() {while(graph.firstChild) graph.removeChild(graph.firstChild);}
 function cleanTable() {while(table.firstChild) table.removeChild(table.firstChild);}
 function applyDashBGraph0() {
     cleanGraph();
     var header = document.createElement("h2");
-    header.innerHTML = "Tab for the graph for dashboard 0";
+    header.innerHTML = "Graph: Long-term revenue summary for a period of " + filter2Data + " years ending in " + filter1Data;
     graph.append(header);
     var graph0 = document.createElement("canvas");
-    graph0.id = "graph0";
-    graph0.style.width="100%"
-    var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-    var yValues = [55, 49, 44, 24, 15];
-    var barColors = ["red", "green","blue","orange","brown"];
-    new Chart(graph0, {
-        type: "bar",
-        data: {labels: xValues, datasets: [{backgroundColor: barColors, data: yValues}]},
-        options: {legend: {display: false}, title: {display: true, text: "World Wine Production 2018"}}
-    });
+    graph0.style.width="100%";
+    var xLabel = ["Online", "Buses", "Region1", "Region2", "Region3", "Region4", "Region5", "Region6", "Region7", "Region8"];
+    var yLabel = ["2023", "2024", "2025", "2026", "2027"];
+    var yTotal = ["724387.75", "686620.00", "496512.75", "324966.75", "235801.75"];
+    var dataSet = [
+        ["145327.25", "0", "22773.00", "150440.25", "47832.25", "120941.00", "50924.25", "52646.00", "63073.50", "70430.25"],
+        ["135092.00", "0", "23365.00", "142534.00", "40143.25", "113923.25", "54095.75", "45809.50", "58621.75", "73035.50"],
+        ["98491.25", "0", "18171.00", "100215.00", "28646.75", "86601.00", "39408.50", "30911.25", "40450.25", "53617.75"],
+        ["64188.00", "0", "12182.50", "63435.25", "19931.00", "57735.50", "26364.00", "20369.50", "28008.25", "32752.75"],
+        ["49023.25", "0", "8036.50", "48003.50", "14206.25", "40166.50", "18456.75", "14832.75", "19368.75", "23707.50"]
+    ];
+    var yColor = ["blue", "green", "orange", "brown", "black"];
+    var data = {
+        labels: xLabel,
+        datasets: [
+            {label: yLabel[0], data: dataSet[0], borderColor: yColor[0], backgroundColor: yColor[0]}, 
+            {label: yLabel[1], data: dataSet[1], borderColor: yColor[1], backgroundColor: yColor[1]}, 
+            {label: yLabel[2], data: dataSet[2], borderColor: yColor[2], backgroundColor: yColor[2]},
+            {label: yLabel[3], data: dataSet[3], borderColor: yColor[3], backgroundColor: yColor[3]},
+            {label: yLabel[4], data: dataSet[4], borderColor: yColor[4], backgroundColor: yColor[4]}
+        ]
+    };
+    var config = {
+        type: "line", data: data,
+        options: {
+            responsive: true,
+            plugins: {legend: {position: 'top',}, title: {display: false, text: ""}}
+        },
+    };
+    new Chart(graph0, config);
     graph.append(graph0);
+    var totalTable = document.createElement("div");
+    totalTable.id = "graphTable";
+    var table = document.createElement('table');
+    var thead = document.createElement('thead');
+    var tbody = document.createElement('tbody');
+    var headerRow = document.createElement('tr');
+    for (var i = -1; i < yLabel.length; i++) {
+        const th = document.createElement('th');
+        if (i == -1) th.textContent  = "Year: ";
+        else th.textContent = yLabel[i];
+        headerRow.appendChild(th);
+    };
+    thead.appendChild(headerRow);
+    var dataRow = document.createElement('tr');
+    for (var i = -1; i < yTotal.length; i++) {
+        const td = document.createElement('td');
+        if (i == -1) td.textContent  = "Total revenue by year: ";
+        else td.textContent = yTotal[i];
+        dataRow.appendChild(td);
+    };
+    tbody.appendChild(dataRow);
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    totalTable.appendChild(table);
+    graph.append(totalTable);
 }
 function applyDashBGraph1() {
+/*
+    Region	January	February	March	April	May	June	July	August	September	October	November	December
+    Buses	NULL	NULL	NULL	NULL	NULL	NULL	NULL	NULL	NULL	NULL	NULL	NULL
+    Online	3660.00	4394.00	3995.50	4471.25	4223.25	4558.00	3628.25	4007.25	4521.25	3668.50	3559.00	4337.00
+    Region 1	741.50	794.25	694.50	497.75	734.25	294.50	454.00	761.00	794.25	1015.00	768.00	487.50
+    Region 2	3275.00	3091.75	3319.75	3946.25	4377.25	4520.50	3788.00	4552.25	4340.75	4245.75	3953.50	4592.75
+    Region 3	1309.50	1194.25	1236.00	1276.50	1248.25	1516.50	1115.00	1175.00	955.25	1369.00	1436.00	375.00
+    Region 4	3540.00	2813.50	3533.00	3325.25	2683.00	3398.50	4299.00	3821.00	2745.25	3874.50	2713.75	3419.75
+    Region 5	1596.75	1166.00	1642.75	1476.25	1509.50	1117.00	1730.00	1576.25	1596.75	1422.00	1442.00	2181.50
+    Region 6	1296.00	1162.25	1335.75	1502.50	1022.25	762.50	1222.00	1716.25	930.50	950.00	1830.25	1102.50
+    Region 7	2024.25	2282.50	1969.00	1284.75	2083.50	1516.25	1590.00	1183.25	1269.25	1356.50	1535.25	1274.25
+    Region 8	2456.50	2270.25	1712.50	1670.50	1982.75	1751.25	2325.00	1348.25	2405.50	1779.25	2137.00	1868.75
+    Total	19899.50	19168.75	19438.75	19451.00	19864.00	19435.00	20151.25	20140.50	19558.75	19680.50	19374.75	19639.00
+*/
+
     cleanGraph();
     var header = document.createElement("h2");
-    header.innerHTML = "Tab for the graph for dashboard 1";
+    header.innerHTML = "Graph: Mid-term revenue summary for " + filter1Data;
     graph.append(header);
+    var graph1 = document.createElement("canvas");
+    graph1.style.width="100%";
+    var xLabel = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "Novmeber", "December"];
+    var yLabel = ["Online", "Buses", "Region1", "Region2", "Region3", "Region4", "Region5", "Region6", "Region7", "Region8"];
+    var yTotal = ["19899.50", "19168.75", "19438.75", "19451.00", "19864.00", "19435.00", "20151.25", "20140.50", "19558.75", "19680.50", "19374.75", "19639.00"];
+    var dataSet = [
+        ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+        ["3660.00", "4394.00", "3995.50", "4471.25", "4223.25", "4558.00", "3628.25", "4007.25", "4521.25", "3668.50", "3559.00", "4337.00"],
+        ["741.50", "794.25", "694.50", "497.75", "734.25", "294.50", "454.00", "761.00", "794.25", "1015.00", "768.00", "487.5"],
+        ["3275.00", "3091.75", "3319.75", "3946.25", "4377.25", "4520.50", "3788.00", "4552.25", "4340.75", "4245.75", "3953.50", "4592.75"],
+        ["1309.50", "1194.25", "1236.00", "1276.50", "1248.25", "1516.50", "1115.00", "1175.00", "955.25", "1369.00", "1436.00", "375.00"],
+        ["", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", ""],
+    ];
+    var yColor = ["blue", "green", "orange", "brown", "black"];
+
 }
 function applyDashBGraph2() {
+/*
+Product	January	February	March	April	May	June	July	August	September	October	November	December	TotalYear
+twoTrips	1078.00	980.00	1050.00	1162.00	910.00	1246.00	1064.00	987.00	1071.00	1127.00	1120.00	952.00	12747.00
+tenTrips	4721.50	4488.75	4488.75	4389.00	5054.00	4389.00	5087.25	5253.50	4887.75	5253.50	4754.75	5187.00	57954.75
+monthly	14100.00	13700.00	13900.00	13900.00	13900.00	13800.00	14000.00	13900.00	13600.00	13300.00	13500.00	13500.00	165100.00
+*/
     cleanGraph();
     var header = document.createElement("h2");
-    header.innerHTML = "Tab for the graph for dashboard 2";
+    header.innerHTML = "Graph: Revenue details by fare products for" + filter1Data;
     graph.append(header);
 }
 function applyDashBGraph3() {
     cleanGraph();
     var header = document.createElement("h2");
-    header.innerHTML = "Tab for the graph for dashboard 3";
+    header.innerHTML = "Graph: Revenue details by points of sales for " + filter1Data;
     graph.append(header);
 }
 function applyDashBGraph4() {
+/*
+Year	WholeYear	January	February	March	April	May	June	July	August	September	October	November	December
+2023	38940	3292	2926	3352	2938	3210	3156	3234	3374	3318	3428	3428	3284
+2024	37768	3522	3130	3154	3288	3342	3122	3314	3210	2984	3016	2790	2896
+2025	26932	2838	2332	2330	2258	2270	2128	2346	2178	2108	2146	1934	2064
+2026	20224	2010	1780	1864	1874	1842	1838	1834	1662	1526	1420	1322	1252
+2027	14148	1130	1098	1186	1198	1234	1238	1310	1216	1166	1128	1104	1140
+*/
     cleanGraph();
     var header = document.createElement("h2");
-    header.innerHTML = "Tab for the graph for dashboard 4";
+    header.innerHTML = "Graph: Long-term user traffic for a period of " + filter2Data + " years ending in " + filter1Data +
+        ", for service " + getKeyByValue(services, filter4Data) + ", in " + getKeyByValue(directions, filter5Data);
     graph.append(header);
 }
 function applyDashBGraph5() {
     cleanGraph();
     var header = document.createElement("h2");
-    header.innerHTML = "Mid-term user traffic in " + filter1Data + " for service " +  getKeyByValue(services, filter4Data);
+    header.innerHTML = "Graph: Mid-term user traffic in " + filter1Data + " for service " +  getKeyByValue(services, filter4Data);
     graph.append(header);
     var graph5 = document.createElement("canvas");
-    graph5.id = "graph0";
     graph5.style.width="100%";
     var xLabel = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "Novmeber", "December"];
     var yLabel = ["Total", "Direction 0", "Direction 1"];
@@ -259,7 +353,7 @@ function applyDashBGraph5() {
     new Chart(graph5, config);
     graph.append(graph5);
     var annualTable = document.createElement("div");
-    annualTable.id = "graph5Table";
+    annualTable.id = "graphTable";
     var table = document.createElement('table');
     var thead = document.createElement('thead');
     var tbody = document.createElement('tbody');
@@ -285,50 +379,79 @@ function applyDashBGraph5() {
     graph.append(annualTable);
 }
 function applyDashBGraph6() {
+/*
+period	total	direction0	direction1
+Daily	6	0	0
+0AM	0	0	0
+1AM	0	0	0
+2AM	0	0	0
+3AM	0	0	0
+4AM	0	0	0
+5AM	0	0	0
+6AM	1	1	0
+7AM	0	0	0
+8AM	1	0	1
+9AM	0	0	0
+10AM	1	1	0
+11AM	0	0	0
+12AM	0	0	0
+1PM	0	0	0
+2PM	0	0	0
+3PM	0	0	0
+4PM	0	0	0
+5PM	0	0	0
+6PM	1	1	0
+7PM	0	0	0
+8PM	0	0	0
+9PM	1	0	1
+10PM	1	0	1
+11PM	0	0	0
+*/
     cleanGraph();
     var header = document.createElement("h2");
-    header.innerHTML = "Tab for the graph for dashboard 6";
+    header.innerHTML = "Graph: Short-term user traffic on " + filter3Data + " for service " +  getKeyByValue(services, filter4Data);
     graph.append(header);
 }
 function applyDashBTable0() {
     cleanTable();
     var header = document.createElement("h2");
-    header.innerHTML = "Tab for the table for dashboard 0";
+    header.innerHTML = "Table: Long-term revenue summary for a period of " + filter2Data + " years ending in " + filter1Data;
     table.append(header);
 }
 function applyDashBTable1() {
     cleanTable();
     var header = document.createElement("h2");
-    header.innerHTML = "Tab for the table for dashboard 1";
+    header.innerHTML = "Table: Mid-term revenue summary for " + filter1Data;
     table.append(header);
 }
 function applyDashBTable2() {
     cleanTable();
     var header = document.createElement("h2");
-    header.innerHTML = "Tab for the table for dashboard 2";
+    header.innerHTML = "Table: Revenue details by fare products for" + filter1Data;
     table.append(header);
 }
 function applyDashBTable3() {
     cleanTable();
     var header = document.createElement("h2");
-    header.innerHTML = "Tab for the table for dashboard 3";
+    header.innerHTML = "Table: Revenue details by points of sales for " + filter1Data;
     table.append(header);
 }
 function applyDashBTable4() {
     cleanTable();
     var header = document.createElement("h2");
-    header.innerHTML = "Tab for the table for dashboard 4";
+    header.innerHTML = "Table: Long-term user traffic for a period of " + filter2Data + " years ending in " + filter1Data +
+        ", for service " + getKeyByValue(services, filter4Data) + ", in " + getKeyByValue(directions, filter5Data);
     table.append(header);
 }
 function applyDashBTable5() {
     cleanTable();
     var header = document.createElement("h2");
-    header.innerHTML = "Tab for the table for dashboard 5";
+    header.innerHTML = "Table: Mid-term user traffic in " + filter1Data + " for service " +  getKeyByValue(services, filter4Data);
     table.append(header);
 }
 function applyDashBTable6() {
     cleanTable();
     var header = document.createElement("h2");
-    header.innerHTML = "Tab for the table for dashboard 6";
+    header.innerHTML = "Table: Short-term user traffic on " + filter3Data + " for service " +  getKeyByValue(services, filter4Data);
     table.append(header);
 }
