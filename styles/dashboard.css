@@ -30,7 +30,7 @@ h2 {
 #graphTable {
     padding-top: 20px;
 }
-#graphTable table {
+#graphTable table, th, td {
     margin-left: auto;
     margin-right: auto;
     text-align: center;

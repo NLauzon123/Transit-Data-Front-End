@@ -187,6 +187,33 @@ function filterDataCompilation() {
 
 function cleanGraph() {while(graph.firstChild) graph.removeChild(graph.firstChild);}
 function cleanTable() {while(table.firstChild) table.removeChild(table.firstChild);}
+function addTableInGraph(headerData, bodyData, headerTitle, bodyTitle) {
+    var totalTable = document.createElement("div");
+    totalTable.id = "graphTable";
+    var table = document.createElement('table');
+    var thead = document.createElement('thead');
+    var tbody = document.createElement('tbody');
+    var headerRow = document.createElement('tr');
+    for (var i = -1; i < headerData.length; i++) {
+        var th = document.createElement('th');
+        if (i == -1) th.textContent  = headerTitle;
+        else th.textContent = headerData[i];
+        headerRow.appendChild(th);
+    };
+    thead.appendChild(headerRow);
+    var dataRow = document.createElement('tr');
+    for (var i = -1; i < bodyData.length; i++) {
+        var td = document.createElement('td');
+        if (i == -1) td.textContent  = bodyTitle;
+        else td.textContent = bodyData[i];
+        dataRow.appendChild(td);
+    };
+    tbody.appendChild(dataRow);
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    totalTable.appendChild(table);
+    graph.append(totalTable);
+}
 function applyDashBGraph0() {
     cleanGraph();
     var header = document.createElement("h2");
@@ -224,56 +251,17 @@ function applyDashBGraph0() {
     };
     new Chart(graph0, config);
     graph.append(graph0);
-    var totalTable = document.createElement("div");
-    totalTable.id = "graphTable";
-    var table = document.createElement('table');
-    var thead = document.createElement('thead');
-    var tbody = document.createElement('tbody');
-    var headerRow = document.createElement('tr');
-    for (var i = -1; i < yLabel.length; i++) {
-        const th = document.createElement('th');
-        if (i == -1) th.textContent  = "Year: ";
-        else th.textContent = yLabel[i];
-        headerRow.appendChild(th);
-    };
-    thead.appendChild(headerRow);
-    var dataRow = document.createElement('tr');
-    for (var i = -1; i < yTotal.length; i++) {
-        const td = document.createElement('td');
-        if (i == -1) td.textContent  = "Total revenue by year: ";
-        else td.textContent = yTotal[i];
-        dataRow.appendChild(td);
-    };
-    tbody.appendChild(dataRow);
-    table.appendChild(thead);
-    table.appendChild(tbody);
-    totalTable.appendChild(table);
-    graph.append(totalTable);
+    addTableInGraph(yLabel, yTotal, "Year: ", "Total revenue by year: ");
 }
 function applyDashBGraph1() {
-/*
-    Region	January	February	March	April	May	June	July	August	September	October	November	December
-    Buses	NULL	NULL	NULL	NULL	NULL	NULL	NULL	NULL	NULL	NULL	NULL	NULL
-    Online	3660.00	4394.00	3995.50	4471.25	4223.25	4558.00	3628.25	4007.25	4521.25	3668.50	3559.00	4337.00
-    Region 1	741.50	794.25	694.50	497.75	734.25	294.50	454.00	761.00	794.25	1015.00	768.00	487.50
-    Region 2	3275.00	3091.75	3319.75	3946.25	4377.25	4520.50	3788.00	4552.25	4340.75	4245.75	3953.50	4592.75
-    Region 3	1309.50	1194.25	1236.00	1276.50	1248.25	1516.50	1115.00	1175.00	955.25	1369.00	1436.00	375.00
-    Region 4	3540.00	2813.50	3533.00	3325.25	2683.00	3398.50	4299.00	3821.00	2745.25	3874.50	2713.75	3419.75
-    Region 5	1596.75	1166.00	1642.75	1476.25	1509.50	1117.00	1730.00	1576.25	1596.75	1422.00	1442.00	2181.50
-    Region 6	1296.00	1162.25	1335.75	1502.50	1022.25	762.50	1222.00	1716.25	930.50	950.00	1830.25	1102.50
-    Region 7	2024.25	2282.50	1969.00	1284.75	2083.50	1516.25	1590.00	1183.25	1269.25	1356.50	1535.25	1274.25
-    Region 8	2456.50	2270.25	1712.50	1670.50	1982.75	1751.25	2325.00	1348.25	2405.50	1779.25	2137.00	1868.75
-    Total	19899.50	19168.75	19438.75	19451.00	19864.00	19435.00	20151.25	20140.50	19558.75	19680.50	19374.75	19639.00
-*/
-
     cleanGraph();
     var header = document.createElement("h2");
     header.innerHTML = "Graph: Mid-term revenue summary for " + filter1Data;
     graph.append(header);
     var graph1 = document.createElement("canvas");
     graph1.style.width="100%";
-    var xLabel = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "Novmeber", "December"];
-    var yLabel = ["Online", "Buses", "Region1", "Region2", "Region3", "Region4", "Region5", "Region6", "Region7", "Region8"];
+    var xLabel = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var yLabel = ["Buses", "Online", "Region1", "Region2", "Region3", "Region4", "Region5", "Region6", "Region7", "Region8"];
     var yTotal = ["19899.50", "19168.75", "19438.75", "19451.00", "19864.00", "19435.00", "20151.25", "20140.50", "19558.75", "19680.50", "19374.75", "19639.00"];
     var dataSet = [
         ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
@@ -281,47 +269,120 @@ function applyDashBGraph1() {
         ["741.50", "794.25", "694.50", "497.75", "734.25", "294.50", "454.00", "761.00", "794.25", "1015.00", "768.00", "487.5"],
         ["3275.00", "3091.75", "3319.75", "3946.25", "4377.25", "4520.50", "3788.00", "4552.25", "4340.75", "4245.75", "3953.50", "4592.75"],
         ["1309.50", "1194.25", "1236.00", "1276.50", "1248.25", "1516.50", "1115.00", "1175.00", "955.25", "1369.00", "1436.00", "375.00"],
-        ["", "", "", "", "", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "", "", "", "", ""],
+        ["3540.00", "2813.50", "3533.00", "3325.25", "2683.00", "3398.50", "4299.00", "3821.00", "2745.25", "3874.50", "2713.75", "3419.75"],
+        ["1596.75", "1166.00", "1642.75", "1476.25", "1509.50", "1117.00", "1730.00", "1576.25", "1596.75", "1422.00", "1442.00", "2181.50"],
+        ["1296.00", "1162.25", "1335.75", "1502.50", "1022.25", "762.50", "1222.00", "1716.25", "930.50", "950.00", "1830.25", "1102.50"],
+        ["2024.25", "2282.50", "1969.00", "1284.75", "2083.50", "1516.25", "1590.00", "1183.25", "1269.25", "1356.50", "1535.25", "1274.25"],
+        ["2456.50", "2270.25", "1712.50", "1670.50", "1982.75", "1751.25", "2325.00", "1348.25", "2405.50", "1779.25", "2137.00", "1868.75"],
     ];
-    var yColor = ["blue", "green", "orange", "brown", "black"];
-
+    var yColor = ["blue", "green", "orange", "brown", "black", "yellow", "gray", "red", "aqua", "chocolate"];
+    var data = {
+        labels: xLabel,
+        datasets: [
+            {label: yLabel[0], data: dataSet[0], backgroundColor: yColor[0]}, 
+            {label: yLabel[1], data: dataSet[1], backgroundColor: yColor[1]}, 
+            {label: yLabel[2], data: dataSet[2], backgroundColor: yColor[2]},
+            {label: yLabel[3], data: dataSet[3], backgroundColor: yColor[3]},
+            {label: yLabel[4], data: dataSet[4], backgroundColor: yColor[4]},
+            {label: yLabel[5], data: dataSet[5], backgroundColor: yColor[5]},
+            {label: yLabel[6], data: dataSet[6], backgroundColor: yColor[6]},
+            {label: yLabel[7], data: dataSet[7], backgroundColor: yColor[7]},
+            {label: yLabel[8], data: dataSet[8], backgroundColor: yColor[8]},
+            {label: yLabel[9], data: dataSet[9], backgroundColor: yColor[9]}
+        ]
+    };
+    var config = {
+        type: "bar", data: data,
+        options: {
+            responsive: true,
+            plugins: {legend: {position: 'top',}, title: {display: false, text: ""}}
+        },
+    };
+    new Chart(graph1, config);
+    graph.append(graph1);
+    addTableInGraph(xLabel, yTotal, "Month: ", "Total revenue: ");
 }
 function applyDashBGraph2() {
-/*
-Product	January	February	March	April	May	June	July	August	September	October	November	December	TotalYear
-twoTrips	1078.00	980.00	1050.00	1162.00	910.00	1246.00	1064.00	987.00	1071.00	1127.00	1120.00	952.00	12747.00
-tenTrips	4721.50	4488.75	4488.75	4389.00	5054.00	4389.00	5087.25	5253.50	4887.75	5253.50	4754.75	5187.00	57954.75
-monthly	14100.00	13700.00	13900.00	13900.00	13900.00	13800.00	14000.00	13900.00	13600.00	13300.00	13500.00	13500.00	165100.00
-*/
     cleanGraph();
     var header = document.createElement("h2");
     header.innerHTML = "Graph: Revenue details by fare products for" + filter1Data;
     graph.append(header);
+    var graph2 = document.createElement("canvas");
+    graph2.style.width="100%";
+    var xLabel = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var yLabel = ["Two trips", "Ten trips", "Monthly"];
+    var yTotal = ["12747.00", "57954.75", "165100.00"];
+    var dataSet = [
+        ["1078.00", "980.00", "1050.00", "1162.00", "910.00", "1246.00", "1064.00", "987.00", "1071.00", "1127.00", "1120.00", "952.00"],
+        ["4721.50", "4488.75", "4488.75", "4389.00", "5054.00", "4389.00", "5087.25", "5253.50", "4887.75", "5253.50", "4754.75", "5187.00"],
+        ["14100.00", "13700.00", "13900.00", "13900.00", "13900.00", "13800.00", "14000.00", "13900.00", "13600.00", "13300.00", "13500.00", "13500.00"]
+    ];
+    var yColor = ["blue", "green", "orange"];
+    var data = {
+        labels: xLabel,
+        datasets: [
+            {label: yLabel[0], data: dataSet[0], backgroundColor: yColor[0]}, 
+            {label: yLabel[1], data: dataSet[1], backgroundColor: yColor[1]}, 
+            {label: yLabel[2], data: dataSet[2], backgroundColor: yColor[2]},
+        ]
+    };
+    var config = {
+        type: "bar", data: data,
+        options: {
+            responsive: true,
+            plugins: {legend: {position: 'top',}, title: {display: false, text: ""}}
+        },
+    };
+    new Chart(graph2, config);
+    graph.append(graph2);
+    addTableInGraph(yLabel, yTotal, "Fare product: ", "Total annual revenue: ");
 }
 function applyDashBGraph3() {
     cleanGraph();
     var header = document.createElement("h2");
-    header.innerHTML = "Graph: Revenue details by points of sales for " + filter1Data;
+    header.innerHTML = "Graph: Revenue details by points of sales for " + filter1Data + " - Under development";
     graph.append(header);
 }
 function applyDashBGraph4() {
-/*
-Year	WholeYear	January	February	March	April	May	June	July	August	September	October	November	December
-2023	38940	3292	2926	3352	2938	3210	3156	3234	3374	3318	3428	3428	3284
-2024	37768	3522	3130	3154	3288	3342	3122	3314	3210	2984	3016	2790	2896
-2025	26932	2838	2332	2330	2258	2270	2128	2346	2178	2108	2146	1934	2064
-2026	20224	2010	1780	1864	1874	1842	1838	1834	1662	1526	1420	1322	1252
-2027	14148	1130	1098	1186	1198	1234	1238	1310	1216	1166	1128	1104	1140
-*/
     cleanGraph();
     var header = document.createElement("h2");
     header.innerHTML = "Graph: Long-term user traffic for a period of " + filter2Data + " years ending in " + filter1Data +
         ", for service " + getKeyByValue(services, filter4Data) + ", in " + getKeyByValue(directions, filter5Data);
     graph.append(header);
+    var graph4 = document.createElement("canvas");
+    graph4.style.width="100%";
+    var xLabel = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var yLabel = ["2023", "2024", "2025", "2026", "2027"];
+    var yTotal = ["38940", "37768", "26932", "20224", "14148"];
+    var dataSet = [
+        ["3292", "2926", "3352", "2938", "3210", "3156", "3234", "3374", "3318", "3428", "3428", "3284"],
+        ["3522", "3130", "3154", "3288", "3342", "3122", "3314", "3210", "2984", "3016", "2790", "2896"],
+        ["2838", "2332", "2330", "2258", "2270", "2128", "2346", "2178", "2108", "2146", "1934", "2064"],
+        ["2010", "1780", "1864", "1874", "1842", "1838", "1834", "1662", "1526", "1420", "1322", "1252"],
+        ["1130", "1098", "1186", "1198", "1234", "1238", "1310", "1216", "1166", "1128", "1104", "1140"]
+    ];
+    var yColor = ["blue", "green", "orange", "brown", "black"];
+    var data = {
+        labels: xLabel,
+        datasets: [
+            {label: yLabel[0], data: dataSet[0], borderColor: yColor[0], backgroundColor: yColor[0]}, 
+            {label: yLabel[1], data: dataSet[1], borderColor: yColor[1], backgroundColor: yColor[1]}, 
+            {label: yLabel[2], data: dataSet[2], borderColor: yColor[2], backgroundColor: yColor[2]},
+            {label: yLabel[3], data: dataSet[3], borderColor: yColor[3], backgroundColor: yColor[3]},
+            {label: yLabel[4], data: dataSet[4], borderColor: yColor[4], backgroundColor: yColor[4]}
+        ]
+    };
+    var config = {
+        type: "line", data: data,
+        options: {
+            responsive: true,
+            plugins: {legend: {position: 'top',}, title: {display: false, text: ""}}
+        },
+    };
+    new Chart(graph4, config);
+    graph.append(graph4);
+    addTableInGraph(yLabel, yTotal, "Year: ", "Total users: ");
+
 }
 function applyDashBGraph5() {
     cleanGraph();
@@ -330,18 +391,22 @@ function applyDashBGraph5() {
     graph.append(header);
     var graph5 = document.createElement("canvas");
     graph5.style.width="100%";
-    var xLabel = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "Novmeber", "December"];
+    var xLabel = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     var yLabel = ["Total", "Direction 0", "Direction 1"];
     var yAnnual = ["26932", "13466", "13466"];
-    var dataSet = [["2838", "2332", "2330", "2258", "2270", "2128", "2346", "2178", "2108", "2146", "1934", "2064"],
+    var dataSet = [
+        ["2838", "2332", "2330", "2258", "2270", "2128", "2346", "2178", "2108", "2146", "1934", "2064"],
         ["1419", "1166", "1165", "1129", "1135", "1064", "1173", "1089", "1054", "1073", "967", "1032"],
-        ["1419", "1166", "1165", "1129", "1135", "1064", "1173", "1089", "1054", "1073", "967", "1032"]];
+        ["1419", "1166", "1165", "1129", "1135", "1064", "1173", "1089", "1054", "1073", "967", "1032"]
+    ];
     var barColor = ["blue", "green", "orange"];
     var data = {
         labels: xLabel,
-        datasets: [{label: yLabel[0], data: dataSet[0],  backgroundColor: barColor[0]}, 
+        datasets: [
+            {label: yLabel[0], data: dataSet[0],  backgroundColor: barColor[0]}, 
             {label: yLabel[1], data: dataSet[1],  backgroundColor: barColor[1]}, 
-            {label: yLabel[2], data: dataSet[2],  backgroundColor: barColor[2]}]
+            {label: yLabel[2], data: dataSet[2],  backgroundColor: barColor[2]}
+        ]
     };
     var config = {
         type: "bar", data: data,
@@ -352,31 +417,7 @@ function applyDashBGraph5() {
     };
     new Chart(graph5, config);
     graph.append(graph5);
-    var annualTable = document.createElement("div");
-    annualTable.id = "graphTable";
-    var table = document.createElement('table');
-    var thead = document.createElement('thead');
-    var tbody = document.createElement('tbody');
-    var headerRow = document.createElement('tr');
-    for (var i = -1; i < yLabel.length; i++) {
-        const th = document.createElement('th');
-        if (i == -1) th.textContent  = "Direction: ";
-        else th.textContent = yLabel[i];
-        headerRow.appendChild(th);
-    };
-    thead.appendChild(headerRow);
-    var dataRow = document.createElement('tr');
-    for (var i = -1; i < yAnnual.length; i++) {
-        const td = document.createElement('td');
-        if (i == -1) td.textContent  = "Total annual users: ";
-        else td.textContent = yAnnual[i];
-        dataRow.appendChild(td);
-    };
-    tbody.appendChild(dataRow);
-    table.appendChild(thead);
-    table.appendChild(tbody);
-    annualTable.appendChild(table);
-    graph.append(annualTable);
+    addTableInGraph(yLabel, yAnnual, "Direction: ", "Total annual users: ");
 }
 function applyDashBGraph6() {
 /*
@@ -411,6 +452,35 @@ Daily	6	0	0
     var header = document.createElement("h2");
     header.innerHTML = "Graph: Short-term user traffic on " + filter3Data + " for service " +  getKeyByValue(services, filter4Data);
     graph.append(header);
+    var graph6 = document.createElement("canvas");
+    graph6.style.width="100%";
+    var xLabel = ["0AM", "1AM", "2AM", "3AM", "4AM", "5AM", "6AM", "7AM", "8AM", "9AM", "10AM", "11AM","12AM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM", "7PM", "8PM", "9PM", "10PM", "11PM"];
+    var yLabel = ["Total", "Direction 0", "Direction 1"];
+    var yAnnual = ["6", "3", "3"];
+    var dataSet = [
+        ["0", "0", "0", "0", "0", "0", "1", "0", "1", "0", "1", "0","0", "0", "0", "0", "0", "0", "1", "0", "0", "1", "1", "0"],
+        ["0", "0", "0", "0", "0", "0", "1", "0", "0", "0", "1", "0","0", "0", "0", "0", "0", "0", "1", "0", "0", "0", "0", "0"],
+        ["0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "0", "0","0", "0", "0", "0", "0", "0", "0", "0", "0", "1", "1", "0"],
+    ];
+    var barColor = ["blue", "green", "orange"];
+    var data = {
+        labels: xLabel,
+        datasets: [
+            {label: yLabel[0], data: dataSet[0],  backgroundColor: barColor[0]}, 
+            {label: yLabel[1], data: dataSet[1],  backgroundColor: barColor[1]}, 
+            {label: yLabel[2], data: dataSet[2],  backgroundColor: barColor[2]}
+        ]
+    };
+    var config = {
+        type: "bar", data: data,
+        options: {
+            responsive: true,
+            plugins: {legend: {position: 'top',}, title: {display: false, text: ""}}
+        },
+    };
+    new Chart(graph6, config);
+    graph.append(graph6);
+    addTableInGraph(yLabel, yAnnual, "Direction: ", "Total users for the day: ");
 }
 function applyDashBTable0() {
     cleanTable();
@@ -433,7 +503,7 @@ function applyDashBTable2() {
 function applyDashBTable3() {
     cleanTable();
     var header = document.createElement("h2");
-    header.innerHTML = "Table: Revenue details by points of sales for " + filter1Data;
+    header.innerHTML = "Table: Revenue details by points of sales for " + filter1Data + " - Under development";
     table.append(header);
 }
 function applyDashBTable4() {
