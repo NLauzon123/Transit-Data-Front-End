@@ -16,18 +16,11 @@ const getDataFromProcedure = async (requestData) => {
     if (response.ok) {
       // Parse the JSON data from the response
       const data = await response.json();
-
-      // Display the data in the #result div
-      document.getElementById("result").innerText = JSON.stringify(
-        data,
-        null,
-        2
-      );
+      // return the data
+      return JSON.stringify(data);
     } else {
       // Handle errors (e.g., non-200 status codes)
-      document.getElementById(
-        "result"
-      ).innerText = `Error: ${response.statusText}`;
+      return { error: `Error: ${response.statusText}` };
     }
   } catch (error) {
     // Handle network errors or other issues

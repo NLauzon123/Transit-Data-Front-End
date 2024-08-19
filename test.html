@@ -7,6 +7,29 @@
   </head>
   <body>
     <h1>Netlify Function Example</h1>
+    <button id="button">send request</button>
     <div id="result"></div>
+    <script type="module">
+      import { getDataFromProcedure } from "./js/apiCalls.js";
+
+      document.getElementById("button").addEventListener("click", async () => {
+        const data = await getDataFromProcedure({
+          procedure: "MidTermTraffic",
+          params: [
+            {
+              key: "year",
+              type: "Int",
+              value: 2023,
+            },
+            {
+              key: "service",
+              type: "Int",
+              value: 1,
+            },
+          ],
+        });
+        console.log(data);
+      });
+    </script>
   </body>
 </html>
