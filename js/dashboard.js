@@ -3,7 +3,7 @@ var dashBSelect;
 var agencyNum = 1;
 var firstName = "Emma";
 var lastName = "Tremblay";
-var years = ["Select a year", "2023", "2024", "2025", "2026", "2027"]; 
+var years = [2023, 2024, 2025, 2026, 2027]; 
 var services = {"Select a service" : "0", "Ligne 1 - Verte',1" : "1", "Ligne 2 - Orange" : "2", "Ligne 4 - Jaune" : "3",
     "Ligne 5 - Bleue" : "4", "Bus 18 - Beaubien" : "13", "Bus 24 - Sherbrooke" : "16", "Bus 51 - Édouard-Montpetit" : "40",
     "Bus 67 - Saint-Michel" : "51", "Bus 105 - Sherbrooke" : "77", "Bus 121 - Sauvé / Côte-Vertu" : "89",
@@ -38,7 +38,7 @@ for (var i = 0; i < tabButtons.length; i++) {
 }
 document.querySelector('.tablink').click();
 
-const dashboardOptions = document.querySelectorAll('.dashboard-option');
+const dashboardOptions = document.querySelectorAll('.dropdown-item');
 const filterID = document.getElementById("filterID");
 for (let i = 0; i < dashboardOptions.length; i++) {
     dashboardOptions[i].addEventListener('click', function() {dashBSelectSwitch(i);});
@@ -82,6 +82,14 @@ function cleanAllFilters() {
 }
 function populateFilter1() {
     var select = document.createElement("select");
+    select.style.maxWidth = "300px";
+    select.className = "form-select";
+    select.ariaLabel = "Default select example"
+    let initial = document.createElement("option");
+    let initialText = document.createTextNode("Select...");
+    initial.setAttribute('selected', "Select...");
+    initial.appendChild(initialText);
+    select.appendChild(initial);
     for (i = 0; i < years.length; i++) {
         let option = document.createElement("option");
         let optionText = document.createTextNode(years[i]);
@@ -99,6 +107,8 @@ filter1.addEventListener("change", e => {
 });
 function populateFilter2() {
     var input = document.createElement("input");
+    input.className = "form-control";
+    input.style.maxWidth = "300px";
     filter2.style.display = "block";
     filter2.innerHTML = "Select a period (in years): ";
     filter2.appendChild(input);
@@ -420,34 +430,6 @@ function applyDashBGraph5() {
     addTableInGraph(yLabel, yAnnual, "Direction: ", "Total annual users: ");
 }
 function applyDashBGraph6() {
-/*
-period	total	direction0	direction1
-Daily	6	0	0
-0AM	0	0	0
-1AM	0	0	0
-2AM	0	0	0
-3AM	0	0	0
-4AM	0	0	0
-5AM	0	0	0
-6AM	1	1	0
-7AM	0	0	0
-8AM	1	0	1
-9AM	0	0	0
-10AM	1	1	0
-11AM	0	0	0
-12AM	0	0	0
-1PM	0	0	0
-2PM	0	0	0
-3PM	0	0	0
-4PM	0	0	0
-5PM	0	0	0
-6PM	1	1	0
-7PM	0	0	0
-8PM	0	0	0
-9PM	1	0	1
-10PM	1	0	1
-11PM	0	0	0
-*/
     cleanGraph();
     var header = document.createElement("h2");
     header.innerHTML = "Graph: Short-term user traffic on " + filter3Data + " for service " +  getKeyByValue(services, filter4Data);

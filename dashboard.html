@@ -19,23 +19,25 @@
         <div class="col-md-2" id="agency"></div>
         <div class="col-md-4" id="employee"></div>
         <div class="col-md-4 emplAction">
-          <button>Settings</button>
-          <button>Log out</button>
+          <button type="button" class="btn btn-primary">Settings</button>
+          <button type="button" class="btn btn-primary">Log out</button>
         </div>
       </div>
       <div class="row separator"></div>
       <div class="row">
-        <div class="dashboards">
-          <button class="dropbtn">Dashboards</button>
-          <div class="dashboards-content">
-            <div class="dashboard-option">Long-term revenue summary</div>
-            <div class="dashboard-option">Mid-term revenue summary</div>
-            <div class="dashboard-option">Revenue details by fare products</div>
-            <div class="dashboard-option">Revenue details by points of sales</div>
-            <div class="dashboard-option">Long-term user traffic</div>
-            <div class="dashboard-option">Mid-term user traffic</div>
-            <div class="dashboard-option">Short-term user traffic</div>
-          </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="max-width: 300px;">
+            Dashboards
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Long-term revenue summary</a></li>
+            <li><a class="dropdown-item" href="#">Mid-term revenue summary</a></li>
+            <li><a class="dropdown-item" href="#">Revenue details by fare products</a></li>
+            <li><a class="dropdown-item" href="#">Revenue details by points of sales</a></li>
+            <li><a class="dropdown-item" href="#">Long-term user traffic</a></li>
+            <li><a class="dropdown-item" href="#">Mid-term user traffic</a></li>
+            <li><a class="dropdown-item" href="#">Short-term user traffic</a></li>
+          </ul>
         </div>
       </div>
       <div class="row separator"></div>

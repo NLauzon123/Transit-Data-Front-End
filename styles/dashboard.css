@@ -41,7 +41,7 @@ h2 {
 .separator {
     height: 20px;
     width: 100%;
-    background-color: aquamarine;
+    background-color: none
 }
 .filterButton {
     height: 60px;
@@ -57,7 +57,7 @@ h2 {
 .filterButton:hover {
     background: green;
 }
-.emplAction button {
+/*.emplAction button {
     height: 60px;
     background: lightgray;
     border: none;
@@ -70,6 +70,10 @@ h2 {
 }
 .emplAction button:hover {
     background: green;
+}*/
+.emplAction {
+    margin-top: auto;
+    margin-bottom: auto;
 }
 .tab {
     width: 100%;
@@ -99,7 +103,7 @@ h2 {
     line-height: 21px;
     display: none;
 }
-.dropbtn {
+/*.dropbtn {
     background-color: darkgray;
     color: white;
     padding: 16px;
@@ -127,4 +131,4 @@ h2 {
 }
 .dashboards-content div:hover {background-color: #f1f1f1}  
 .dashboards:hover .dashboards-content {display: block;}
-.dashboards:hover .dropbtn {background-color: green;}        
+.dashboards:hover .dropbtn {background-color: green;}     */   
