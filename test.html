@@ -7,12 +7,19 @@
   </head>
   <body>
     <h1>Netlify Function Example</h1>
-    <button id="button">send request</button>
+    <button id="button1">getDataFromProcedure</button>
+    <button id="button2">loginUser</button>
+    <button id="button3">checkToken</button>
+
     <div id="result"></div>
     <script type="module">
-      import { getDataFromProcedure } from "./js/apiCalls.js";
-
-      document.getElementById("button").addEventListener("click", async () => {
+      import {
+        getDataFromProcedure,
+        loginUser,
+        checkToken,
+      } from "./js/apiCalls.js";
+      let accessToken;
+      document.getElementById("button1").addEventListener("click", async () => {
         const data = await getDataFromProcedure({
           procedure: "MidTermTraffic",
           params: [
@@ -27,6 +34,22 @@
               value: 1,
             },
           ],
+        });
+        console.log(data);
+      });
+
+      document.getElementById("button2").addEventListener("click", async () => {
+        const data = await loginUser({
+          username: "lbouchard",
+          password: "RTL12345678",
+        });
+        console.log(data);
+        accessToken = data.accessToken;
+      });
+
+      document.getElementById("button3").addEventListener("click", async () => {
+        const data = await checkToken({
+          accessToken,
         });
         console.log(data);
       });
