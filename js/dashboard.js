@@ -1,17 +1,29 @@
+/*Global variables and operations*/
 var dashBSelect;
-
 var agencyNum = 1;
 var firstName = "Emma";
 var lastName = "Tremblay";
 var years = [2023, 2024, 2025, 2026, 2027]; 
-var services = {"Select a service" : "0", "Ligne 1 - Verte',1" : "1", "Ligne 2 - Orange" : "2", "Ligne 4 - Jaune" : "3",
-    "Ligne 5 - Bleue" : "4", "Bus 18 - Beaubien" : "13", "Bus 24 - Sherbrooke" : "16", "Bus 51 - Édouard-Montpetit" : "40",
-    "Bus 67 - Saint-Michel" : "51", "Bus 105 - Sherbrooke" : "77", "Bus 121 - Sauvé / Côte-Vertu" : "89",
-    "Bus 141 - Jean-Talon Est" : "102", "Bus 165 - Côte-des-Neiges" : "110", "Bus 439 - Express Pie-IX" : "191"};
-var directions = {"Select a direction" : "-1", "Direction 0" : "0", "Direction 1" : "1", "Both directions" : "null"};
-var getKeyByValue = (object, value) => {return Object.keys(object).find(key => object[key] === value);};
+var servicesLab = ["Ligne 1 - Verte", "Ligne 2 - Orange", "Ligne 4 - Jaune", "Ligne 5 - Bleue", "Bus 18 - Beaubien", 
+    "Bus 24 - Sherbrooke", "Bus 51 - Édouard-Montpetit", "Bus 67 - Saint-Michel", "Bus 105 - Sherbrooke", 
+    "Bus 121 - Sauvé / Côte-Vertu", "Bus 141 - Jean-Talon Est", "Bus 165 - Côte-des-Neiges", "Bus 439 - Express Pie-IX"];
+var servicesNum = [1, 2, 3, 4, 13, 16, 40, 51, 77, 89, 102, 110, 191];
+var directionsLab = ["Direction 0", "Direction 1", "Both directions"];
+var directionsNum = [0, 1, 2];
+var filter1Data, filter2Data, filter3Data, filter4Data, filter5Data;
 const agency = document.getElementById("agency");
 const employee = document.getElementById("employee");
+const dashboardOptions = document.querySelectorAll('.dropdown-item');
+const filterID = document.getElementById("filterID");
+const filter1 = document.getElementById("filterRow1");
+const filter2 = document.getElementById("filterRow2");
+const filter3 = document.getElementById("filterRow3");
+const filter4 = document.getElementById("filterRow4");
+const filter5 = document.getElementById("filterRow5");
+const filterButton = document.getElementById("filterButton");
+const graph = document.getElementById("nav-graph");
+const table = document.getElementById("nav-table");
+
 switch (agencyNum) { 
     case 1: agency.style.backgroundImage = "url('resources/artm-logo.png')"; break;
     case 2: agency.style.backgroundImage = "url('resources/stm-logo.png')"; break;
@@ -23,27 +35,11 @@ switch (agencyNum) {
 }
 employee.innerHTML = "Welcome " + firstName + " " + lastName;
 
-const tabButtons = document.querySelectorAll('.tablink');
-for (var i = 0; i < tabButtons.length; i++) {
-    tabButtons[i].addEventListener('click', function() {
-        var tabName = this.dataset.tab;
-        var tabContent = document.getElementById(tabName);
-        var allTabContent = document.querySelectorAll('.tabcontent');
-        var allTabButtons = document.querySelectorAll('.tablink');
-        for (var j = 0; j < allTabContent.length; j++) allTabContent[j].style.display = 'none';
-        for (var j = 0; j < allTabButtons.length; j++) allTabButtons[j].classList.remove('active');
-        tabContent.style.display = "block";
-        this.classList.add('active');
-    });
-}
-document.querySelector('.tablink').click();
-
-const dashboardOptions = document.querySelectorAll('.dropdown-item');
-const filterID = document.getElementById("filterID");
 for (let i = 0; i < dashboardOptions.length; i++) {
     dashboardOptions[i].addEventListener('click', function() {dashBSelectSwitch(i);});
 }
 
+/*Methods for managing the filters*/
 function dashBSelectSwitch(selected) {
     dashBSelect = selected;
     filterID.innerHTML = "Filter for " + dashboardOptions[dashBSelect].innerHTML + ":";
@@ -57,15 +53,6 @@ function dashBSelectSwitch(selected) {
         case 6: applyDashBFilter6(); break;
     }
 }
-const filter1 = document.getElementById("filterRow1");
-const filter2 = document.getElementById("filterRow2");
-const filter3 = document.getElementById("filterRow3");
-const filter4 = document.getElementById("filterRow4");
-const filter5 = document.getElementById("filterRow5");
-const filterButton = document.getElementById("filterButton");
-const graph = document.getElementById("tab1");
-const table = document.getElementById("tab2");
-var filter1Data, filter2Data, filter3Data, filter4Data, filter5Data;
 function cleanAllFilters() {
     while(filter1.firstChild) filter1.removeChild(filter1.firstChild); filter1.style.display = "none";
     while(filter2.firstChild) filter2.removeChild(filter2.firstChild); filter2.style.display = "none";
@@ -87,7 +74,7 @@ function populateFilter1() {
     select.ariaLabel = "Default select example"
     let initial = document.createElement("option");
     let initialText = document.createTextNode("Select...");
-    initial.setAttribute('selected', "Select...");
+    initial.setAttribute('selected', years[0]);
     initial.appendChild(initialText);
     select.appendChild(initial);
     for (i = 0; i < years.length; i++) {
@@ -126,10 +113,18 @@ function populateFilter3() {
 filter3.addEventListener("change", e => {filter3Data = e.target.value;});
 function populateFilter4() {
     var select = document.createElement("select");
-    for (var key in services) {
+    select.style.maxWidth = "300px";
+    select.className = "form-select";
+    select.ariaLabel = "Default select example"
+    let initial = document.createElement("option");
+    let initialText = document.createTextNode("Select...");
+    initial.setAttribute('selected', servicesNum[0]);
+    initial.appendChild(initialText);
+    select.appendChild(initial);
+    for (i = 0; i < servicesLab.length; i++) {
         let option = document.createElement("option");
-        let optionText = document.createTextNode(key);
-        option.setAttribute('value', services[key]);
+        let optionText = document.createTextNode(servicesLab[i]);
+        option.setAttribute('value', servicesNum[i]);
         option.appendChild(optionText);
         select.appendChild(option);
     }
@@ -140,10 +135,18 @@ function populateFilter4() {
 filter4.addEventListener("change", e => {filter4Data = e.target.value;});
 function populateFilter5() {
     var select = document.createElement("select");
-    for (var key in directions) {
+    select.style.maxWidth = "300px";
+    select.className = "form-select";
+    select.ariaLabel = "Default select example"
+    let initial = document.createElement("option");
+    let initialText = document.createTextNode("Select...");
+    initial.setAttribute('selected', directionsNum[0]);
+    initial.appendChild(initialText);
+    select.appendChild(initial);
+    for (i = 0; i < directionsLab.length; i++) {
         let option = document.createElement("option");
-        let optionText = document.createTextNode(key);
-        option.setAttribute('value', directions[key]);
+        let optionText = document.createTextNode(directionsLab[i]);
+        option.setAttribute('value', directionsNum[i]);
         option.appendChild(optionText);
         select.appendChild(option);
     }
@@ -183,6 +186,16 @@ function applyDashBFilter6(selected) {
     populateFilter4();
     filterButton.style.display = "block";
 }
+function getFilter4Lab() {
+    var label = "";
+    for (i = 0; i < servicesNum.length; i++) if (servicesNum[i] == filter4Data) label = servicesLab[i];
+    return label;
+}
+function getFilter5Lab() {
+    var label = "";
+    for (i = 0; i < directionsNum.length; i++) if (directionsNum[i] == filter5Data) label = directionsLab[i];
+    return label;
+}
 function filterDataCompilation() {
     switch (dashBSelect) {
         case 0: console.log(dashBSelect + " " + filter1Data + " " + filter2Data); applyDashBGraph0(); applyDashBTable0(); break;
@@ -195,6 +208,7 @@ function filterDataCompilation() {
     }
 }
 
+/*Methods for managing graph and table areas*/
 function cleanGraph() {while(graph.firstChild) graph.removeChild(graph.firstChild);}
 function cleanTable() {while(table.firstChild) table.removeChild(table.firstChild);}
 function addTableInGraph(headerData, bodyData, headerTitle, bodyTitle) {
@@ -357,7 +371,7 @@ function applyDashBGraph4() {
     cleanGraph();
     var header = document.createElement("h2");
     header.innerHTML = "Graph: Long-term user traffic for a period of " + filter2Data + " years ending in " + filter1Data +
-        ", for service " + getKeyByValue(services, filter4Data) + ", in " + getKeyByValue(directions, filter5Data);
+        ", for service " + getFilter4Lab() + ", in " + getFilter5Lab();
     graph.append(header);
     var graph4 = document.createElement("canvas");
     graph4.style.width="100%";
@@ -397,7 +411,7 @@ function applyDashBGraph4() {
 function applyDashBGraph5() {
     cleanGraph();
     var header = document.createElement("h2");
-    header.innerHTML = "Graph: Mid-term user traffic in " + filter1Data + " for service " +  getKeyByValue(services, filter4Data);
+    header.innerHTML = "Graph: Mid-term user traffic in " + filter1Data + " for service " +  getFilter4Lab();
     graph.append(header);
     var graph5 = document.createElement("canvas");
     graph5.style.width="100%";
@@ -432,7 +446,7 @@ function applyDashBGraph5() {
 function applyDashBGraph6() {
     cleanGraph();
     var header = document.createElement("h2");
-    header.innerHTML = "Graph: Short-term user traffic on " + filter3Data + " for service " +  getKeyByValue(services, filter4Data);
+    header.innerHTML = "Graph: Short-term user traffic on " + filter3Data + " for service " +  getFilter4Lab();
     graph.append(header);
     var graph6 = document.createElement("canvas");
     graph6.style.width="100%";
@@ -492,18 +506,18 @@ function applyDashBTable4() {
     cleanTable();
     var header = document.createElement("h2");
     header.innerHTML = "Table: Long-term user traffic for a period of " + filter2Data + " years ending in " + filter1Data +
-        ", for service " + getKeyByValue(services, filter4Data) + ", in " + getKeyByValue(directions, filter5Data);
+        ", for service " + getFilter4Lab() + ", in " + getFilter5Lab();
     table.append(header);
 }
 function applyDashBTable5() {
     cleanTable();
     var header = document.createElement("h2");
-    header.innerHTML = "Table: Mid-term user traffic in " + filter1Data + " for service " +  getKeyByValue(services, filter4Data);
+    header.innerHTML = "Table: Mid-term user traffic in " + filter1Data + " for service " +  getFilter4Lab();
     table.append(header);
 }
 function applyDashBTable6() {
     cleanTable();
     var header = document.createElement("h2");
-    header.innerHTML = "Table: Short-term user traffic on " + filter3Data + " for service " +  getKeyByValue(services, filter4Data);
+    header.innerHTML = "Table: Short-term user traffic on " + filter3Data + " for service " +  getFilter4Lab();
     table.append(header);
 }

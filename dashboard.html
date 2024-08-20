@@ -49,19 +49,23 @@
         <div id="filterRow4">Filter area #4</div>
         <div id="filterRow5">Filter area #5</div>
         <div id="filterButton">
-          <button class="filterButton" onclick="filterDataCompilation()">
+          <button class="btn btn-primary btn-lg" onclick="filterDataCompilation()">
             Apply filter(s)
           </button>
         </div>
       </div>
       <div class="row separator"></div>
       <div class="row">
-        <div class="tab">
-          <button class="tablink" data-tab="tab1">Graph</button>
-          <button class="tablink" data-tab="tab2">Table</button>
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-graph-tab" data-bs-toggle="tab" data-bs-target="#nav-graph" type="button" role="tab" aria-controls="nav-graph" aria-selected="true">Graph</button>
+            <button class="nav-link" id="nav-table-tab" data-bs-toggle="tab" data-bs-target="#nav-table" type="button" role="tab" aria-controls="nav-table" aria-selected="false">Table</button>
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-graph" role="tabpanel" aria-labelledby="nav-graph-tab"><h2>Graph zone</h2></div>
+          <div class="tab-pane fade" id="nav-table" role="tabpanel" aria-labelledby="nav-table-tab"><h2>Table zone</h2></div>
         </div>
-        <div id="tab1" class="tabcontent"><h2>Graph zone</h2></div>
-        <div id="tab2" class="tabcontent"><h2>Table zone</h2></div>
       </div>
       <div class="row separator"></div>
     </div>
