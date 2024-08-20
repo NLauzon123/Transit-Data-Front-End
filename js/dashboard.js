@@ -11,6 +11,7 @@ var servicesNum = [1, 2, 3, 4, 13, 16, 40, 51, 77, 89, 102, 110, 191];
 var directionsLab = ["Direction 0", "Direction 1", "Both directions"];
 var directionsNum = [0, 1, 2];
 var filter1Data, filter2Data, filter3Data, filter4Data, filter5Data;
+var requestData;
 const agency = document.getElementById("agency");
 const employee = document.getElementById("employee");
 const dashboardOptions = document.querySelectorAll('.dropdown-item');
@@ -42,6 +43,8 @@ for (let i = 0; i < dashboardOptions.length; i++) {
 /*Methods for managing the filters*/
 function dashBSelectSwitch(selected) {
     dashBSelect = selected;
+    filter1Data = undefined; filter2Data = undefined; filter3Data = undefined;
+    filter4Data = undefined; filter5Data = undefined;
     filterID.innerHTML = "Filter for " + dashboardOptions[dashBSelect].innerHTML + ":";
     switch (selected) {
         case 0: applyDashBFilter0(); break;
@@ -198,13 +201,69 @@ function getFilter5Lab() {
 }
 function filterDataCompilation() {
     switch (dashBSelect) {
-        case 0: console.log(dashBSelect + " " + filter1Data + " " + filter2Data); applyDashBGraph0(); applyDashBTable0(); break;
-        case 1: console.log(dashBSelect + " " + filter1Data); applyDashBGraph1(); applyDashBTable1(); break;
-        case 2: console.log(dashBSelect + " " + filter1Data); applyDashBGraph2(); applyDashBTable2(); break;
-        case 3: console.log(dashBSelect + " " + filter1Data); applyDashBGraph3(); applyDashBTable3(); break;
-        case 4: console.log(dashBSelect + " " + filter1Data + " " + filter2Data + " " + filter4Data + " " + filter5Data); applyDashBGraph4(); applyDashBTable4(); break;
-        case 5: console.log(dashBSelect + " " + filter1Data + " " + filter4Data); applyDashBGraph5(); applyDashBTable5(); break;
-        case 6: console.log(dashBSelect + " " + filter3Data + " " + filter4Data); applyDashBGraph6(); applyDashBTable6(); break;
+        case 0: console.log(dashBSelect + " " + filter1Data + " " + filter2Data); 
+            if (filter1Data != null && filter1Data != undefined && filter2Data != null && filter2Data != undefined) {
+                requestData = undefined;
+                requestData = {
+                    procedure: "LongTermRevenueSummary",
+                    params: [
+                        {key: "endYear", type: "Int", value: parseInt(filter1Data),},
+                        {key: "period", type: "Int", value: parseInt(filter2Data),},
+                    ],
+                }
+                console.log(requestData);
+                applyDashBGraph0(); applyDashBTable0();
+            }
+            break;
+        case 1: console.log(dashBSelect + " " + filter1Data); 
+            if (filter1Data != null && filter1Data != undefined) {
+                requestData = undefined;
+                requestData = {
+                    procedure: "MidTermRevenueSummary",
+                    params: [{key: "year", type: "Int", value: parseInt(filter1Data),},],
+                }
+                console.log(requestData);
+                applyDashBGraph1(); applyDashBTable1(); 
+            }
+            break;
+        case 2: console.log(dashBSelect + " " + filter1Data); 
+            if (filter1Data != null && filter1Data != undefined) {
+                requestData = undefined;
+                requestData = {
+                    procedure: "RevenueDetailsFareProducts",
+                    params: [{key: "year", type: "Int", value: parseInt(filter1Data),},],
+                }
+                console.log(requestData);
+                applyDashBGraph2(); applyDashBTable2(); 
+            }
+            break;
+        case 3: console.log(dashBSelect + " " + filter1Data); 
+            if (filter1Data != null && filter1Data != undefined) {
+                requestData = undefined;
+                requestData = {
+                    procedure: "RevenueDetailsPOS",
+                    params: [{key: "year", type: "Int", value: parseInt(filter1Data),},],
+                }
+                console.log(requestData);
+                applyDashBGraph3(); applyDashBTable3(); 
+            }
+            break;
+        case 4: console.log(dashBSelect + " " + filter1Data + " " + filter2Data + " " + filter4Data + " " + filter5Data); 
+            if (filter1Data != null && filter1Data != undefined && filter2Data != null && filter2Data != undefined &&
+                filter4Data != null && filter4Data != undefined && filter5Data != null && filter5Data != undefined) {
+                applyDashBGraph4(); applyDashBTable4(); 
+            }
+            break;
+        case 5: console.log(dashBSelect + " " + filter1Data + " " + filter4Data); 
+            if (filter1Data != null && filter1Data != undefined && filter4Data != null && filter4Data != undefined) {
+                applyDashBGraph5(); applyDashBTable5(); 
+            }
+            break;
+        case 6: console.log(dashBSelect + " " + filter3Data + " " + filter4Data); 
+            if (filter3Data != null && filter3Data != undefined && filter4Data != null && filter4Data != undefined) {
+                applyDashBGraph6(); applyDashBTable6(); 
+            }
+            break;
     }
 }
 
@@ -213,8 +272,10 @@ function cleanGraph() {while(graph.firstChild) graph.removeChild(graph.firstChil
 function cleanTable() {while(table.firstChild) table.removeChild(table.firstChild);}
 function addTableInGraph(headerData, bodyData, headerTitle, bodyTitle) {
     var totalTable = document.createElement("div");
+    totalTable.className = "table-responsive";
     totalTable.id = "graphTable";
     var table = document.createElement('table');
+    table.className = "table";
     var thead = document.createElement('thead');
     var tbody = document.createElement('tbody');
     var headerRow = document.createElement('tr');
