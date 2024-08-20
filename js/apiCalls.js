@@ -5,6 +5,7 @@ const getDataFromProcedure = async (requestData) => {
       `https://transitvanierbackend.azurewebsites.net/api/getDataFromProcedure`,
       {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -35,6 +36,7 @@ const loginUser = async (requestData) => {
       `https://transitvanierbackend.azurewebsites.net/api/loginUser`,
       {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -58,17 +60,17 @@ const loginUser = async (requestData) => {
   }
 };
 
-const checkToken = async (requestData) => {
+const checkToken = async () => {
   try {
     // Make the request to the Netlify function
     const response = await fetch(
       `https://transitvanierbackend.azurewebsites.net/api/checkToken`,
       {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(requestData),
       }
     );
 

@@ -18,20 +18,19 @@
         loginUser,
         checkToken,
       } from "./js/apiCalls.js";
-      let accessToken;
       document.getElementById("button1").addEventListener("click", async () => {
         const data = await getDataFromProcedure({
-          procedure: "MidTermTraffic",
+          procedure: "ShortTermTrafficProc",
           params: [
             {
-              key: "year",
-              type: "Int",
-              value: 2023,
+              key: "givenDay",
+              type: "DateTime",
+              value: "2023/09/15",
             },
             {
               key: "service",
               type: "Int",
-              value: 1,
+              value: 2,
             },
           ],
         });
@@ -44,13 +43,10 @@
           password: "RTL12345678",
         });
         console.log(data);
-        accessToken = data.accessToken;
       });
 
       document.getElementById("button3").addEventListener("click", async () => {
-        const data = await checkToken({
-          accessToken,
-        });
+        const data = await checkToken();
         console.log(data);
       });
     </script>
