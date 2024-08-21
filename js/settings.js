@@ -5,6 +5,24 @@ const validateForm = (formSelector, callback) => {
 
   const validationOptions = [
     {
+      attribute: 'match',
+      isValid: (input) => {
+        const matchSelector = input.getAttribute('match');
+        const matchedElement = formElement.querySelector(`#${matchSelector}`);
+        return (
+          matchedElement && matchedElement.value.trim() === input.value.trim()
+        );
+      },
+      errorMessage: (input, label) => {
+        const matchSelector = input.getAttribute('match');
+        const matchedElement = formElement.querySelector(`#${matchSelector}`);
+        const matchedLabel =
+          matchedElement.parentElement.parentElement.querySelector('label');
+
+        return `${label.textContent} should match ${matchedLabel.textContent}`;
+      },
+    },
+    {
       attribute: 'pattern',
       isValid: (input) => {
         const patternRegex = new RegExp(input.pattern);
@@ -105,3 +123,8 @@ const sendToAPI = (formElement) => {
 };
 
 validateForm('#settingsForm', sendToAPI);
+
+let cancelBtn = document.querySelector('#cancelRedirect');
+cancelBtn.addEventListener('click', () => {
+  window.location.href = 'dashboard.html';
+});
