@@ -11,6 +11,8 @@
     <button id="button2">loginUser</button>
     <button id="button3">checkToken</button>
     <button id="button4">signupUser</button>
+    <button id="button5">logoutUser</button>
+    <button id="button6">changePassword</button>
 
     <div id="result"></div>
     <script type="module">
@@ -18,7 +20,9 @@
         getDataFromProcedure,
         signupUser,
         loginUser,
+        logoutUser,
         checkToken,
+        changePassword,
       } from "./js/apiCalls.js";
       document.getElementById("button1").addEventListener("click", async () => {
         const data = await getDataFromProcedure({
@@ -41,8 +45,8 @@
 
       document.getElementById("button2").addEventListener("click", async () => {
         const data = await loginUser({
-          username: "lbouchard",
-          password: "RTL12345678",
+          username: "jssjohn",
+          password: "pww123",
         });
         console.log(data);
       });
@@ -57,8 +61,19 @@
           agencyID: 1,
           firstName: "Jim",
           lastName: "John",
-          username: "jsjohn",
-          password: "pass123",
+          username: "jssjohn",
+          password: "pw123",
+        });
+        console.log(data);
+      });
+      document.getElementById("button5").addEventListener("click", async () => {
+        const data = await logoutUser();
+        console.log(data);
+      });
+      document.getElementById("button6").addEventListener("click", async () => {
+        const data = await changePassword({
+          oldPassword: "pw123",
+          password: "pw123",
         });
         console.log(data);
       });
