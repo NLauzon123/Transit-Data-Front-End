@@ -1,4 +1,4 @@
-//import {getDataFromProcedure, signupUser, loginUser, checkToken,} from "./js/apiCalls.js";
+import {getDataFromProcedure, signupUser, loginUser, checkToken,} from "./apiCalls.js";
 /*Global variables and operations*/
 var dashBSelect;
 var agencyNum = 1;
@@ -200,7 +200,9 @@ function getFilter5Lab() {
     for (let i = 0; i < directionsNum.length; i++) if (directionsNum[i] == filter5Data) label = directionsLab[i];
     return label;
 }
-function filterDataCompilation() {
+const filterButtonC = document.getElementById("filterButtonC");
+filterButtonC.addEventListener('click', filterDataCompilation);
+async function filterDataCompilation() {
     switch (dashBSelect) {
         case 0: console.log(dashBSelect + " " + filter1Data + " " + filter2Data); 
             if (filter1Data != null && filter1Data != undefined && filter2Data != null && filter2Data != undefined) {
@@ -213,7 +215,7 @@ function filterDataCompilation() {
                     ],
                 }
                 console.log(requestData);
-                var data = null; //data = getDataFromProcedure(requestData);
+                var data = null; data = await getDataFromProcedure(requestData);
                 applyDashBGraph0(data); applyDashBTable0(data);
             }
             break;
@@ -550,6 +552,11 @@ function applyDashBGraph6(data) {
     graph.append(header);
     var graph6 = document.createElement("canvas");
     graph6.style.width="100%";
+
+    var data1 = [[{Day: '2023-09-15T00:00:00.000Z', Service: '2', Name: 'Ligne 2 - Orange'},], 
+        [{period: 'Daily', total: 139, direction0: 0, direction1: 0},]
+    ];
+    console.log(data1);
     var xLabel = ["0AM", "1AM", "2AM", "3AM", "4AM", "5AM", "6AM", "7AM", "8AM", "9AM", "10AM", "11AM","12AM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM", "7PM", "8PM", "9PM", "10PM", "11PM"];
     var yLabel = ["Total", "Direction 0", "Direction 1"];
     var yAnnual = ["6", "3", "3"];
