@@ -1,3 +1,4 @@
+//import {getDataFromProcedure, signupUser, loginUser, checkToken,} from "./js/apiCalls.js";
 /*Global variables and operations*/
 var dashBSelect;
 var agencyNum = 1;
@@ -80,7 +81,7 @@ function populateFilter1() {
     initial.setAttribute('selected', years[0]);
     initial.appendChild(initialText);
     select.appendChild(initial);
-    for (i = 0; i < years.length; i++) {
+    for (let i = 0; i < years.length; i++) {
         let option = document.createElement("option");
         let optionText = document.createTextNode(years[i]);
         option.setAttribute('value', years[i]);
@@ -93,7 +94,7 @@ function populateFilter1() {
     filter1.appendChild(select);
 }
 filter1.addEventListener("change", e => {
-    for (i = 0; i < years.length; i++) if (e.target.value == years[i]) filter1Data = years[i];
+    for (let i = 0; i < years.length; i++) if (e.target.value == years[i]) filter1Data = years[i];
 });
 function populateFilter2() {
     var input = document.createElement("input");
@@ -124,7 +125,7 @@ function populateFilter4() {
     initial.setAttribute('selected', servicesNum[0]);
     initial.appendChild(initialText);
     select.appendChild(initial);
-    for (i = 0; i < servicesLab.length; i++) {
+    for (let i = 0; i < servicesLab.length; i++) {
         let option = document.createElement("option");
         let optionText = document.createTextNode(servicesLab[i]);
         option.setAttribute('value', servicesNum[i]);
@@ -146,7 +147,7 @@ function populateFilter5() {
     initial.setAttribute('selected', directionsNum[0]);
     initial.appendChild(initialText);
     select.appendChild(initial);
-    for (i = 0; i < directionsLab.length; i++) {
+    for (let i = 0; i < directionsLab.length; i++) {
         let option = document.createElement("option");
         let optionText = document.createTextNode(directionsLab[i]);
         option.setAttribute('value', directionsNum[i]);
@@ -191,19 +192,19 @@ function applyDashBFilter6(selected) {
 }
 function getFilter4Lab() {
     var label = "";
-    for (i = 0; i < servicesNum.length; i++) if (servicesNum[i] == filter4Data) label = servicesLab[i];
+    for (let i = 0; i < servicesNum.length; i++) if (servicesNum[i] == filter4Data) label = servicesLab[i];
     return label;
 }
 function getFilter5Lab() {
     var label = "";
-    for (i = 0; i < directionsNum.length; i++) if (directionsNum[i] == filter5Data) label = directionsLab[i];
+    for (let i = 0; i < directionsNum.length; i++) if (directionsNum[i] == filter5Data) label = directionsLab[i];
     return label;
 }
 function filterDataCompilation() {
     switch (dashBSelect) {
         case 0: console.log(dashBSelect + " " + filter1Data + " " + filter2Data); 
             if (filter1Data != null && filter1Data != undefined && filter2Data != null && filter2Data != undefined) {
-                requestData = undefined;
+                var requestData = undefined;
                 requestData = {
                     procedure: "LongTermRevenueSummary",
                     params: [
@@ -212,56 +213,94 @@ function filterDataCompilation() {
                     ],
                 }
                 console.log(requestData);
-                applyDashBGraph0(); applyDashBTable0();
+                var data = null; //data = getDataFromProcedure(requestData);
+                applyDashBGraph0(data); applyDashBTable0(data);
             }
             break;
         case 1: console.log(dashBSelect + " " + filter1Data); 
             if (filter1Data != null && filter1Data != undefined) {
-                requestData = undefined;
+                var requestData = undefined;
                 requestData = {
                     procedure: "MidTermRevenueSummary",
                     params: [{key: "year", type: "Int", value: parseInt(filter1Data),},],
                 }
                 console.log(requestData);
-                applyDashBGraph1(); applyDashBTable1(); 
+                var data = null; //data = getDataFromProcedure(requestData);
+                applyDashBGraph1(data); applyDashBTable1(data); 
             }
             break;
         case 2: console.log(dashBSelect + " " + filter1Data); 
             if (filter1Data != null && filter1Data != undefined) {
-                requestData = undefined;
+                var requestData = undefined;
                 requestData = {
                     procedure: "RevenueDetailsFareProducts",
                     params: [{key: "year", type: "Int", value: parseInt(filter1Data),},],
                 }
                 console.log(requestData);
-                applyDashBGraph2(); applyDashBTable2(); 
+                var data = null; //data = getDataFromProcedure(requestData);
+                applyDashBGraph2(data); applyDashBTable2(data); 
             }
             break;
         case 3: console.log(dashBSelect + " " + filter1Data); 
             if (filter1Data != null && filter1Data != undefined) {
-                requestData = undefined;
+                var requestData = undefined;
                 requestData = {
                     procedure: "RevenueDetailsPOS",
                     params: [{key: "year", type: "Int", value: parseInt(filter1Data),},],
                 }
                 console.log(requestData);
-                applyDashBGraph3(); applyDashBTable3(); 
+                var data = null; //data = getDataFromProcedure(requestData);
+                applyDashBGraph3(data); applyDashBTable3(data); 
             }
             break;
         case 4: console.log(dashBSelect + " " + filter1Data + " " + filter2Data + " " + filter4Data + " " + filter5Data); 
             if (filter1Data != null && filter1Data != undefined && filter2Data != null && filter2Data != undefined &&
                 filter4Data != null && filter4Data != undefined && filter5Data != null && filter5Data != undefined) {
-                applyDashBGraph4(); applyDashBTable4(); 
+                var dir; if (filter5Data == 2) dir = null; else dir = parseInt(filter5Data);
+                var requestData = undefined;
+                requestData = {
+                    procedure: "LongTermTrafficProc",
+                    params: [
+                        {key: "givenYear", type: "Int", value: parseInt(filter1Data),},
+                        {key: "period", type: "Int", value: parseInt(filter2Data),},
+                        {key: "service", type: "Int", value: parseInt(filter4Data),},
+                        {key: "direction", type: "Int", value: dir,},
+                    ],
+                }
+                console.log(requestData);
+                var data = null; //data = getDataFromProcedure(requestData);
+                applyDashBGraph4(data); applyDashBTable4(data); 
             }
             break;
         case 5: console.log(dashBSelect + " " + filter1Data + " " + filter4Data); 
             if (filter1Data != null && filter1Data != undefined && filter4Data != null && filter4Data != undefined) {
-                applyDashBGraph5(); applyDashBTable5(); 
+                var requestData = undefined;
+                requestData = {
+                    procedure: "MidTermTraffic",
+                    params: [
+                        {key: "year", type: "Int", value: parseInt(filter1Data),},
+                        {key: "service", type: "Int", value: parseInt(filter4Data),},
+                    ],
+                }
+                console.log(requestData);
+                var data = null; //data = getDataFromProcedure(requestData);
+                applyDashBGraph5(data); applyDashBTable5(data); 
             }
             break;
         case 6: console.log(dashBSelect + " " + filter3Data + " " + filter4Data); 
             if (filter3Data != null && filter3Data != undefined && filter4Data != null && filter4Data != undefined) {
-                applyDashBGraph6(); applyDashBTable6(); 
+                console.log(filter3Data.replaceAll('-', '/'));
+                var requestData = {
+                    procedure: "ShortTermTrafficProc",
+                    params: [{key: "year", type: "Int", value: parseInt(filter1Data),},],
+                    params: [
+                        {key: "givenDay", type: "DateTime", value: filter3Data.replaceAll('-', '/'),},
+                        {key: "service", type: "Int", value: parseInt(filter4Data),},
+                      ],
+                }
+                console.log(requestData);
+                var data = null; //data = getDataFromProcedure(requestData);
+                applyDashBGraph6(data); applyDashBTable6(data); 
             }
             break;
     }
@@ -299,7 +338,7 @@ function addTableInGraph(headerData, bodyData, headerTitle, bodyTitle) {
     totalTable.appendChild(table);
     graph.append(totalTable);
 }
-function applyDashBGraph0() {
+function applyDashBGraph0(data) {
     cleanGraph();
     var header = document.createElement("h2");
     header.innerHTML = "Graph: Long-term revenue summary for a period of " + filter2Data + " years ending in " + filter1Data;
@@ -338,7 +377,7 @@ function applyDashBGraph0() {
     graph.append(graph0);
     addTableInGraph(yLabel, yTotal, "Year: ", "Total revenue by year: ");
 }
-function applyDashBGraph1() {
+function applyDashBGraph1(data) {
     cleanGraph();
     var header = document.createElement("h2");
     header.innerHTML = "Graph: Mid-term revenue summary for " + filter1Data;
@@ -387,7 +426,7 @@ function applyDashBGraph1() {
     graph.append(graph1);
     addTableInGraph(xLabel, yTotal, "Month: ", "Total revenue: ");
 }
-function applyDashBGraph2() {
+function applyDashBGraph2(data) {
     cleanGraph();
     var header = document.createElement("h2");
     header.innerHTML = "Graph: Revenue details by fare products for" + filter1Data;
@@ -422,13 +461,13 @@ function applyDashBGraph2() {
     graph.append(graph2);
     addTableInGraph(yLabel, yTotal, "Fare product: ", "Total annual revenue: ");
 }
-function applyDashBGraph3() {
+function applyDashBGraph3(data) {
     cleanGraph();
     var header = document.createElement("h2");
     header.innerHTML = "Graph: Revenue details by points of sales for " + filter1Data + " - Under development";
     graph.append(header);
 }
-function applyDashBGraph4() {
+function applyDashBGraph4(data) {
     cleanGraph();
     var header = document.createElement("h2");
     header.innerHTML = "Graph: Long-term user traffic for a period of " + filter2Data + " years ending in " + filter1Data +
@@ -469,7 +508,7 @@ function applyDashBGraph4() {
     addTableInGraph(yLabel, yTotal, "Year: ", "Total users: ");
 
 }
-function applyDashBGraph5() {
+function applyDashBGraph5(data) {
     cleanGraph();
     var header = document.createElement("h2");
     header.innerHTML = "Graph: Mid-term user traffic in " + filter1Data + " for service " +  getFilter4Lab();
@@ -504,7 +543,7 @@ function applyDashBGraph5() {
     graph.append(graph5);
     addTableInGraph(yLabel, yAnnual, "Direction: ", "Total annual users: ");
 }
-function applyDashBGraph6() {
+function applyDashBGraph6(data) {
     cleanGraph();
     var header = document.createElement("h2");
     header.innerHTML = "Graph: Short-term user traffic on " + filter3Data + " for service " +  getFilter4Lab();
@@ -539,44 +578,44 @@ function applyDashBGraph6() {
     graph.append(graph6);
     addTableInGraph(yLabel, yAnnual, "Direction: ", "Total users for the day: ");
 }
-function applyDashBTable0() {
+function applyDashBTable0(data) {
     cleanTable();
     var header = document.createElement("h2");
     header.innerHTML = "Table: Long-term revenue summary for a period of " + filter2Data + " years ending in " + filter1Data;
     table.append(header);
 }
-function applyDashBTable1() {
+function applyDashBTable1(data) {
     cleanTable();
     var header = document.createElement("h2");
     header.innerHTML = "Table: Mid-term revenue summary for " + filter1Data;
     table.append(header);
 }
-function applyDashBTable2() {
+function applyDashBTable2(data) {
     cleanTable();
     var header = document.createElement("h2");
     header.innerHTML = "Table: Revenue details by fare products for" + filter1Data;
     table.append(header);
 }
-function applyDashBTable3() {
+function applyDashBTable3(data) {
     cleanTable();
     var header = document.createElement("h2");
     header.innerHTML = "Table: Revenue details by points of sales for " + filter1Data + " - Under development";
     table.append(header);
 }
-function applyDashBTable4() {
+function applyDashBTable4(data) {
     cleanTable();
     var header = document.createElement("h2");
     header.innerHTML = "Table: Long-term user traffic for a period of " + filter2Data + " years ending in " + filter1Data +
         ", for service " + getFilter4Lab() + ", in " + getFilter5Lab();
     table.append(header);
 }
-function applyDashBTable5() {
+function applyDashBTable5(data) {
     cleanTable();
     var header = document.createElement("h2");
     header.innerHTML = "Table: Mid-term user traffic in " + filter1Data + " for service " +  getFilter4Lab();
     table.append(header);
 }
-function applyDashBTable6() {
+function applyDashBTable6(data) {
     cleanTable();
     var header = document.createElement("h2");
     header.innerHTML = "Table: Short-term user traffic on " + filter3Data + " for service " +  getFilter4Lab();
