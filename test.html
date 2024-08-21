@@ -10,11 +10,13 @@
     <button id="button1">getDataFromProcedure</button>
     <button id="button2">loginUser</button>
     <button id="button3">checkToken</button>
+    <button id="button4">signupUser</button>
 
     <div id="result"></div>
     <script type="module">
       import {
         getDataFromProcedure,
+        signupUser,
         loginUser,
         checkToken,
       } from "./js/apiCalls.js";
@@ -47,6 +49,17 @@
 
       document.getElementById("button3").addEventListener("click", async () => {
         const data = await checkToken();
+        console.log(data);
+      });
+
+      document.getElementById("button4").addEventListener("click", async () => {
+        const data = await signupUser({
+          agencyID: 1,
+          firstName: "Jim",
+          lastName: "John",
+          username: "jsjohn",
+          password: "pass123",
+        });
         console.log(data);
       });
     </script>
