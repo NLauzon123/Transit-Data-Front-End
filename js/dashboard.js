@@ -478,27 +478,14 @@ function applyDashBGraph0(data) {
   graph.append(header);
   var graph0 = document.createElement('canvas');
   graph0.style.width = '100%';
-  var xLabel = [
-    'Online',
-    'Buses',
-    'Region1',
-    'Region2',
-    'Region3',
-    'Region4',
-    'Region5',
-    'Region6',
-    'Region7',
-    'Region8',
-  ];
-  var yLabel = ['2023', '2024', '2025', '2026', '2027'];
-  var yTotal = [
-    '724387.75',
-    '686620.00',
-    '496512.75',
-    '324966.75',
-    '235801.75',
-  ];
-  var dataSet = [
+  var xLabel = ['Online', 'Buses', 'Region1', 'Region2', 'Region3', 'Region4', 'Region5', 'Region6', 'Region7', 'Region8',];
+  var yLabel = [];  var yTotal = []; var dataSet = [];
+  for (let i = 0; i < data[1].length; i++) {
+    yLabel[i] = data[1][i].Year; yTotal[i] = data[1][i].All;
+    dataSet[i] = [data[1][i].Online, data[1][i].Buses, data[1][i].Region1, data[1][i].Region2, data[1][i].Region3,
+        data[1][i].Region4, data[1][i].Region5, data[1][i].Region6, data[1][i].Region7, data[1][i].Region8];
+  }
+  /*var dataSet = [
     [
       '145327.25',
       '0',
@@ -560,7 +547,7 @@ function applyDashBGraph0(data) {
       '23707.50',
     ],
   ];
-  var yColor = ['blue', 'green', 'orange', 'brown', 'black'];
+  var yColor = ['blue', 'green', 'orange', 'brown', 'black', 'yellow', 'gray', 'red', 'aqua', 'chocolate',];
   var data = {
     labels: xLabel,
     datasets: [
@@ -608,7 +595,7 @@ function applyDashBGraph0(data) {
     },
   };
   new Chart(graph0, config);
-  graph.append(graph0);
+  graph.append(graph0);*/
   addTableInGraph(yLabel, yTotal, 'Year: ', 'Total revenue by year: ');
 }
 function applyDashBGraph1(data) {
