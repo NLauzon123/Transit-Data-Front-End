@@ -137,8 +137,10 @@
                         <div class="col-auto">
                             <input required 
                             minlength="8"
-                            pattern="/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/" 
-                            type="password" id="oldPassword" class="form-control" >
+                            pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}$" 
+                            type="password" 
+                            id="oldPassword" 
+                            class="form-control">
                             <span class="error-icon hidden errspan-error">
                                 <i class="fa-solid fa-circle-exclamation"></i>
                             </span>
@@ -157,8 +159,10 @@
                         <div class="col-auto">
                             <input required 
                             minlength="8"
-                            pattern="/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/" 
-                            type="password" id="newPassword" class="form-control" >
+                            pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}$" 
+                            type="password" 
+                            id="newPassword" 
+                            class="form-control">
                             <span class="error-icon hidden errspan-error">
                                 <i class="fa-solid fa-circle-exclamation"></i>
                             </span>
@@ -179,7 +183,7 @@
                             match="newPassword"
                             required 
                             minlength="8"
-                            pattern="/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/" 
+                            pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}$" 
                             type="password" id="confirmPassword" class="form-control" >
                             <span class="error-icon hidden errspan-error">
                                 <i class="fa-solid fa-circle-exclamation"></i>
@@ -200,7 +204,7 @@
                             <button class="btn btn-primary" type="submit">Save</button>
                         </div>
                     </div>
-                </div>
+                </div>aA1!sekjflksejfa
               </form>
 
         </div>
@@ -215,6 +219,6 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-    <script src="js/signup.js"></script>
+    <script type="module" src="js/signup.js"></script>
   </body>
 </html>
