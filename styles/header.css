@@ -3,6 +3,10 @@
   color: white;
 }
 
-.divider{
-    height: 100px;
+.divider {
+  height: 100px;
+}
+
+.header__logo {
+  width: 75px;
 }
