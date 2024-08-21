@@ -143,8 +143,10 @@
                         <div class="col-auto">
                             <input required 
                             minlength="8"
-                            pattern="/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/" 
-                            type="password" id="password" class="form-control" >
+                            pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}$" 
+                            type="password" 
+                            id="password" 
+                            class="form-control">
                             <span class="error-icon hidden errspan-error">
                                 <i class="fa-solid fa-circle-exclamation"></i>
                             </span>
