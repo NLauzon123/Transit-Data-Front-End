@@ -2,7 +2,7 @@ import { checkToken, loginUser } from "./apiCalls.js";
 
 const checkTokenResult = await checkToken();
 
-if (checkTokenResult && !checkTokenResult.error) {
+if (checkTokenResult && checkTokenResult.status == 200) {
   //   redirectToDashboard();
 }
 
@@ -17,7 +17,7 @@ loginBtn.addEventListener("click", async (e) => {
 
 async function login(username, password) {
   const result = await loginUser({ username, password });
-  if (result && !result.error) {
+  if (result && result.status == 200) {
     redirectToDashboard();
   } else {
     alert("Unable to login.");
