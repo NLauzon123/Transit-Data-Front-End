@@ -49,7 +49,7 @@ const validateForm = (formSelector, callback) => {
 
   const validateSingleFormGroup = (formGroup) => {
     const label = formGroup.querySelector('label');
-    const input = formGroup.querySelector('input, textarea');
+    const input = formGroup.querySelector('input, textarea, select');
     const errorContainer = formGroup.querySelector('.error__signup');
     const errorIcon = formGroup.querySelector('.error-icon');
     const successIcon = formGroup.querySelector('.success-icon');
@@ -59,8 +59,8 @@ const validateForm = (formSelector, callback) => {
     for (const option of validationOptions) {
       if (input.hasAttribute(option.attribute) && !option.isValid(input)) {
         errorContainer.textContent = option.errorMessage(input, label);
-        input.classList.add('border-red-700');
-        input.classList.remove('border-green-700');
+        input.classList.add('border-danger');
+        input.classList.remove('border-success');
         successIcon.classList.add('hidden');
         errorIcon.classList.remove('hidden');
         formGroupError = true;
@@ -69,8 +69,8 @@ const validateForm = (formSelector, callback) => {
 
     if (!formGroupError) {
       errorContainer.textContent = '';
-      input.classList.add('border-green-700');
-      input.classList.remove('border-red-700');
+      input.classList.add('border-success');
+      input.classList.remove('border-danger');
       successIcon.classList.remove('hidden');
       errorIcon.classList.add('hidden');
     }
@@ -97,7 +97,7 @@ const validateForm = (formSelector, callback) => {
   };
 
   formElement.addEventListener('submit', (event) => {
-    event.preventDefault(); //Stop form completely submitting the form
+    event.preventDefault();
 
     const formValid = validateAllFormGroups(formElement);
 

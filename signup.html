@@ -1,186 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fare Transit Managment - Sign Up</title>
-    <link
-    rel="icon"
-    type="image/png" 
-    href="./resources/favicon-32x32.png"
-    sizes="32x32" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-      rel="stylesheet"
-    />
+    <link rel="icon" type="image/png" href="./resources/favicon-32x32.png" sizes="32x32" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="styles/global.css" type="text/css" />
     <link rel="stylesheet" href="styles/signup.css" type="text/css" />
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="hamburger-container">
         <div class="hamburger-button" id="hamburger"></div>
-      </div>
-      <div class="container site-container">
-    <header
-    class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
-    >
-    <div class="col-md-3 mb-2 mb-md-0">
-        <a
-        href="/"
-        class="d-inline-flex link-body-emphasis text-decoration-none"
-        >
-        <svg
-            class="bi"
-            width="40"
-            height="32"
-            role="img"
-            aria-label="Bootstrap"
-        >
-            <use xlink:href="#bootstrap"></use>
-        </svg>
-        </a>
     </div>
-
-    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-        <li><a href="#" class="nav-link px-2">Features</a></li>
-        <li><a href="#" class="nav-link px-2">Pricing</a></li>
-        <li><a href="#" class="nav-link px-2">FAQs</a></li>
-        <li><a href="#" class="nav-link px-2">About</a></li>
-    </ul>
-
-    <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-primary me-2">
-        Login
-        </button>
-        <button type="button" class="btn btn-primary">Sign-up</button>
-    </div>
-    </header>
-    <main>
-        <div class="container container-fluid justify-content-center ">
-            <div class="row  text-center">
-                <div class="col">
-                    <h1 class="pb-3">Sign Up</h1>
-                    <p class="pt-2">Already have an account?
-                        <a href="/index.html">Login here</a> instead.</p>
-                </div>
+    <div class="container site-container">
+        <header
+            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <div class="col-md-3 mb-2 mb-md-0">
+                <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+                    <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
             </div>
-            <form class="row " id="signUpForm" >
-                <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
-                    <div class=" col col-md-5 ">
-                        <div class="col-auto">
-                            <label for="agencyID" class="col-form-label">Agency ID</label>
-                        </div>
-                        <div class="col-auto ">
-                            <input required type="text" id="agencyID" class="form-control" >
-                            <span class="error-icon hidden errspan-error">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                            </span>
-                            <span class="success-icon hidden errspan-success">
-                            <i class="fa-solid fa-circle-check "></i>
-                            </span>
-                        </div>
-                        <div class="error__signup " id="error__agencyID"></div>
+
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+                <li><a href="#" class="nav-link px-2">Features</a></li>
+                <li><a href="#" class="nav-link px-2">Pricing</a></li>
+                <li><a href="#" class="nav-link px-2">FAQs</a></li>
+                <li><a href="#" class="nav-link px-2">About</a></li>
+            </ul>
+
+            <div class="col-md-3 text-end">
+                <button type="button" class="btn btn-outline-primary me-2">
+                    Login
+                </button>
+                <button type="button" class="btn btn-primary">Sign-up</button>
+            </div>
+        </header>
+        <main>
+            <div class="container container-fluid justify-content-center ">
+                <div class="row  text-center">
+                    <div class="col">
+                        <h1 class="pb-3">Sign Up</h1>
+                        <p class="pt-2">Already have an account?
+                            <a href="/index.html">Login here</a> instead.
+                        </p>
                     </div>
                 </div>
-                <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
-                    <div class=" col col-md-5 ">
-                        <div class="col-auto">
-                            <label for="firstName" class="col-form-label">First Name</label>
-                        </div>
-                        <div class="col-auto">
-                            <input required type="text" id="firstName" class="form-control">
-                            <span class="error-icon hidden errspan-error">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                            </span>
-                            <span class="success-icon hidden errspan-success">
-                                <i class="fa-solid fa-circle-check "></i>
-                            </span>
-                        </div>
-                        <div class="error__signup" id="error__fname"></div>
-                    </div>
-                </div>
-                <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
-                    <div class=" col col-md-5  ">
-                        <div class="col-auto">
-                            <label for="lastName" class="col-form-label">Last Name</label>
-                        </div>
-                        <div class="col-auto">
-                            <input required type="text" id="lastName" class="form-control" >
-                            <span class="error-icon hidden errspan-error">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                            </span>
-                            <span class="success-icon hidden errspan-success">
-                                <i class="fa-solid fa-circle-check "></i>
-                            </span>
-                        </div>
-                        <div class="error__signup" id="error__lname"></div>
-                    </div>
-                </div>
-                <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
-                    <div class=" col col-md-5 ">
-                        <div class="col-auto">
-                            <label for="username" class="col-form-label">Username</label>
-                        </div>
-                        <div class="col-auto">
-                            <input required type="text" id="username" class="form-control">
-                            <span class="error-icon hidden errspan-error">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                            </span>
-                            <span class="success-icon hidden errspan-success">
-                                <i class="fa-solid fa-circle-check "></i>
-                            </span>
-                        </div>
-                        <div class="error__signup" id="error__username"></div>
-                    </div>
-                </div>
-                <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
-                    <div class=" col col-md-5  ">
-                        <div class="col-auto">
-                            <label for="password" class="col-form-label">Password</label>
-                        </div>
-                        <div class="col-auto">
-                            <input required 
-                            minlength="8"
-                            pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}$" 
-                            type="password" 
-                            id="password" 
-                            class="form-control">
-                            <span class="error-icon hidden errspan-error">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                            </span>
-                            <span class="success-icon hidden errspan-success">
-                                <i class="fa-solid fa-circle-check "></i>
-                            </span>
-                        </div>
-                        <div class="error__signup " id="error__password"></div>
-                    </div>
-                </div>
-                <div class="row g-3 justify-content-md-center ">
-                    <div class=" col col-md-5">
-                        <div class="col-12 text-center">
-                            <button class="btn btn-primary" type="submit">Submit</button>
+                <form class="row " id="signUpForm">
+                    <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
+                        <div class=" col col-md-5 ">
+                            <div class="col-auto">
+                                <label for="agencyID" class="col-form-label">Agency ID</label>
+                            </div>
+                            <div class="col-auto input-container">
+                                <select class="form-select" required id="agencyID" aria-label="agencyID selection">
+                                    <option selected value="">Please select an agency</option>
+                                    <option value="1">1 - Oversight ARTM Autorité régionale de transport métropolitain
+                                    </option>
+                                    <option value="2">2 - Operator STM Société de transport de Montréal</option>
+                                    <option value="3">3 - Operator EXO Réseau de transport métropolitain</option>
+                                    <option value="4">4 - Operator RTL Société de transport de Longueuil</option>
+                                    <option value="5">5 - Operator STL Société de transport de Laval</option>
+                                    <option value="6">6 - Operator REM Réseau express métropolitain</option>
+                                </select>
+                                <span class="error-icon hidden errspan-error">
+                                    <i class="fa-solid fa-circle-exclamation"></i>
+                                </span>
+                                <span class="success-icon hidden errspan-success">
+                                    <i class="fa-solid fa-circle-check "></i>
+                                </span>
+                            </div>
+                            <div class="error__signup " id="error__agencyID"></div>
                         </div>
                     </div>
-                </div>
-              </form>
-        </div>
-    </main>
-    <footer id="footer" class="text-center py-4 my-4 ">
-        <div class="" id="footer_year"></div>
-      </footer>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
-    <script src="js/global.js"></script>
-    <script type="module" src="js/signup.js"></script>
-  </body>
+                    <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
+                        <div class=" col col-md-5 ">
+                            <div class="col-auto">
+                                <label for="firstName" class="col-form-label">First Name</label>
+                            </div>
+                            <div class="col-auto">
+                                <input required type="text" id="firstName" class="form-control">
+                                <span class="error-icon hidden errspan-error">
+                                    <i class="fa-solid fa-circle-exclamation"></i>
+                                </span>
+                                <span class="success-icon hidden errspan-success">
+                                    <i class="fa-solid fa-circle-check "></i>
+                                </span>
+                            </div>
+                            <div class="error__signup" id="error__fname"></div>
+                        </div>
+                    </div>
+                    <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
+                        <div class=" col col-md-5  ">
+                            <div class="col-auto">
+                                <label for="lastName" class="col-form-label">Last Name</label>
+                            </div>
+                            <div class="col-auto">
+                                <input required type="text" id="lastName" class="form-control">
+                                <span class="error-icon hidden errspan-error">
+                                    <i class="fa-solid fa-circle-exclamation"></i>
+                                </span>
+                                <span class="success-icon hidden errspan-success">
+                                    <i class="fa-solid fa-circle-check "></i>
+                                </span>
+                            </div>
+                            <div class="error__signup" id="error__lname"></div>
+                        </div>
+                    </div>
+                    <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
+                        <div class=" col col-md-5 ">
+                            <div class="col-auto">
+                                <label for="username" class="col-form-label">Username</label>
+                            </div>
+                            <div class="col-auto">
+                                <input required type="text" id="username" class="form-control">
+                                <span class="error-icon hidden errspan-error">
+                                    <i class="fa-solid fa-circle-exclamation"></i>
+                                </span>
+                                <span class="success-icon hidden errspan-success">
+                                    <i class="fa-solid fa-circle-check "></i>
+                                </span>
+                            </div>
+                            <div class="error__signup" id="error__username"></div>
+                        </div>
+                    </div>
+                    <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
+                        <div class=" col col-md-5  ">
+                            <div class="col-auto">
+                                <label for="password" class="col-form-label">Password</label>
+                            </div>
+                            <div class="col-auto">
+                                <input required autocomplete="off" minlength="8"
+                                    pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}$" type="password"
+                                    id="password" class="form-control">
+                                <span class="error-icon hidden errspan-error">
+                                    <i class="fa-solid fa-circle-exclamation"></i>
+                                </span>
+                                <span class="success-icon hidden errspan-success">
+                                    <i class="fa-solid fa-circle-check "></i>
+                                </span>
+                            </div>
+                            <div class="error__signup " id="error__password"></div>
+                        </div>
+                    </div>
+                    <div class="row g-3 justify-content-md-center ">
+                        <div class=" col col-md-5">
+                            <div class="col-12 text-center">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+        <footer id="footer" class="text-center py-4 my-4 ">
+            <div class="" id="footer_year"></div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+        <script src="js/global.js"></script>
+        <script type="module" src="js/signup.js"></script>
+</body>
+
 </html>

@@ -81,9 +81,16 @@ img {
   background-size: calc(.75em + .375rem) calc(.75em + .375rem);
 } */
 
+.border-danger {
+  border-width: 2px;
+}
+
+.border-success {
+  border-width: 2px;
+}
 .errspan-error {
   float: right;
-  margin-right: 10px;
+  margin-right: 40px;
   margin-top: -30px;
   position: relative;
   z-index: 2;
@@ -91,7 +98,7 @@ img {
 }
 .errspan-success {
   float: right;
-  margin-right: 10px;
+  margin-right: 40px;
   margin-top: -30px;
   position: relative;
   z-index: 2;
