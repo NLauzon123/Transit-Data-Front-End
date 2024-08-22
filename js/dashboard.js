@@ -1,5 +1,6 @@
-import { getUserDataFromToken } from "./pageSetup.js";
-getUserDataFromToken(true);
+import { getUserDataFromToken, setupHeader } from "./pageSetup.js";
+const userData = await getUserDataFromToken(true);
+setupHeader(userData);
 import { getDataFromProcedure } from "./apiCalls.js";
 /*Global variables and operations*/
 var dashBSelect;

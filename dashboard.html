@@ -18,17 +18,49 @@
     />
     <link rel="stylesheet" href="styles/global.css" type="text/css" />
     <link rel="stylesheet" href="styles/dashboard.css" type="text/css" />
+    <link rel="stylesheet" href="styles/header.css" type="text/css" />
   </head>
   <body>
     <div class="container">
-      <div class="row">
-        <div class="col-md-2" id="agency"></div>
-        <div class="col-md-4" id="employee"></div>
-        <div class="col-md-4 emplAction">
-          <button type="button" class="btn btn-primary">Settings</button>
-          <button type="button" class="btn btn-primary">Log out</button>
+      <header
+        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 mb-4 border-bottom"
+      >
+        <div class="col-md-3">
+          <a
+            href="/"
+            class="d-inline-flex link-body-emphasis text-decoration-none"
+          >
+            <img src="resources/logo.png" class="header__logo" alt="" />
+            <use xlink:href="#bootstrap"></use>
+          </a>
         </div>
-      </div>
+
+        <div
+          class="col-6 justify-content-center text-center"
+          id="header-welcome"
+        ></div>
+        <!-- <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="#" class="nav-link px-2">Features</a></li>
+        <li><a href="#" class="nav-link px-2">Pricing</a></li>
+        <li><a href="#" class="nav-link px-2">FAQs</a></li>
+        <li><a href="#" class="nav-link px-2">About</a></li>
+      </ul> -->
+
+        <div class="col-3 text-end">
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="logout-btn"
+            onclick="window.location.href='/settings.html'"
+          >
+            Settings
+          </button>
+          <button type="button" class="btn btn-primary" id="logout-btn">
+            Log Out
+          </button>
+        </div>
+      </header>
       <div class="row separator"></div>
       <div class="row">
         <div class="btn-group">
