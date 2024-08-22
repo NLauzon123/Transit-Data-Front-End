@@ -25,7 +25,9 @@ const setPlaceholders = (userData) => {
 };
 
 let cancelBtn = document.querySelector("#cancelRedirect");
-cancelBtn.addEventListener("click", () => {
+cancelBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+    event.stopPropagation();
   window.location.href = "dashboard.html";
 });
 
