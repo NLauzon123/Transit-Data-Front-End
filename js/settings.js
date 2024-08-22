@@ -24,6 +24,11 @@ const setPlaceholders = (userData) => {
   });
 };
 
+let cancelBtn = document.querySelector("#cancelRedirect");
+cancelBtn.addEventListener("click", () => {
+  window.location.href = "dashboard.html";
+});
+
 const validateForm = (formSelector, callback) => {
   const formElement = document.querySelector(formSelector);
 
@@ -120,6 +125,7 @@ const validateForm = (formSelector, callback) => {
 
   formElement.addEventListener("submit", (event) => {
     event.preventDefault();
+    event.stopPropagation();
 
     const formValid = validateAllFormGroups(formElement);
 
@@ -159,7 +165,4 @@ setup();
 
 validateForm("#settingsForm", sendToAPI);
 
-let cancelBtn = document.querySelector("#cancelRedirect");
-cancelBtn.addEventListener("click", () => {
-  window.location.href = "dashboard.html";
-});
+
