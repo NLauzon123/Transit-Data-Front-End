@@ -305,7 +305,8 @@ async function filterDataCompilation() {
           params: [{ key: 'year', type: 'Int', value: parseInt(filter1Data) }],
         };
         console.log(requestData);
-        var data = null; //data = getDataFromProcedure(requestData);
+        var data = null; 
+        data = await getDataFromProcedure(requestData);
         applyDashBGraph1(data);
         applyDashBTable1(data);
       }
@@ -319,7 +320,8 @@ async function filterDataCompilation() {
           params: [{ key: 'year', type: 'Int', value: parseInt(filter1Data) }],
         };
         console.log(requestData);
-        var data = null; //data = getDataFromProcedure(requestData);
+        var data = null; 
+        data = await getDataFromProcedure(requestData);
         applyDashBGraph2(data);
         applyDashBTable2(data);
       }
@@ -333,7 +335,8 @@ async function filterDataCompilation() {
           params: [{ key: 'year', type: 'Int', value: parseInt(filter1Data) }],
         };
         console.log(requestData);
-        var data = null; //data = getDataFromProcedure(requestData);
+        var data = null; 
+        data = await getDataFromProcedure(requestData);
         applyDashBGraph3(data);
         applyDashBTable3(data);
       }
@@ -374,7 +377,8 @@ async function filterDataCompilation() {
           ],
         };
         console.log(requestData);
-        var data = null; //data = getDataFromProcedure(requestData);
+        var data = null; 
+        data = await getDataFromProcedure(requestData);
         applyDashBGraph4(data);
         applyDashBTable4(data);
       }
@@ -396,7 +400,8 @@ async function filterDataCompilation() {
           ],
         };
         console.log(requestData);
-        var data = null; //data = getDataFromProcedure(requestData);
+        var data = null; 
+        data = await getDataFromProcedure(requestData);
         applyDashBGraph5(data);
         applyDashBTable5(data);
       }
@@ -423,7 +428,8 @@ async function filterDataCompilation() {
           ],
         };
         console.log(requestData);
-        var data = null; //data = getDataFromProcedure(requestData);
+        var data = null; 
+        data = await getDataFromProcedure(requestData);
         applyDashBGraph6(data);
         applyDashBTable6(data);
       }
@@ -478,111 +484,17 @@ function applyDashBGraph0(data) {
   graph.append(header);
   var graph0 = document.createElement('canvas');
   graph0.style.width = '100%';
+  var yColor = ['blue', 'green', 'orange', 'brown', 'black', 'yellow', 'gray', 'red', 'aqua', 'chocolate',];
   var xLabel = ['Online', 'Buses', 'Region1', 'Region2', 'Region3', 'Region4', 'Region5', 'Region6', 'Region7', 'Region8',];
-  var yLabel = [];  var yTotal = []; var dataSet = [];
+  var yLabel = [];  var yTotal = []; var dataSet = []; var dataPack = [];
   for (let i = 0; i < data[1].length; i++) {
     yLabel[i] = data[1][i].Year; yTotal[i] = data[1][i].All;
-    dataSet[i] = [data[1][i].Online, data[1][i].Buses, data[1][i].Region1, data[1][i].Region2, data[1][i].Region3,
-        data[1][i].Region4, data[1][i].Region5, data[1][i].Region6, data[1][i].Region7, data[1][i].Region8];
+    dataSet[i] = [data[1][i].Online, data[1][i].Buses, data[1][i]['Region 1'], data[1][i]['Region 2'], data[1][i]['Region 3'],
+        data[1][i]['Region 4'], data[1][i]['Region 5'], data[1][i]['Region 6'], data[1][i]['Region 7'], data[1][i]['Region 8']];
+    for (let j = 0; j < xLabel.length; j++) if (dataSet[i][j] == null) dataSet[i][j] = 0;
+    dataPack[i] = {label: yLabel[i], data: dataSet[i], borderColor: yColor[i],backgroundColor: yColor[i],};
   }
-  /*var dataSet = [
-    [
-      '145327.25',
-      '0',
-      '22773.00',
-      '150440.25',
-      '47832.25',
-      '120941.00',
-      '50924.25',
-      '52646.00',
-      '63073.50',
-      '70430.25',
-    ],
-    [
-      '135092.00',
-      '0',
-      '23365.00',
-      '142534.00',
-      '40143.25',
-      '113923.25',
-      '54095.75',
-      '45809.50',
-      '58621.75',
-      '73035.50',
-    ],
-    [
-      '98491.25',
-      '0',
-      '18171.00',
-      '100215.00',
-      '28646.75',
-      '86601.00',
-      '39408.50',
-      '30911.25',
-      '40450.25',
-      '53617.75',
-    ],
-    [
-      '64188.00',
-      '0',
-      '12182.50',
-      '63435.25',
-      '19931.00',
-      '57735.50',
-      '26364.00',
-      '20369.50',
-      '28008.25',
-      '32752.75',
-    ],
-    [
-      '49023.25',
-      '0',
-      '8036.50',
-      '48003.50',
-      '14206.25',
-      '40166.50',
-      '18456.75',
-      '14832.75',
-      '19368.75',
-      '23707.50',
-    ],
-  ];
-  var yColor = ['blue', 'green', 'orange', 'brown', 'black', 'yellow', 'gray', 'red', 'aqua', 'chocolate',];
-  var data = {
-    labels: xLabel,
-    datasets: [
-      {
-        label: yLabel[0],
-        data: dataSet[0],
-        borderColor: yColor[0],
-        backgroundColor: yColor[0],
-      },
-      {
-        label: yLabel[1],
-        data: dataSet[1],
-        borderColor: yColor[1],
-        backgroundColor: yColor[1],
-      },
-      {
-        label: yLabel[2],
-        data: dataSet[2],
-        borderColor: yColor[2],
-        backgroundColor: yColor[2],
-      },
-      {
-        label: yLabel[3],
-        data: dataSet[3],
-        borderColor: yColor[3],
-        backgroundColor: yColor[3],
-      },
-      {
-        label: yLabel[4],
-        data: dataSet[4],
-        borderColor: yColor[4],
-        backgroundColor: yColor[4],
-      },
-    ],
-  };
+  var data = {labels: xLabel, datasets: dataPack};
   var config = {
     type: 'line',
     data: data,
@@ -595,7 +507,7 @@ function applyDashBGraph0(data) {
     },
   };
   new Chart(graph0, config);
-  graph.append(graph0);*/
+  graph.append(graph0);
   addTableInGraph(yLabel, yTotal, 'Year: ', 'Total revenue by year: ');
 }
 function applyDashBGraph1(data) {
@@ -605,202 +517,27 @@ function applyDashBGraph1(data) {
   graph.append(header);
   var graph1 = document.createElement('canvas');
   graph1.style.width = '100%';
-  var xLabel = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-  var yLabel = [
-    'Buses',
-    'Online',
-    'Region1',
-    'Region2',
-    'Region3',
-    'Region4',
-    'Region5',
-    'Region6',
-    'Region7',
-    'Region8',
-  ];
-  var yTotal = [
-    '19899.50',
-    '19168.75',
-    '19438.75',
-    '19451.00',
-    '19864.00',
-    '19435.00',
-    '20151.25',
-    '20140.50',
-    '19558.75',
-    '19680.50',
-    '19374.75',
-    '19639.00',
-  ];
-  var dataSet = [
-    ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0'],
-    [
-      '3660.00',
-      '4394.00',
-      '3995.50',
-      '4471.25',
-      '4223.25',
-      '4558.00',
-      '3628.25',
-      '4007.25',
-      '4521.25',
-      '3668.50',
-      '3559.00',
-      '4337.00',
-    ],
-    [
-      '741.50',
-      '794.25',
-      '694.50',
-      '497.75',
-      '734.25',
-      '294.50',
-      '454.00',
-      '761.00',
-      '794.25',
-      '1015.00',
-      '768.00',
-      '487.5',
-    ],
-    [
-      '3275.00',
-      '3091.75',
-      '3319.75',
-      '3946.25',
-      '4377.25',
-      '4520.50',
-      '3788.00',
-      '4552.25',
-      '4340.75',
-      '4245.75',
-      '3953.50',
-      '4592.75',
-    ],
-    [
-      '1309.50',
-      '1194.25',
-      '1236.00',
-      '1276.50',
-      '1248.25',
-      '1516.50',
-      '1115.00',
-      '1175.00',
-      '955.25',
-      '1369.00',
-      '1436.00',
-      '375.00',
-    ],
-    [
-      '3540.00',
-      '2813.50',
-      '3533.00',
-      '3325.25',
-      '2683.00',
-      '3398.50',
-      '4299.00',
-      '3821.00',
-      '2745.25',
-      '3874.50',
-      '2713.75',
-      '3419.75',
-    ],
-    [
-      '1596.75',
-      '1166.00',
-      '1642.75',
-      '1476.25',
-      '1509.50',
-      '1117.00',
-      '1730.00',
-      '1576.25',
-      '1596.75',
-      '1422.00',
-      '1442.00',
-      '2181.50',
-    ],
-    [
-      '1296.00',
-      '1162.25',
-      '1335.75',
-      '1502.50',
-      '1022.25',
-      '762.50',
-      '1222.00',
-      '1716.25',
-      '930.50',
-      '950.00',
-      '1830.25',
-      '1102.50',
-    ],
-    [
-      '2024.25',
-      '2282.50',
-      '1969.00',
-      '1284.75',
-      '2083.50',
-      '1516.25',
-      '1590.00',
-      '1183.25',
-      '1269.25',
-      '1356.50',
-      '1535.25',
-      '1274.25',
-    ],
-    [
-      '2456.50',
-      '2270.25',
-      '1712.50',
-      '1670.50',
-      '1982.75',
-      '1751.25',
-      '2325.00',
-      '1348.25',
-      '2405.50',
-      '1779.25',
-      '2137.00',
-      '1868.75',
-    ],
-  ];
-  var yColor = [
-    'blue',
-    'green',
-    'orange',
-    'brown',
-    'black',
-    'yellow',
-    'gray',
-    'red',
-    'aqua',
-    'chocolate',
-  ];
-  var data = {
-    labels: xLabel,
-    datasets: [
-      { label: yLabel[0], data: dataSet[0], backgroundColor: yColor[0] },
-      { label: yLabel[1], data: dataSet[1], backgroundColor: yColor[1] },
-      { label: yLabel[2], data: dataSet[2], backgroundColor: yColor[2] },
-      { label: yLabel[3], data: dataSet[3], backgroundColor: yColor[3] },
-      { label: yLabel[4], data: dataSet[4], backgroundColor: yColor[4] },
-      { label: yLabel[5], data: dataSet[5], backgroundColor: yColor[5] },
-      { label: yLabel[6], data: dataSet[6], backgroundColor: yColor[6] },
-      { label: yLabel[7], data: dataSet[7], backgroundColor: yColor[7] },
-      { label: yLabel[8], data: dataSet[8], backgroundColor: yColor[8] },
-      { label: yLabel[9], data: dataSet[9], backgroundColor: yColor[9] },
-    ],
-  };
+  var yColor = ['blue', 'green', 'orange', 'brown', 'black', 'yellow', 'gray', 'red', 'aqua', 'chocolate',];
+  var xLabel = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',];
+  var yLabel = ['Buses', 'Online', 'Region 1', 'Region 2', 'Region 3', 'Region 4', 'Region 5', 'Region 6', 'Region 7', 'Region 8',];
+  var yTotal = []; var dataSet = []; var dataPack = [];
+  for (let i = 0; i < data[1].length; i++) 
+    if (data[1][i].Region == 'Total') 
+        yTotal = [data[1][i].January, data[1][i].February, data[1][i].March, data[1][i].April, data[1][i].May, 
+        data[1][i].June, data[1][i].July, data[1][i].August, data[1][i].September, data[1][i].October, 
+        data[1][i].November, data[1][i].December,];
+  for (let i = 0; i < yLabel.length; i++) {
+    for (let j = 0; j < data[1].length; j++) {
+        if (data[1][j].Region == yLabel[i]) {
+            dataSet[i] = [data[1][j].January, data[1][j].February, data[1][j].March, data[1][j].April, data[1][j].May, 
+            data[1][j].June, data[1][j].July, data[1][j].August, data[1][j].September, data[1][j].October, 
+            data[1][j].November, data[1][j].December,];
+        }
+    }
+    for (let j = 0; j < xLabel.length; j++) if (dataSet[i][j] == null) dataSet[i][j] = 0;
+    dataPack[i] ={ label: yLabel[i], data: dataSet[i], backgroundColor: yColor[i] };
+  }
+  var data = {labels: xLabel, datasets: dataPack,};
   var config = {
     type: 'bar',
     data: data,
@@ -819,80 +556,28 @@ function applyDashBGraph1(data) {
 function applyDashBGraph2(data) {
   cleanGraph();
   var header = document.createElement('h2');
-  header.innerHTML =
-    'Graph: Revenue details by fare products for' + filter1Data;
+  header.innerHTML = 'Graph: Revenue details by fare products for' + filter1Data;
   graph.append(header);
   var graph2 = document.createElement('canvas');
   graph2.style.width = '100%';
-  var xLabel = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
+  var yColor = ['blue', 'green', 'orange', 'brown', 'black', 'yellow', 'gray', 'red', 'aqua', 'chocolate',];
+  var xLabel = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',];
   var yLabel = ['Two trips', 'Ten trips', 'Monthly'];
-  var yTotal = ['12747.00', '57954.75', '165100.00'];
-  var dataSet = [
-    [
-      '1078.00',
-      '980.00',
-      '1050.00',
-      '1162.00',
-      '910.00',
-      '1246.00',
-      '1064.00',
-      '987.00',
-      '1071.00',
-      '1127.00',
-      '1120.00',
-      '952.00',
-    ],
-    [
-      '4721.50',
-      '4488.75',
-      '4488.75',
-      '4389.00',
-      '5054.00',
-      '4389.00',
-      '5087.25',
-      '5253.50',
-      '4887.75',
-      '5253.50',
-      '4754.75',
-      '5187.00',
-    ],
-    [
-      '14100.00',
-      '13700.00',
-      '13900.00',
-      '13900.00',
-      '13900.00',
-      '13800.00',
-      '14000.00',
-      '13900.00',
-      '13600.00',
-      '13300.00',
-      '13500.00',
-      '13500.00',
-    ],
-  ];
-  var yColor = ['blue', 'green', 'orange'];
-  var data = {
-    labels: xLabel,
-    datasets: [
-      { label: yLabel[0], data: dataSet[0], backgroundColor: yColor[0] },
-      { label: yLabel[1], data: dataSet[1], backgroundColor: yColor[1] },
-      { label: yLabel[2], data: dataSet[2], backgroundColor: yColor[2] },
-    ],
-  };
+  var product = ['twoTrips', 'tenTrips', 'monthly'];
+  var yTotal = []; var dataSet = []; var dataPack = [];
+  for (let i = 0; i < product.length; i++) {
+    for (let j = 0; j < data[1].length; j++) {
+      if (data[1][j].Product == product[i]) {
+        yTotal[i] = data[1][j].TotalYear;
+        dataSet[i] = [data[1][j].January, data[1][j].February, data[1][j].March, data[1][j].April, data[1][j].May, 
+          data[1][j].June, data[1][j].July, data[1][j].August, data[1][j].September, data[1][j].October, 
+          data[1][j].November, data[1][j].December,];
+      }
+    }
+    for (let j = 0; j < xLabel.length; j++) if (dataSet[i][j] == null) dataSet[i][j] = 0;
+    dataPack[i] ={ label: yLabel[i], data: dataSet[i], backgroundColor: yColor[i] };
+  }
+  var data = {labels: xLabel, datasets: dataPack,};
   var config = {
     type: 'bar',
     data: data,
@@ -914,148 +599,29 @@ function applyDashBGraph3(data) {
   header.innerHTML =
     'Graph: Revenue details by points of sales for ' +
     filter1Data +
-    ' - Under development';
+    ' No graph available for this type of result. Please refer to the table instead.';
   graph.append(header);
 }
 function applyDashBGraph4(data) {
   cleanGraph();
   var header = document.createElement('h2');
-  header.innerHTML =
-    'Graph: Long-term user traffic for a period of ' +
-    filter2Data +
-    ' years ending in ' +
-    filter1Data +
-    ', for service ' +
-    getFilter4Lab() +
-    ', in ' +
-    getFilter5Lab();
+  header.innerHTML = 'Graph: Long-term user traffic for a period of ' + filter2Data + ' years ending in ' +
+    filter1Data + ', for service ' + getFilter4Lab() + ', in ' + getFilter5Lab();
   graph.append(header);
   var graph4 = document.createElement('canvas');
   graph4.style.width = '100%';
-  var xLabel = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-  var yLabel = ['2023', '2024', '2025', '2026', '2027'];
-  var yTotal = ['38940', '37768', '26932', '20224', '14148'];
-  var dataSet = [
-    [
-      '3292',
-      '2926',
-      '3352',
-      '2938',
-      '3210',
-      '3156',
-      '3234',
-      '3374',
-      '3318',
-      '3428',
-      '3428',
-      '3284',
-    ],
-    [
-      '3522',
-      '3130',
-      '3154',
-      '3288',
-      '3342',
-      '3122',
-      '3314',
-      '3210',
-      '2984',
-      '3016',
-      '2790',
-      '2896',
-    ],
-    [
-      '2838',
-      '2332',
-      '2330',
-      '2258',
-      '2270',
-      '2128',
-      '2346',
-      '2178',
-      '2108',
-      '2146',
-      '1934',
-      '2064',
-    ],
-    [
-      '2010',
-      '1780',
-      '1864',
-      '1874',
-      '1842',
-      '1838',
-      '1834',
-      '1662',
-      '1526',
-      '1420',
-      '1322',
-      '1252',
-    ],
-    [
-      '1130',
-      '1098',
-      '1186',
-      '1198',
-      '1234',
-      '1238',
-      '1310',
-      '1216',
-      '1166',
-      '1128',
-      '1104',
-      '1140',
-    ],
-  ];
-  var yColor = ['blue', 'green', 'orange', 'brown', 'black'];
-  var data = {
-    labels: xLabel,
-    datasets: [
-      {
-        label: yLabel[0],
-        data: dataSet[0],
-        borderColor: yColor[0],
-        backgroundColor: yColor[0],
-      },
-      {
-        label: yLabel[1],
-        data: dataSet[1],
-        borderColor: yColor[1],
-        backgroundColor: yColor[1],
-      },
-      {
-        label: yLabel[2],
-        data: dataSet[2],
-        borderColor: yColor[2],
-        backgroundColor: yColor[2],
-      },
-      {
-        label: yLabel[3],
-        data: dataSet[3],
-        borderColor: yColor[3],
-        backgroundColor: yColor[3],
-      },
-      {
-        label: yLabel[4],
-        data: dataSet[4],
-        borderColor: yColor[4],
-        backgroundColor: yColor[4],
-      },
-    ],
-  };
+  var yColor = ['blue', 'green', 'orange', 'brown', 'black', 'yellow', 'gray', 'red', 'aqua', 'chocolate',];
+  var xLabel = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',];
+  var yLabel = [];  var yTotal = []; var dataSet = []; var dataPack = [];
+  for (let i = 0; i < data[1].length; i++) {
+    yLabel[i] = data[1][i].Year; yTotal[i] = data[1][i].WholeYear;
+    dataSet[i] = [data[1][i].January, data[1][i].February, data[1][i].March, data[1][i].April, data[1][i].May,
+        data[1][i].June, data[1][i].July, data[1][i].August, data[1][i].September, data[1][i].October,
+        data[1][i].November, data[1][i].December,];
+    for (let j = 0; j < xLabel.length; j++) if (dataSet[i][j] == null) dataSet[i][j] = 0;
+    dataPack[i] = {label: yLabel[i], data: dataSet[i], borderColor: yColor[i],backgroundColor: yColor[i],};
+  }
+  var data = {labels: xLabel, datasets: dataPack,};
   var config = {
     type: 'line',
     data: data,
@@ -1074,83 +640,32 @@ function applyDashBGraph4(data) {
 function applyDashBGraph5(data) {
   cleanGraph();
   var header = document.createElement('h2');
-  header.innerHTML =
-    'Graph: Mid-term user traffic in ' +
-    filter1Data +
-    ' for service ' +
-    getFilter4Lab();
+  header.innerHTML = 'Graph: Mid-term user traffic in ' + filter1Data + ' for service ' + getFilter4Lab();
   graph.append(header);
   var graph5 = document.createElement('canvas');
   graph5.style.width = '100%';
-  var xLabel = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
+  var yColor = ['blue', 'green', 'orange', 'brown', 'black', 'yellow', 'gray', 'red', 'aqua', 'chocolate',];
+  var xLabel = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',];
   var yLabel = ['Total', 'Direction 0', 'Direction 1'];
-  var yAnnual = ['26932', '13466', '13466'];
-  var dataSet = [
-    [
-      '2838',
-      '2332',
-      '2330',
-      '2258',
-      '2270',
-      '2128',
-      '2346',
-      '2178',
-      '2108',
-      '2146',
-      '1934',
-      '2064',
-    ],
-    [
-      '1419',
-      '1166',
-      '1165',
-      '1129',
-      '1135',
-      '1064',
-      '1173',
-      '1089',
-      '1054',
-      '1073',
-      '967',
-      '1032',
-    ],
-    [
-      '1419',
-      '1166',
-      '1165',
-      '1129',
-      '1135',
-      '1064',
-      '1173',
-      '1089',
-      '1054',
-      '1073',
-      '967',
-      '1032',
-    ],
-  ];
-  var barColor = ['blue', 'green', 'orange'];
-  var data = {
-    labels: xLabel,
-    datasets: [
-      { label: yLabel[0], data: dataSet[0], backgroundColor: barColor[0] },
-      { label: yLabel[1], data: dataSet[1], backgroundColor: barColor[1] },
-      { label: yLabel[2], data: dataSet[2], backgroundColor: barColor[2] },
-    ],
-  };
+  var yAnnual = []; var dataSet = []; var dataPack = []; var tot = []; var dir0 = []; var dir1 = [];
+  for (let i = 0; i < data[1].length; i++) {
+    if (data[1][i].period == "Annual") yAnnual = [data[1][i].total, data[1][i].direction0, data[1][i].direction1,];
+  }
+  for (let i = 0; i < xLabel.length; i++) {
+    for (let j = 0; j < data[1].length; j++) {
+      if (data[1][j].period == xLabel[i]) {
+        tot[i] = data[1][j].total; dir0[i] = data[1][j].direction0; dir1[i] = data[1][j].direction1;
+      }
+    }
+    if (tot[i] == null) tot[i] = 0;
+    if (dir0[i] == null) dir0[i] = 0;
+    if (dir1[i] == null) dir1[i] = 0;
+  }
+  dataSet[0] = tot; dataSet[1] = dir0; dataSet[2] = dir1;
+  dataPack[0] ={ label: yLabel[0], data: dataSet[0], backgroundColor: yColor[0] };
+  dataPack[1] ={ label: yLabel[1], data: dataSet[1], backgroundColor: yColor[1] };
+  dataPack[2] ={ label: yLabel[2], data: dataSet[2], backgroundColor: yColor[2] };
+  var data = {labels: xLabel, datasets: dataPack,};
   var config = {
     type: 'bar',
     data: data,
@@ -1169,143 +684,33 @@ function applyDashBGraph5(data) {
 function applyDashBGraph6(data) {
   cleanGraph();
   var header = document.createElement('h2');
-  header.innerHTML =
-    'Graph: Short-term user traffic on ' +
-    filter3Data +
-    ' for service ' +
-    getFilter4Lab();
+  header.innerHTML = 'Graph: Short-term user traffic on ' + filter3Data + ' for service ' + getFilter4Lab();
   graph.append(header);
   var graph6 = document.createElement('canvas');
   graph6.style.width = '100%';
-
-  var data1 = [
-    [
-      {
-        Day: '2023-09-15T00:00:00.000Z',
-        Service: '2',
-        Name: 'Ligne 2 - Orange',
-      },
-    ],
-    [{ period: 'Daily', total: 139, direction0: 0, direction1: 0 }],
-  ];
-  console.log(data1);
-  var xLabel = [
-    '0AM',
-    '1AM',
-    '2AM',
-    '3AM',
-    '4AM',
-    '5AM',
-    '6AM',
-    '7AM',
-    '8AM',
-    '9AM',
-    '10AM',
-    '11AM',
-    '12AM',
-    '1PM',
-    '2PM',
-    '3PM',
-    '4PM',
-    '5PM',
-    '6PM',
-    '7PM',
-    '8PM',
-    '9PM',
-    '10PM',
-    '11PM',
-  ];
+  var yColor = ['blue', 'green', 'orange', 'brown', 'black', 'yellow', 'gray', 'red', 'aqua', 'chocolate',];
+  var xLabel = ['0AM', '1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12AM',
+    '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM', '10PM', '11PM',];
   var yLabel = ['Total', 'Direction 0', 'Direction 1'];
-  var yAnnual = ['6', '3', '3'];
-  var dataSet = [
-    [
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '1',
-      '0',
-      '1',
-      '0',
-      '1',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '1',
-      '0',
-      '0',
-      '1',
-      '1',
-      '0',
-    ],
-    [
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '1',
-      '0',
-      '0',
-      '0',
-      '1',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '1',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-    ],
-    [
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '1',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '0',
-      '1',
-      '1',
-      '0',
-    ],
-  ];
-  var barColor = ['blue', 'green', 'orange'];
-  var data = {
-    labels: xLabel,
-    datasets: [
-      { label: yLabel[0], data: dataSet[0], backgroundColor: barColor[0] },
-      { label: yLabel[1], data: dataSet[1], backgroundColor: barColor[1] },
-      { label: yLabel[2], data: dataSet[2], backgroundColor: barColor[2] },
-    ],
-  };
+  var yDaily = []; var dataSet = []; var dataPack = []; var tot = []; var dir0 = []; var dir1 = [];
+  for (let i = 0; i < data[1].length; i++) {
+    if (data[1][i].period == 'Daily') yDaily = [data[1][i].total, data[1][i].direction0, data[1][i].direction1,];
+  }
+  for (let i = 0; i < xLabel.length; i++) {
+    for (let j = 0; j < data[1].length; j++) {
+      if (data[1][j].period == xLabel[i]) {
+        tot[i] = data[1][j].total; dir0[i] = data[1][j].direction0; dir1[i] = data[1][j].direction1;
+      }
+    }
+    if (tot[i] == null) tot[i] = 0;
+    if (dir0[i] == null) dir0[i] = 0;
+    if (dir1[i] == null) dir1[i] = 0;
+  }
+  dataSet[0] = tot; dataSet[1] = dir0; dataSet[2] = dir1;
+  dataPack[0] ={ label: yLabel[0], data: dataSet[0], backgroundColor: yColor[0] };
+  dataPack[1] ={ label: yLabel[1], data: dataSet[1], backgroundColor: yColor[1] };
+  dataPack[2] ={ label: yLabel[2], data: dataSet[2], backgroundColor: yColor[2] };
+  var data = {labels: xLabel, datasets: dataPack,};
   var config = {
     type: 'bar',
     data: data,
@@ -1319,7 +724,7 @@ function applyDashBGraph6(data) {
   };
   new Chart(graph6, config);
   graph.append(graph6);
-  addTableInGraph(yLabel, yAnnual, 'Direction: ', 'Total users for the day: ');
+  addTableInGraph(yLabel, yDaily, 'Direction: ', 'Total users for the day: ');
 }
 
 /* Method: generate table template */
@@ -1445,8 +850,7 @@ function applyDashBTable3(data) {
   var header = document.createElement('h2');
   header.innerHTML =
     'Table: Revenue details by points of sales for ' +
-    filter1Data +
-    ' - Under development';
+    filter1Data;
   table.append(header);
   tableGenerateorType2(data);
 }
