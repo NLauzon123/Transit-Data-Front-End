@@ -1,6 +1,32 @@
 "use strict";
 
-import { changePassword } from "./apiCalls.js";
+import { changePassword, checkToken } from "./apiCalls.js";
+let userData;
+
+const setup = async () => {
+  const checkTokenResult = await checkToken();
+  if (!checkTokenResult || checkTokenResult.status != 200) {
+    window.location.replace("/");
+  }
+  userData = checkTokenResult.recordset;
+  userData.agency = userData.longName + " (" + userData.shortName + ")";
+  console.log(userData);
+  setPlaceholders();
+};
+
+const setPlaceholders = () => {
+  const fieldIds = [
+    "inputAgencyID",
+    "inputFName",
+    "inputLName",
+    "inputUsername",
+  ];
+  fieldIds.forEach((id) => {
+    const fieldInput = document.getElementById(id);
+    const propertName = fieldInput.getAttribute("data-field-name");
+    fieldInput.value = userData[propertName];
+  });
+};
 
 const validateForm = (formSelector, callback) => {
   const formElement = document.querySelector(formSelector);
@@ -134,6 +160,8 @@ const sendToAPI = async (formElement) => {
 
   //submitting to an API via AJAX or smtg.
 };
+
+setup();
 
 validateForm("#settingsForm", sendToAPI);
 

@@ -67,17 +67,17 @@
         <div class="container container-fluid justify-content-center ">
             <div class="row text-center">
                 <div class="col p-3">
-                    <h1>Setting</h1>
+                    <h1>Settings</h1>
                 </div>
             </div>
             <form class="row justify-content-center" id="settingsForm">
                 <div class=" formValidationGroup row g-2 justify-content-md-center align-items-center">
                     <div class=" col col-md-5">
                         <div class="col-auto">
-                            <label for="inputAgencyID" class="col-form-label">Agency ID :</label>
+                            <label for="inputAgencyID" class="col-form-label">Agency:</label>
                         </div>
                         <div class="col-auto">
-                            <input type="text" id="inputAgencyID" class="form-control" disabled aria-describedby="agencyIDHelpInline" value="Agent123">
+                            <input type="text" id="inputAgencyID" data-field-name="agency" class="form-control" disabled aria-describedby="agencyIDHelpInline" >
                             <span class="error-icon hidden errspan-error">
                                 <i class="fa-solid fa-circle-exclamation"></i>
                             </span>
@@ -91,10 +91,10 @@
                 <div class=" formValidationGroup row g-2 justify-content-md-center align-items-center">
                     <div class=" col col-md-5">
                         <div class="col-auto">
-                            <label for="inputFName" class="col-form-label">First Name :</label>
+                            <label for="inputFName" class="col-form-label">First Name:</label>
                         </div>
                         <div class="col-auto">
-                            <input type="text" id="inputFName" class="form-control" disabled value="John" aria-describedby="firstNameHelpInline">
+                            <input type="text" id="inputFName" data-field-name="firstName" class="form-control" disabled  aria-describedby="firstNameHelpInline">
                             <span class="error-icon hidden errspan-error">
                                 <i class="fa-solid fa-circle-exclamation"></i>
                             </span>
@@ -108,10 +108,10 @@
                 <div class=" formValidationGroup row g-2 justify-content-md-center align-items-center">
                     <div class=" col col-md-5">
                         <div class="col-auto">
-                            <label for="inputLName" class="col-form-label">Last Name :</label>
+                            <label for="inputLName" class="col-form-label">Last Name:</label>
                         </div>
                         <div class="col-auto">
-                            <input type="text" id="inputLName" class="form-control" disabled  value="Doe" aria-describedby="lastNameHelpInline">
+                            <input type="text" id="inputLName" data-field-name="lastName" class="form-control" disabled   aria-describedby="lastNameHelpInline">
                             <span class="error-icon hidden errspan-error">
                                 <i class="fa-solid fa-circle-exclamation"></i>
                             </span>
@@ -125,10 +125,10 @@
                 <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
                     <div class=" col col-md-5">
                         <div class="col-auto">
-                            <label for="inputUsername" class="col-form-label">Username :</label>
+                            <label for="inputUsername" class="col-form-label">Username:</label>
                         </div>
                         <div class="col-auto">
-                            <input type="text" id="inputUsername" class="form-control" disabled  value="john.doe" aria-describedby="usernameHelpInline">
+                            <input type="text" id="inputUsername" data-field-name="username" class="form-control" disabled   aria-describedby="usernameHelpInline">
                             <span class="error-icon hidden errspan-error">
                                 <i class="fa-solid fa-circle-exclamation"></i>
                             </span>
@@ -142,7 +142,7 @@
                 <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
                     <div class=" col col-md-5  ">
                         <div class="col-auto">
-                            <label for="oldPassword" class="col-form-label">Old Password</label>
+                            <label for="oldPassword" class="col-form-label">Old Password:</label>
                         </div>
                         <div class="col-auto">
                             <input required 
@@ -164,7 +164,7 @@
                 <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
                     <div class=" col col-md-5  ">
                         <div class="col-auto">
-                            <label for="newPassword" class="col-form-label">New Password</label>
+                            <label for="newPassword" class="col-form-label">New Password:</label>
                         </div>
                         <div class="col-auto">
                             <input required 
@@ -186,7 +186,7 @@
                 <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
                     <div class=" col col-md-5  ">
                         <div class="col-auto">
-                            <label for="confirmPassword" class="col-form-label">Confim Password</label>
+                            <label for="confirmPassword" class="col-form-label">Confim Password:</label>
                         </div>
                         <div class="col-auto">
                             <input 
