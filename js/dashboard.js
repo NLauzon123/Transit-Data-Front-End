@@ -301,8 +301,10 @@ async function filterDataCompilation() {
           filterButtonC.innerHTML = "Processing... please wait.";
           data = await getDataFromProcedure(requestData);
           filterButtonC.innerHTML = "Apply filter(s)";
-          applyDashBGraph0(data);
-          applyDashBTable0(data);
+          if (data != null && data != undefined && data != 0) {
+            applyDashBGraph0(data); applyDashBTable0(data);
+          }
+          else {filterButtonC.innerHTML = "No data received, try again.";}
         }
         else {filterButtonC.innerHTML = "Invalid filter inputs, try again.";}
       }
@@ -321,8 +323,10 @@ async function filterDataCompilation() {
         filterButtonC.innerHTML = "Processing... please wait.";
         data = await getDataFromProcedure(requestData);
         filterButtonC.innerHTML = "Apply filter(s)";
-        applyDashBGraph1(data);
-        applyDashBTable1(data);
+        if (data != null && data != undefined && data != 0) {
+          applyDashBGraph1(data); applyDashBTable1(data);
+        }
+        else {filterButtonC.innerHTML = "No data received, try again.";}
       }
       else {filterButtonC.innerHTML = "Invalid filter inputs, try again.";}
       break;
@@ -339,8 +343,10 @@ async function filterDataCompilation() {
         filterButtonC.innerHTML = "Processing... please wait.";
         data = await getDataFromProcedure(requestData);
         filterButtonC.innerHTML = "Apply filter(s)";
-        applyDashBGraph2(data);
-        applyDashBTable2(data);
+        if (data != null && data != undefined && data != 0) {
+          applyDashBGraph2(data); applyDashBTable2(data);
+        }
+        else {filterButtonC.innerHTML = "No data received, try again.";}
       }
       else {filterButtonC.innerHTML = "Invalid filter inputs, try again.";}
       break;
@@ -355,10 +361,12 @@ async function filterDataCompilation() {
         console.log(requestData);
         var data = null; 
         filterButtonC.innerHTML = "Processing... please wait.";
-        data = await getDataFromProcedure(requestData);
+        //data = await getDataFromProcedure(requestData);
         filterButtonC.innerHTML = "Apply filter(s)";
-        applyDashBGraph3(data);
-        applyDashBTable3(data);
+        //if (data != null && data != undefined && data != 0) {
+          applyDashBGraph3(data); applyDashBTable3(data);
+        //}
+        //else {filterButtonC.innerHTML = "No data received, try again.";}
       }
       else {filterButtonC.innerHTML = "Invalid filter inputs, try again.";}
       break;
@@ -394,8 +402,10 @@ async function filterDataCompilation() {
           filterButtonC.innerHTML = "Processing... please wait.";
           data = await getDataFromProcedure(requestData);
           filterButtonC.innerHTML = "Apply filter(s)";
-          applyDashBGraph4(data);
-          applyDashBTable4(data);
+          if (data != null && data != undefined && data != 0) {
+            applyDashBGraph4(data); applyDashBTable4(data);
+          }
+          else {filterButtonC.innerHTML = "No data received, try again.";}
         }
         else {filterButtonC.innerHTML = "Invalid filter inputs, try again.";}
       }
@@ -422,8 +432,10 @@ async function filterDataCompilation() {
         filterButtonC.innerHTML = "Processing... please wait.";
         data = await getDataFromProcedure(requestData);
         filterButtonC.innerHTML = "Apply filter(s)";
-        applyDashBGraph5(data);
-        applyDashBTable5(data);
+        if (data != null && data != undefined && data != 0) {
+          applyDashBGraph5(data); applyDashBTable5(data);
+        }
+        else {filterButtonC.innerHTML = "No data received, try again.";}
       }
       else {filterButtonC.innerHTML = "Invalid filter inputs, try again.";}
       break;
@@ -453,8 +465,10 @@ async function filterDataCompilation() {
         filterButtonC.innerHTML = "Processing... please wait.";
         data = await getDataFromProcedure(requestData);
         filterButtonC.innerHTML = "Apply filter(s)";
-        applyDashBGraph6(data);
-        applyDashBTable6(data);
+        if (data != null && data != undefined && data != 0) {
+          applyDashBGraph6(data); applyDashBTable6(data);
+        }
+        else {filterButtonC.innerHTML = "No data received, try again.";}
       }
       else {filterButtonC.innerHTML = "Invalid filter inputs, try again.";}
       break;
@@ -623,7 +637,7 @@ function applyDashBGraph3(data) {
   header.innerHTML =
     'Graph: Revenue details by points of sales for ' +
     filter1Data +
-    ' No graph available for this type of result. Please refer to the table instead.';
+    ' No graph available for this type of result. Under development.';
   graph.append(header);
 }
 function applyDashBGraph4(data) {
@@ -874,9 +888,10 @@ function applyDashBTable3(data) {
   var header = document.createElement('h2');
   header.innerHTML =
     'Table: Revenue details by points of sales for ' +
-    filter1Data;
+    filter1Data +
+    ' No table available for this type of result. Under development.';
   table.append(header);
-  tableGenerateorType2(data);
+  //tableGenerateorType2(data);
 }
 function applyDashBTable4(data) {
   cleanTable();
