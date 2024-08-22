@@ -1,7 +1,7 @@
-import { getUserDataFromToken } from "./pageSetup.js";
+import { getUserDataFromToken, setupHeader } from "./pageSetup.js";
 import { loginUser } from "./apiCalls.js";
 
-const checkTokenResult = await getUserDataFromToken(false);
+await getUserDataFromToken(false);
 
 const loginBtn = document.getElementById("login-btn");
 

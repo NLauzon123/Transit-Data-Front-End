@@ -10,3 +10,12 @@
 .header__logo {
   width: 75px;
 }
+
+.header__agency-img {
+  max-width: 50%;
+  margin-right: 50px;
+}
+
+.header__welcome-message {
+  font-size: 20px;
+}
