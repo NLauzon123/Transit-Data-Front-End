@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fare Transit Managment - Settings</title>
     <link
-    rel="icon"
-    type="image/png"
-    href="./resources/favicon-32x32.png"
-    sizes="32x32" 
+      rel="icon"
+      type="image/png"
+      href="./resources/favicon-32x32.png"
+      sizes="32x32"
     />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -22,207 +22,278 @@
     />
     <link rel="stylesheet" href="styles/global.css" type="text/css" />
     <link rel="stylesheet" href="styles/settings.css" type="text/css" />
+    <link rel="stylesheet" href="styles/header.css" type="text/css" />
   </head>
   <body>
     <div class="hamburger-container">
-        <div class="hamburger-button" id="hamburger"></div>
-      </div>
-      <div class="container site-container">
-    <header
-    class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
-    >
-    <div class="col-md-3 mb-2 mb-md-0">
-        <a
-        href="/"
-        class="d-inline-flex link-body-emphasis text-decoration-none"
-        >
-        <svg
-            class="bi"
-            width="40"
-            height="32"
-            role="img"
-            aria-label="Bootstrap"
-        >
+      <div class="hamburger-button" id="hamburger"></div>
+    </div>
+    <div class="container site-container">
+      <header
+        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 mb-4 border-bottom"
+      >
+        <div class="col-md-3">
+          <a
+            href="/"
+            class="d-inline-flex link-body-emphasis text-decoration-none"
+          >
+            <img src="resources/logo.png" class="header__logo" alt="" />
             <use xlink:href="#bootstrap"></use>
-        </svg>
-        </a>
-    </div>
-
-    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-        <li><a href="#" class="nav-link px-2">Features</a></li>
-        <li><a href="#" class="nav-link px-2">Pricing</a></li>
-        <li><a href="#" class="nav-link px-2">FAQs</a></li>
-        <li><a href="#" class="nav-link px-2">About</a></li>
-    </ul>
-
-    <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-primary me-2">
-        Login
-        </button>
-        <button type="button" class="btn btn-primary">Sign-up</button>
-    </div>
-    </header>
-    <main>
-        <div class="container container-fluid justify-content-center ">
-            <div class="row text-center">
-                <div class="col p-3">
-                    <h1>Settings</h1>
-                </div>
-            </div>
-            <form class="row justify-content-center" id="settingsForm">
-                <div class=" formValidationGroup row g-2 justify-content-md-center align-items-center">
-                    <div class=" col col-md-5">
-                        <div class="col-auto">
-                            <label for="inputAgencyID" class="col-form-label">Agency:</label>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" id="inputAgencyID" data-field-name="agency" class="form-control" disabled aria-describedby="agencyIDHelpInline" >
-                            <span class="error-icon hidden errspan-error">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                            </span>
-                            <span class="success-icon hidden errspan-success">
-                            <i class="fa-solid fa-circle-check "></i>
-                            </span>
-                        </div>
-                        <div class="error__settings" id="error__agencyID"></div>
-                    </div>
-                </div>
-                <div class=" formValidationGroup row g-2 justify-content-md-center align-items-center">
-                    <div class=" col col-md-5">
-                        <div class="col-auto">
-                            <label for="inputFName" class="col-form-label">First Name:</label>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" id="inputFName" data-field-name="firstName" class="form-control" disabled  aria-describedby="firstNameHelpInline">
-                            <span class="error-icon hidden errspan-error">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                            </span>
-                            <span class="success-icon hidden errspan-success">
-                            <i class="fa-solid fa-circle-check "></i>
-                            </span>
-                        </div>
-                        <div class="error__settings" id="error__fname"></div>
-                    </div>
-                </div>
-                <div class=" formValidationGroup row g-2 justify-content-md-center align-items-center">
-                    <div class=" col col-md-5">
-                        <div class="col-auto">
-                            <label for="inputLName" class="col-form-label">Last Name:</label>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" id="inputLName" data-field-name="lastName" class="form-control" disabled   aria-describedby="lastNameHelpInline">
-                            <span class="error-icon hidden errspan-error">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                            </span>
-                            <span class="success-icon hidden errspan-success">
-                            <i class="fa-solid fa-circle-check "></i>
-                            </span>
-                        </div>
-                        <div class="error__settings" id="error__lname"></div>
-                    </div>
-                </div>
-                <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
-                    <div class=" col col-md-5">
-                        <div class="col-auto">
-                            <label for="inputUsername" class="col-form-label">Username:</label>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" id="inputUsername" data-field-name="username" class="form-control" disabled   aria-describedby="usernameHelpInline">
-                            <span class="error-icon hidden errspan-error">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                            </span>
-                            <span class="success-icon hidden errspan-success">
-                            <i class="fa-solid fa-circle-check "></i>
-                            </span>
-                        </div>
-                        <div class="error__settings" id="error__username"></div>
-                    </div>
-                </div>
-                <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
-                    <div class=" col col-md-5  ">
-                        <div class="col-auto">
-                            <label for="oldPassword" class="col-form-label">Old Password:</label>
-                        </div>
-                        <div class="col-auto">
-                            <input required 
-                            minlength="8"
-                            pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}$" 
-                            type="password" 
-                            id="oldPassword" 
-                            class="form-control">
-                            <span class="error-icon hidden errspan-error">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                            </span>
-                            <span class="success-icon hidden errspan-success">
-                                <i class="fa-solid fa-circle-check "></i>
-                            </span>
-                        </div>
-                        <div class="error__settings " id="error__password"></div>
-                    </div>
-                </div>
-                <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
-                    <div class=" col col-md-5  ">
-                        <div class="col-auto">
-                            <label for="newPassword" class="col-form-label">New Password:</label>
-                        </div>
-                        <div class="col-auto">
-                            <input required 
-                            minlength="8"
-                            pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}$" 
-                            type="password" 
-                            id="newPassword" 
-                            class="form-control">
-                            <span class="error-icon hidden errspan-error">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                            </span>
-                            <span class="success-icon hidden errspan-success">
-                                <i class="fa-solid fa-circle-check "></i>
-                            </span>
-                        </div>
-                        <div class="error__settings " id="error__password"></div>
-                    </div>
-                </div>
-                <div class="formValidationGroup row g-2 justify-content-md-center align-items-center">
-                    <div class=" col col-md-5  ">
-                        <div class="col-auto">
-                            <label for="confirmPassword" class="col-form-label">Confim Password:</label>
-                        </div>
-                        <div class="col-auto">
-                            <input 
-                            match="newPassword"
-                            required 
-                            minlength="8"
-                            pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}$" 
-                            type="password" id="confirmPassword" class="form-control" >
-                            <span class="error-icon hidden errspan-error">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                            </span>
-                            <span class="success-icon hidden errspan-success">
-                                <i class="fa-solid fa-circle-check "></i>
-                            </span>
-                        </div>
-                        <div class="error__settings" id="error__password"></div>
-                    </div>
-                </div>
-                <div class="row g-4 pb-5 justify-content-md-center align-items-center">
-                    <div class=" row col col-md-4 p-2 text-center">
-                        <div class="col col-md-5">
-                            <button id="cancelRedirect" class="btn btn-secondary">Cancel</button>
-                        </div>
-                        <div class="col-md-6 ">
-                            <button class="btn btn-primary" type="submit">Save</button>
-                        </div>
-                    </div>
-                </div>
-              </form>
-
+          </a>
         </div>
 
+        <div
+          class="col-6 justify-content-center text-center"
+          id="header-welcome"
+        ></div>
+        <!-- <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+          <li><a href="#" class="nav-link px-2">Features</a></li>
+          <li><a href="#" class="nav-link px-2">Pricing</a></li>
+          <li><a href="#" class="nav-link px-2">FAQs</a></li>
+          <li><a href="#" class="nav-link px-2">About</a></li>
+        </ul> -->
+
+        <div class="col-3 text-end">
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="logout-btn"
+            onclick="window.location.href='/dashboard.html'"
+          >
+            View Dashboard
+          </button>
+          <button type="button" class="btn btn-primary" id="logout-btn">
+            Log Out
+          </button>
+        </div>
+      </header>
+    </div>
+    <main>
+      <div class="container container-fluid justify-content-center">
+        <div class="row text-center">
+          <div class="col p-3">
+            <h1>Settings</h1>
+          </div>
+        </div>
+        <form class="row justify-content-center" id="settingsForm">
+          <div
+            class="formValidationGroup row g-2 justify-content-md-center align-items-center"
+          >
+            <div class="col col-md-5">
+              <div class="col-auto">
+                <label for="inputAgencyID" class="col-form-label"
+                  >Agency:</label
+                >
+              </div>
+              <div class="col-auto">
+                <input
+                  type="text"
+                  id="inputAgencyID"
+                  data-field-name="agency"
+                  class="form-control"
+                  disabled
+                  aria-describedby="agencyIDHelpInline"
+                />
+                <span class="error-icon hidden errspan-error">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                </span>
+                <span class="success-icon hidden errspan-success">
+                  <i class="fa-solid fa-circle-check"></i>
+                </span>
+              </div>
+              <div class="error__settings" id="error__agencyID"></div>
+            </div>
+          </div>
+          <div
+            class="formValidationGroup row g-2 justify-content-md-center align-items-center"
+          >
+            <div class="col col-md-5">
+              <div class="col-auto">
+                <label for="inputFName" class="col-form-label"
+                  >First Name:</label
+                >
+              </div>
+              <div class="col-auto">
+                <input
+                  type="text"
+                  id="inputFName"
+                  data-field-name="firstName"
+                  class="form-control"
+                  disabled
+                  aria-describedby="firstNameHelpInline"
+                />
+                <span class="error-icon hidden errspan-error">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                </span>
+                <span class="success-icon hidden errspan-success">
+                  <i class="fa-solid fa-circle-check"></i>
+                </span>
+              </div>
+              <div class="error__settings" id="error__fname"></div>
+            </div>
+          </div>
+          <div
+            class="formValidationGroup row g-2 justify-content-md-center align-items-center"
+          >
+            <div class="col col-md-5">
+              <div class="col-auto">
+                <label for="inputLName" class="col-form-label"
+                  >Last Name:</label
+                >
+              </div>
+              <div class="col-auto">
+                <input
+                  type="text"
+                  id="inputLName"
+                  data-field-name="lastName"
+                  class="form-control"
+                  disabled
+                  aria-describedby="lastNameHelpInline"
+                />
+                <span class="error-icon hidden errspan-error">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                </span>
+                <span class="success-icon hidden errspan-success">
+                  <i class="fa-solid fa-circle-check"></i>
+                </span>
+              </div>
+              <div class="error__settings" id="error__lname"></div>
+            </div>
+          </div>
+          <div
+            class="formValidationGroup row g-2 justify-content-md-center align-items-center"
+          >
+            <div class="col col-md-5">
+              <div class="col-auto">
+                <label for="inputUsername" class="col-form-label"
+                  >Username:</label
+                >
+              </div>
+              <div class="col-auto">
+                <input
+                  type="text"
+                  id="inputUsername"
+                  data-field-name="username"
+                  class="form-control"
+                  disabled
+                  aria-describedby="usernameHelpInline"
+                />
+                <span class="error-icon hidden errspan-error">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                </span>
+                <span class="success-icon hidden errspan-success">
+                  <i class="fa-solid fa-circle-check"></i>
+                </span>
+              </div>
+              <div class="error__settings" id="error__username"></div>
+            </div>
+          </div>
+          <div
+            class="formValidationGroup row g-2 justify-content-md-center align-items-center"
+          >
+            <div class="col col-md-5">
+              <div class="col-auto">
+                <label for="oldPassword" class="col-form-label"
+                  >Old Password:</label
+                >
+              </div>
+              <div class="col-auto">
+                <input
+                  required
+                  minlength="8"
+                  pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}$"
+                  type="password"
+                  id="oldPassword"
+                  class="form-control"
+                />
+                <span class="error-icon hidden errspan-error">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                </span>
+                <span class="success-icon hidden errspan-success">
+                  <i class="fa-solid fa-circle-check"></i>
+                </span>
+              </div>
+              <div class="error__settings" id="error__password"></div>
+            </div>
+          </div>
+          <div
+            class="formValidationGroup row g-2 justify-content-md-center align-items-center"
+          >
+            <div class="col col-md-5">
+              <div class="col-auto">
+                <label for="newPassword" class="col-form-label"
+                  >New Password:</label
+                >
+              </div>
+              <div class="col-auto">
+                <input
+                  required
+                  minlength="8"
+                  pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}$"
+                  type="password"
+                  id="newPassword"
+                  class="form-control"
+                />
+                <span class="error-icon hidden errspan-error">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                </span>
+                <span class="success-icon hidden errspan-success">
+                  <i class="fa-solid fa-circle-check"></i>
+                </span>
+              </div>
+              <div class="error__settings" id="error__password"></div>
+            </div>
+          </div>
+          <div
+            class="formValidationGroup row g-2 justify-content-md-center align-items-center"
+          >
+            <div class="col col-md-5">
+              <div class="col-auto">
+                <label for="confirmPassword" class="col-form-label"
+                  >Confim Password:</label
+                >
+              </div>
+              <div class="col-auto">
+                <input
+                  match="newPassword"
+                  required
+                  minlength="8"
+                  pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}$"
+                  type="password"
+                  id="confirmPassword"
+                  class="form-control"
+                />
+                <span class="error-icon hidden errspan-error">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                </span>
+                <span class="success-icon hidden errspan-success">
+                  <i class="fa-solid fa-circle-check"></i>
+                </span>
+              </div>
+              <div class="error__settings" id="error__password"></div>
+            </div>
+          </div>
+          <div
+            class="row g-4 pb-5 justify-content-md-center align-items-center"
+          >
+            <div class="row col col-md-4 p-2 text-center">
+              <div class="col col-md-5">
+                <button id="cancelRedirect" class="btn btn-secondary">
+                  Cancel
+                </button>
+              </div>
+              <div class="col-md-6">
+                <button class="btn btn-primary" type="submit">Save</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </main>
     <footer id="footer" class="text-center">
-        <div class="" id="footer_year"></div>
-      </footer>
+      <div class="" id="footer_year"></div>
+    </footer>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

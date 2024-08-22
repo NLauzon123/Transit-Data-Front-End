@@ -1,10 +1,11 @@
 "use strict";
 
-import { getUserDataFromToken } from "./pageSetup.js";
+import { getUserDataFromToken, setupHeader } from "./pageSetup.js";
 import { changePassword } from "./apiCalls.js";
 
 const setup = async () => {
   const userData = await getUserDataFromToken(true);
+  setupHeader(userData);
   userData.agency = userData.longName + " (" + userData.shortName + ")";
   setPlaceholders(userData);
 };
