@@ -40,6 +40,7 @@ const filter3 = document.getElementById('filterRow3');
 const filter4 = document.getElementById('filterRow4');
 const filter5 = document.getElementById('filterRow5');
 const filterButton = document.getElementById('filterButton');
+const filterButtonC = document.getElementById('filterButtonC');
 const graph = document.getElementById('nav-graph');
 const table = document.getElementById('nav-table');
 
@@ -160,7 +161,7 @@ function populateFilter2() {
   input.className = 'form-control';
   input.style.maxWidth = '300px';
   filter2.style.display = 'block';
-  filter2.innerHTML = 'Select a period (in years): ';
+  filter2.innerHTML = 'Select a period (in years, more than 1 and no more than 10): ';
   filter2.appendChild(input);
 }
 filter2.addEventListener('change', (e) => {
@@ -228,17 +229,20 @@ filter5.addEventListener('change', (e) => {
 });
 function applyDashBFilter0() {
   cleanAllFilters();
+  filterButtonC.innerHTML = "Apply filter(s)"
   populateFilter1();
   populateFilter2();
   filterButton.style.display = 'block';
 }
 function applyDashBFilter1to3() {
   cleanAllFilters();
+  filterButtonC.innerHTML = "Apply filter(s)"
   populateFilter1();
   filterButton.style.display = 'block';
 }
 function applyDashBFilter4(selected) {
   cleanAllFilters();
+  filterButtonC.innerHTML = "Apply filter(s)"
   populateFilter1();
   populateFilter2();
   populateFilter4();
@@ -247,12 +251,14 @@ function applyDashBFilter4(selected) {
 }
 function applyDashBFilter5(selected) {
   cleanAllFilters();
+  filterButtonC.innerHTML = "Apply filter(s)"
   populateFilter1();
   populateFilter4();
   filterButton.style.display = 'block';
 }
 function applyDashBFilter6(selected) {
   cleanAllFilters();
+  filterButtonC.innerHTML = "Apply filter(s)"
   populateFilter3();
   populateFilter4();
   filterButton.style.display = 'block';
@@ -269,7 +275,6 @@ function getFilter5Lab() {
     if (directionsNum[i] == filter5Data) label = directionsLab[i];
   return label;
 }
-const filterButtonC = document.getElementById('filterButtonC');
 filterButtonC.addEventListener('click', filterDataCompilation);
 async function filterDataCompilation() {
   switch (dashBSelect) {
@@ -279,22 +284,29 @@ async function filterDataCompilation() {
         filter1Data != null &&
         filter1Data != undefined &&
         filter2Data != null &&
-        filter2Data != undefined
+        filter2Data != undefined &&
+        !isNaN(filter2Data)
       ) {
-        var requestData = undefined;
-        requestData = {
-          procedure: 'LongTermRevenueSummary',
-          params: [
-            { key: 'endYear', type: 'Int', value: parseInt(filter1Data) },
-            { key: 'period', type: 'Int', value: parseInt(filter2Data) },
-          ],
-        };
-        console.log(requestData);
-        var data = null;
-        data = await getDataFromProcedure(requestData);
-        applyDashBGraph0(data);
-        applyDashBTable0(data);
+        if (parseInt(filter2Data) > 1 && parseInt(filter2Data) < 11) {
+          var requestData = undefined;
+          requestData = {
+            procedure: 'LongTermRevenueSummary',
+            params: [
+              { key: 'endYear', type: 'Int', value: parseInt(filter1Data) },
+              { key: 'period', type: 'Int', value: parseInt(filter2Data) },
+            ],
+          };
+          console.log(requestData);
+          var data = null;
+          filterButtonC.innerHTML = "Processing... please wait.";
+          data = await getDataFromProcedure(requestData);
+          filterButtonC.innerHTML = "Apply filter(s)";
+          applyDashBGraph0(data);
+          applyDashBTable0(data);
+        }
+        else {filterButtonC.innerHTML = "Invalid filter inputs, try again.";}
       }
+      else {filterButtonC.innerHTML = "Invalid filter inputs, try again.";}
       break;
     case 1:
       console.log(dashBSelect + ' ' + filter1Data);
@@ -306,10 +318,13 @@ async function filterDataCompilation() {
         };
         console.log(requestData);
         var data = null; 
+        filterButtonC.innerHTML = "Processing... please wait.";
         data = await getDataFromProcedure(requestData);
+        filterButtonC.innerHTML = "Apply filter(s)";
         applyDashBGraph1(data);
         applyDashBTable1(data);
       }
+      else {filterButtonC.innerHTML = "Invalid filter inputs, try again.";}
       break;
     case 2:
       console.log(dashBSelect + ' ' + filter1Data);
@@ -321,10 +336,13 @@ async function filterDataCompilation() {
         };
         console.log(requestData);
         var data = null; 
+        filterButtonC.innerHTML = "Processing... please wait.";
         data = await getDataFromProcedure(requestData);
+        filterButtonC.innerHTML = "Apply filter(s)";
         applyDashBGraph2(data);
         applyDashBTable2(data);
       }
+      else {filterButtonC.innerHTML = "Invalid filter inputs, try again.";}
       break;
     case 3:
       console.log(dashBSelect + ' ' + filter1Data);
@@ -336,52 +354,52 @@ async function filterDataCompilation() {
         };
         console.log(requestData);
         var data = null; 
+        filterButtonC.innerHTML = "Processing... please wait.";
         data = await getDataFromProcedure(requestData);
+        filterButtonC.innerHTML = "Apply filter(s)";
         applyDashBGraph3(data);
         applyDashBTable3(data);
       }
+      else {filterButtonC.innerHTML = "Invalid filter inputs, try again.";}
       break;
     case 4:
-      console.log(
-        dashBSelect +
-          ' ' +
-          filter1Data +
-          ' ' +
-          filter2Data +
-          ' ' +
-          filter4Data +
-          ' ' +
-          filter5Data
-      );
+      console.log(dashBSelect + ' ' + filter1Data + ' ' + filter2Data + ' ' + filter4Data + ' ' + filter5Data);
       if (
         filter1Data != null &&
         filter1Data != undefined &&
         filter2Data != null &&
         filter2Data != undefined &&
+        !isNaN(filter2Data) &&
         filter4Data != null &&
         filter4Data != undefined &&
         filter5Data != null &&
         filter5Data != undefined
       ) {
-        var dir;
-        if (filter5Data == 2) dir = null;
-        else dir = parseInt(filter5Data);
-        var requestData = undefined;
-        requestData = {
-          procedure: 'LongTermTrafficProc',
-          params: [
-            { key: 'givenYear', type: 'Int', value: parseInt(filter1Data) },
-            { key: 'period', type: 'Int', value: parseInt(filter2Data) },
-            { key: 'service', type: 'Int', value: parseInt(filter4Data) },
-            { key: 'direction', type: 'Int', value: dir },
-          ],
-        };
-        console.log(requestData);
-        var data = null; 
-        data = await getDataFromProcedure(requestData);
-        applyDashBGraph4(data);
-        applyDashBTable4(data);
+        if (parseInt(filter2Data) > 1 && parseInt(filter2Data) < 11) {
+          var dir;
+          if (filter5Data == 2) dir = null;
+          else dir = parseInt(filter5Data);
+          var requestData = undefined;
+          requestData = {
+            procedure: 'LongTermTrafficProc',
+            params: [
+              { key: 'givenYear', type: 'Int', value: parseInt(filter1Data) },
+              { key: 'period', type: 'Int', value: parseInt(filter2Data) },
+              { key: 'service', type: 'Int', value: parseInt(filter4Data) },
+              { key: 'direction', type: 'Int', value: dir },
+            ],
+          };
+          console.log(requestData);
+          var data = null; 
+          filterButtonC.innerHTML = "Processing... please wait.";
+          data = await getDataFromProcedure(requestData);
+          filterButtonC.innerHTML = "Apply filter(s)";
+          applyDashBGraph4(data);
+          applyDashBTable4(data);
+        }
+        else {filterButtonC.innerHTML = "Invalid filter inputs, try again.";}
       }
+      else {filterButtonC.innerHTML = "Invalid filter inputs, try again.";}
       break;
     case 5:
       console.log(dashBSelect + ' ' + filter1Data + ' ' + filter4Data);
@@ -401,10 +419,13 @@ async function filterDataCompilation() {
         };
         console.log(requestData);
         var data = null; 
+        filterButtonC.innerHTML = "Processing... please wait.";
         data = await getDataFromProcedure(requestData);
+        filterButtonC.innerHTML = "Apply filter(s)";
         applyDashBGraph5(data);
         applyDashBTable5(data);
       }
+      else {filterButtonC.innerHTML = "Invalid filter inputs, try again.";}
       break;
     case 6:
       console.log(dashBSelect + ' ' + filter3Data + ' ' + filter4Data);
@@ -429,10 +450,13 @@ async function filterDataCompilation() {
         };
         console.log(requestData);
         var data = null; 
+        filterButtonC.innerHTML = "Processing... please wait.";
         data = await getDataFromProcedure(requestData);
+        filterButtonC.innerHTML = "Apply filter(s)";
         applyDashBGraph6(data);
         applyDashBTable6(data);
       }
+      else {filterButtonC.innerHTML = "Invalid filter inputs, try again.";}
       break;
   }
 }
