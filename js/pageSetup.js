@@ -30,7 +30,6 @@ function setupHeader(userData) {
         alert("Error logging out.");
       }
     });
-  console.log(userData.shortName.toLowerCase());
   displayUserData(userData);
 }
 
