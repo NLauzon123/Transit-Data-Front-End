@@ -42,30 +42,6 @@ const filterButtonC = document.getElementById("filterButtonC");
 const graph = document.getElementById("nav-graph");
 const table = document.getElementById("nav-table");
 
-switch (agencyNum) {
-  case 1:
-    agency.style.backgroundImage = "url('resources/artm-logo.png')";
-    break;
-  case 2:
-    agency.style.backgroundImage = "url('resources/stm-logo.png')";
-    break;
-  case 3:
-    agency.style.backgroundImage = "url('resources/exo-logo.png')";
-    break;
-  case 4:
-    agency.style.backgroundImage = "url('resources/rtl-logo.png')";
-    break;
-  case 5:
-    agency.style.backgroundImage = "url('resources/stl-logo.png')";
-    break;
-  case 6:
-    agency.style.backgroundImage = "url('resources/rem-logo.jpg')";
-    break;
-  default:
-    agency.innerHTML = "";
-}
-employee.innerHTML = "Welcome " + firstName + " " + lastName;
-
 for (let i = 0; i < dashboardOptions.length; i++) {
   dashboardOptions[i].addEventListener("click", function () {
     dashBSelectSwitch(i);
