@@ -4,9 +4,6 @@ setupHeader(userData);
 import { getDataFromProcedure } from "./apiCalls.js";
 /*Global variables and operations*/
 var dashBSelect;
-var agencyNum = 1;
-var firstName = "Emma";
-var lastName = "Tremblay";
 var years = [2023, 2024, 2025, 2026, 2027];
 var servicesLab = [
   "Ligne 1 - Verte",
@@ -27,9 +24,6 @@ var servicesNum = [1, 2, 3, 4, 13, 16, 40, 51, 77, 89, 102, 110, 191];
 var directionsLab = ["Direction 0", "Direction 1", "Both directions"];
 var directionsNum = [0, 1, 2];
 var filter1Data, filter2Data, filter3Data, filter4Data, filter5Data;
-var requestData;
-const agency = document.getElementById("agency");
-const employee = document.getElementById("employee");
 const dashboardOptions = document.querySelectorAll(".dropdown-item");
 const filterID = document.getElementById("filterID");
 const filter1 = document.getElementById("filterRow1");
