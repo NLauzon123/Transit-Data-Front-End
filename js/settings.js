@@ -132,7 +132,6 @@ const validateForm = (formSelector, callback) => {
     const formValid = validateAllFormGroups(formElement);
 
     if (formValid) {
-      console.log("Form is valid");
       callback(formElement);
     }
   });
@@ -155,8 +154,11 @@ const sendToAPI = async (formElement) => {
 
   const result = await changePassword({ oldPassword, password: newPassword });
   if (result && result.status == 200) {
-    console.log(result.message);
+    errorMessage.style.color = "green";
+    errorMessage.innerText = result.message;
   } else {
+    errorMessage.style.color = "red";
+
     errorMessage.innerText =
       "Unable to reset password, please ensure the old password is correct.";
   }
