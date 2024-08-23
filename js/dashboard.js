@@ -191,7 +191,7 @@ function populateFilter5() {
     select.appendChild(option);
   }
   filter5.style.display = "block";
-  filter5.innerHTML = "Select a service: ";
+  filter5.innerHTML = "Select a direction: ";
   filter5.appendChild(select);
 }
 filter5.addEventListener("change", (e) => {
