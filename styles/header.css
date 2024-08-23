@@ -11,11 +11,25 @@
   width: 75px;
 }
 
+#header-welcome {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
 .header__agency-img {
-  max-width: 50%;
-  margin-right: 50px;
+  display: block;
 }
 
 .header__welcome-message {
   font-size: 20px;
+  flex-direction: row;
+}
+
+@media screen and (min-width: 768px) {
+  .header__agency-img {
+    display: block;
+    max-width: 50%;
+    margin-right: 50px;
+  }
 }
