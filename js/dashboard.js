@@ -31,6 +31,7 @@ const filter2 = document.getElementById("filterRow2");
 const filter3 = document.getElementById("filterRow3");
 const filter4 = document.getElementById("filterRow4");
 const filter5 = document.getElementById("filterRow5");
+const dashboardsDropdown = document.getElementById("dashboards-dropdown");
 const filterButton = document.getElementById("filterButton");
 const filterButtonC = document.getElementById("filterButtonC");
 const graph = document.getElementById("nav-graph");
@@ -246,6 +247,7 @@ function getFilter5Lab() {
 }
 filterButtonC.addEventListener("click", filterDataCompilation);
 async function filterDataCompilation() {
+  setButtonsDisabled(true);
   switch (dashBSelect) {
     case 0:
       console.log(dashBSelect + " " + filter1Data + " " + filter2Data);
@@ -481,6 +483,7 @@ async function filterDataCompilation() {
       }
       break;
   }
+  setButtonsDisabled(false);
 }
 
 /*Methods for managing graph and table areas*/
@@ -1253,4 +1256,10 @@ function applyDashBTable6(data) {
     getFilter4Lab();
   table.append(header);
   tableGenerateorType1(data);
+}
+
+function setButtonsDisabled(disabled) {
+  [filterButtonC, dashboardsDropdown].forEach((button) => {
+    button.disabled = disabled;
+  });
 }
