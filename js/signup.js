@@ -105,7 +105,6 @@ const validateForm = (formSelector, callback) => {
     const formValid = validateAllFormGroups(formElement);
 
     if (formValid) {
-      console.log("Form is valid");
       callback(formElement);
     }
   });
@@ -124,10 +123,7 @@ const sendToAPI = async (formElement) => {
       {}
     );
 
-  console.log(formObject);
-
   const result = await signupUser(formObject);
-  console.log(result.error);
   if (result && result.status == 201) {
     const { username, password } = formObject;
     const loginResult = await loginUser({
@@ -135,7 +131,6 @@ const sendToAPI = async (formElement) => {
       password,
     });
 
-    console.log(loginResult);
     window.location.replace("dashboard.html");
   } else if (result && result.error == `Error: Conflict`) {
     errorMessage.innerText = "A user with that username already exists.";

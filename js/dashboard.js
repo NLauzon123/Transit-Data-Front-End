@@ -250,7 +250,6 @@ async function filterDataCompilation() {
   setButtonsDisabled(true);
   switch (dashBSelect) {
     case 0:
-      console.log(dashBSelect + " " + filter1Data + " " + filter2Data);
       if (
         filter1Data != null &&
         filter1Data != undefined &&
@@ -267,7 +266,6 @@ async function filterDataCompilation() {
               { key: "period", type: "Int", value: parseInt(filter2Data) },
             ],
           };
-          console.log(requestData);
           var data = null;
           filterButtonC.innerHTML =
             "Processing... this may take several minutes.";
@@ -287,14 +285,12 @@ async function filterDataCompilation() {
       }
       break;
     case 1:
-      console.log(dashBSelect + " " + filter1Data);
       if (filter1Data != null && filter1Data != undefined) {
         var requestData = undefined;
         requestData = {
           procedure: "MidTermRevenueSummary",
           params: [{ key: "year", type: "Int", value: parseInt(filter1Data) }],
         };
-        console.log(requestData);
         var data = null;
         filterButtonC.innerHTML =
           "Processing... this may take several minutes.";
@@ -311,14 +307,12 @@ async function filterDataCompilation() {
       }
       break;
     case 2:
-      console.log(dashBSelect + " " + filter1Data);
       if (filter1Data != null && filter1Data != undefined) {
         var requestData = undefined;
         requestData = {
           procedure: "RevenueDetailsFareProducts",
           params: [{ key: "year", type: "Int", value: parseInt(filter1Data) }],
         };
-        console.log(requestData);
         var data = null;
         filterButtonC.innerHTML =
           "Processing... this may take several minutes.";
@@ -335,14 +329,12 @@ async function filterDataCompilation() {
       }
       break;
     case 3:
-      console.log(dashBSelect + " " + filter1Data);
       if (filter1Data != null && filter1Data != undefined) {
         var requestData = undefined;
         requestData = {
           procedure: "RevenueDetailsPOS",
           params: [{ key: "year", type: "Int", value: parseInt(filter1Data) }],
         };
-        console.log(requestData);
         var data = null;
         filterButtonC.innerHTML =
           "Processing... this may take several minutes.";
@@ -358,17 +350,6 @@ async function filterDataCompilation() {
       }
       break;
     case 4:
-      console.log(
-        dashBSelect +
-          " " +
-          filter1Data +
-          " " +
-          filter2Data +
-          " " +
-          filter4Data +
-          " " +
-          filter5Data
-      );
       if (
         filter1Data != null &&
         filter1Data != undefined &&
@@ -394,7 +375,6 @@ async function filterDataCompilation() {
               { key: "direction", type: "Int", value: dir },
             ],
           };
-          console.log(requestData);
           var data = null;
           filterButtonC.innerHTML =
             "Processing... this may take several minutes.";
@@ -414,7 +394,6 @@ async function filterDataCompilation() {
       }
       break;
     case 5:
-      console.log(dashBSelect + " " + filter1Data + " " + filter4Data);
       if (
         filter1Data != null &&
         filter1Data != undefined &&
@@ -429,7 +408,6 @@ async function filterDataCompilation() {
             { key: "service", type: "Int", value: parseInt(filter4Data) },
           ],
         };
-        console.log(requestData);
         var data = null;
         filterButtonC.innerHTML =
           "Processing... this may take several minutes.";
@@ -446,14 +424,12 @@ async function filterDataCompilation() {
       }
       break;
     case 6:
-      console.log(dashBSelect + " " + filter3Data + " " + filter4Data);
       if (
         filter3Data != null &&
         filter3Data != undefined &&
         filter4Data != null &&
         filter4Data != undefined
       ) {
-        console.log(filter3Data.replaceAll("-", "/"));
         var requestData = {
           procedure: "ShortTermTrafficProc",
           params: [{ key: "year", type: "Int", value: parseInt(filter1Data) }],
@@ -466,7 +442,6 @@ async function filterDataCompilation() {
             { key: "service", type: "Int", value: parseInt(filter4Data) },
           ],
         };
-        console.log(requestData);
         var data = null;
         filterButtonC.innerHTML =
           "Processing... this may take several minutes.";
