@@ -273,7 +273,8 @@ async function filterDataCompilation() {
           };
           console.log(requestData);
           var data = null;
-          filterButtonC.innerHTML = "Processing... please wait.";
+          filterButtonC.innerHTML =
+            "Processing... this make take several minutes.";
           data = await getDataFromProcedure(requestData);
           filterButtonC.innerHTML = "Apply filter(s)";
           if (data != null && data != undefined && data != 0) {
