@@ -1,7 +1,7 @@
 "use strict";
 
 import { getUserDataFromToken, setupHeader } from "./pageSetup.js";
-import { changePassword } from "./apiCalls.js";
+import { changePassword, getDataFromProcedure } from "./apiCalls.js";
 
 const setup = async () => {
   const userData = await getUserDataFromToken(true);
@@ -139,6 +139,8 @@ const validateForm = (formSelector, callback) => {
 };
 
 const sendToAPI = async (formElement) => {
+  const errorMessage = document.getElementById("error__submit");
+  errorMessage.innerText = "";
   const formObject = Array.from(formElement.elements)
     .filter((element) => element.type !== "submit")
     .reduce(
@@ -155,9 +157,8 @@ const sendToAPI = async (formElement) => {
   if (result && result.status == 200) {
     console.log(result.message);
   } else {
-    console.log(
-      "Unable to reset password, please ensure the old password is correct."
-    );
+    errorMessage.innerText =
+      "Unable to reset password, please ensure the old password is correct.";
   }
 };
 
