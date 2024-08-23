@@ -19,6 +19,8 @@
 
 .header__agency-img {
   display: block;
+  max-width: 100px;
+  margin-left: 10px;
 }
 
 .header__welcome-message {
@@ -31,5 +33,10 @@
     display: block;
     max-width: 50%;
     margin-right: 50px;
+  }
+  #header-welcome {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
   }
 }

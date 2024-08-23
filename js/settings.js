@@ -27,7 +27,7 @@ const setPlaceholders = (userData) => {
 let cancelBtn = document.querySelector("#cancelRedirect");
 cancelBtn.addEventListener("click", (event) => {
   event.preventDefault();
-    event.stopPropagation();
+  event.stopPropagation();
   window.location.href = "dashboard.html";
 });
 
@@ -149,8 +149,6 @@ const sendToAPI = async (formElement) => {
       {}
     );
 
-  console.log(formObject);
-
   const { oldPassword, newPassword } = formObject;
 
   const result = await changePassword({ oldPassword, password: newPassword });
@@ -166,5 +164,3 @@ const sendToAPI = async (formElement) => {
 setup();
 
 validateForm("#settingsForm", sendToAPI);
-
-

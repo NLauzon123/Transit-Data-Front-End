@@ -112,6 +112,8 @@ const validateForm = (formSelector, callback) => {
 };
 
 const sendToAPI = async (formElement) => {
+  const errorMessage = document.getElementById("error__submit");
+  errorMessage.innerText = "";
   const formObject = Array.from(formElement.elements)
     .filter((element) => element.type !== "submit")
     .reduce(
@@ -125,7 +127,7 @@ const sendToAPI = async (formElement) => {
   console.log(formObject);
 
   const result = await signupUser(formObject);
-  console.log(result);
+  console.log(result.error);
   if (result && result.status == 201) {
     const { username, password } = formObject;
     const loginResult = await loginUser({
@@ -135,7 +137,9 @@ const sendToAPI = async (formElement) => {
 
     console.log(loginResult);
     window.location.replace("dashboard.html");
-  } else console.log(result.message || result.error || "no error found");
+  } else if (result && result.error == `Error: Conflict`) {
+    errorMessage.innerText = "A user with that username already exists.";
+  } else errorMessage.innerText = "Unable to sign up, please try again.";
 };
 
 validateForm("#signUpForm", sendToAPI);
